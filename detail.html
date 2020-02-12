@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <title>Document</title>
+</head>
+
+<body style="background: radial-gradient(ellipse, white, lightblue);">
+  <!-- 商城黑色导航栏 -->
+  <nav class="navbar navbar-inverse" role="navigation">
+    <!-- LOGO -->
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">商品购物平台</a>
+      </div>
+      <!-- 内容 -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+        <!-- 左对齐 -->
+        <ul class="nav navbar-nav navbar-left">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              商店
+              <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="#">公告</a></li>
+              <li class="divider"></li>
+              <li><a href="#">购物车</a></li>
+              <li class="divider"></li>
+              <li><a href="#">销量统计</a></li>
+              <li class="divider"></li>
+              <li><a href="#">关于商城</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              Len
+              <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="#">个人资料</a></li>
+              <li class="divider"></li>
+              <li><a href="#">好友</a></li>
+              <li class="divider"></li>
+              <li><a href="#">好友评论</a></li>
+              <li class="divider"></li>
+              <li><a href="#">库存</a></li>
+            </ul>
+          </li>
+        </ul>
+        <!-- 右对齐 -->
+        <ul class="nav navbar-nav navbar-right">
+          <form class="navbar-form navbar-left">
+            <div class="form-group">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="搜索商品">
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                  </button>
+                </span>
+              </div>
+            </div>
+          </form>
+          <li><a href="#">￥20.00</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <img src="img/headimg.jpg" class="img-rounded img-responsive">
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="#">注销</a></li>
+              <li class="divider"></li>
+              <li><a href="#">帐户明细</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 路径导航 -->
+  <ol class="breadcrumb">
+    <li><a href="#">所有游戏</a></li>
+    <li><a href="#">独立游戏</a></li>
+    <li class="active">妖语</li>
+  </ol>
+
+  <!-- 抬头介绍 -->
+  <div class="container">
+    <h2>妖语</h2>
+    <div class="row">
+      <div class="col-sm-4 col-sm-push-8">
+        <img src="img/gh.jpg" alt="" class="img-responsive center-block">
+        <br>
+        <p class="text-justify">《妖语》是一款解谜向的和风美少女游戏。“和之国”曾樱花满开，妖怪们化为可爱的小姐姐陪伴人类生活。但只有极少数人类可以得此殊荣。他们被叫做“绅士”。然而有一天，妖怪们突然开始了暴动，世界因此失去了颜色。为了探寻妖怪们骚乱的真相，恢复世界的色彩，作为“第一绅士”的你踏上了征程。</p>
+        <table class="table table-striped">
+          <tbody>
+            <tr>
+              <td>全部评测</td>
+              <td><a href="#">特别好评</a>(1,243)</td>
+            </tr>
+            <tr>
+              <td>发行日期</td>
+              <td>2020年2月6日</td>
+            </tr>
+            <tr>
+              <td>发行商</td>
+              <td><a href="">Toffee Cafe</a></td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+      <div class="col-sm-8 col-sm-pull-4">
+        <div id="myCarousel" class="carousel slide">
+          <!-- 轮播（Carousel）指标 -->
+          <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+          </ol>
+          <!-- 轮播（Carousel）项目 -->
+          <div class="carousel-inner">
+            <div class="item active">
+              <img src="img/gh1.jpg" class="img-responsive center-block" alt="First slide">
+            </div>
+            <div class="item">
+              <img src="img/gh2.jpg" class="img-responsive center-block" alt="Second slide">
+            </div>
+            <div class="item">
+              <img src="img/gh3.jpg" class="img-responsive center-block" alt="Third slide">
+            </div>
+          </div>
+          <!-- 轮播（Carousel）导航 -->
+          <a class="carousel-control left" href="#myCarousel" data-slide="prev"> <span _ngcontent-c3="" aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a>
+          <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+        </div>
+        <br>
+        <p>该产品的热门用户自定义标签</p>
+        <div class="btn-group btn-group-justified">
+          <a href="#" class="btn btn-primary btn-sm">独立</a>
+          <a href="#" class="btn btn-primary btn-sm">休闲</a>
+          <a href="#" class="btn btn-primary btn-sm">动作</a>
+          <a href="#" class="btn btn-primary btn-sm">色情内容</a>
+          <a href="#" class="btn btn-primary btn-sm">角色扮演</a>
+          <a href="#" class="btn btn-primary btn-sm">裸露</a>
+          <a href="#" class="btn btn-primary btn-sm">+</a>
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </div>
+  <hr>
+  <!-- 自己评论 -->
+  <div class="container ">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="alert alert-success" role="alert">
+          <h3><strong>您的库中已有《妖语》</strong></h3>
+        </div>
+        <h2 style="color: #66c0f4;">为 妖语 撰写一篇评测</h2>
+        <p>您认为这款游戏有什么优点或缺点？您是否会将这款游戏推荐给他人？请写下您的看法。</p>
+        <div class="row">
+          <div class="col-sm-3 col-xs-2">
+            <img src="img/head.jpg" class="img-responsive center-block">
+          </div>
+          <div class="col-sm-9 col-xs-10">
+            <form>
+              <div class="form-group">
+                <textarea name="name" rows="8" class="form-control" placeholder="请输入评论" required></textarea>
+              </div>
+              <div class="btn-group" data-toggle="buttons">
+
+                <label class="btn btn-primary glyphicon glyphicon-thumbs-up">
+                  <input type="radio" name="options" id="option1" required> 好评
+                </label>
+                <label class="btn btn-primary glyphicon glyphicon-thumbs-down">
+                  <input type="radio" name="options" id="option2" required> 差评
+                </label>
+              </div>
+              <button type="submit" class="btn btn-success pull-right">--提交--</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <!-- 其他用户评论 -->
+  <div class="container">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <!-- 用户 和 状态 -->
+        <div class="row">
+          <!-- 用户 -->
+          <div class="col-sm-5 col-xs-5 pull-left" style="width:250px;">
+            <div class="col-sm-5 col-xs-5">
+              <a href="#" class="thumbnail">
+                <img class="img-responsive  center-block" src="img/user2.jpg" alt="">
+              </a>
+            </div>
+            <div class="col-sm-7 col-xs-7 pull-right" style="color: #5aa9d6;">
+              <h4>Noori</h4>
+              <p class="small">账户有93项产品<br> 4篇评论</p>
+            </div>
+          </div>
+          <!-- 状态 -->
+          <div class="alert alert-success col-xs-5 col-sm-7 col-md-8" style="font-size:15px;  font-weight: 700" role="alert">
+
+            <span class="glyphicon glyphicon-thumbs-up"></span>好评
+          </div>
+        </div>
+        <br>
+        <!-- 评论 -->
+        <div class="well">
+          <p>the "color puzzles" were actually really enjoyable and for once a few of the character designs caught my eye unlike a lot of erotic puzzle games I genuinely play for the puzzles. There is also like a after game timing minigame you can
+            play
+            for more really bad moans, cgi animation and lewds in the 18+patch but it didn't really meet my fancy and was a little laggy. In the end its not bad and its a enjoyable game to waste a little less than an hour on to be rewarded with cute
+            girls... Amanozako best girl.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <!-- 用户 和 状态 -->
+        <div class="row">
+          <!-- 用户 -->
+          <div class="col-sm-5 col-xs-5 pull-left" style="width:250px;">
+            <div class="col-sm-5 col-xs-5">
+              <a href="#" class="thumbnail">
+                <img class="img-responsive  center-block" src="img/user2.jpg" alt="">
+              </a>
+            </div>
+            <div class="col-sm-7 col-xs-7 pull-right" style="color: #5aa9d6;">
+              <h4>Noori</h4>
+              <p class="small">账户有93项产品<br> 4篇评论</p>
+            </div>
+          </div>
+          <!-- 状态 -->
+          <div class="alert alert-success col-xs-5 col-sm-7 col-md-8" style="font-size:15px;  font-weight: 700" role="alert">
+
+            <span class="glyphicon glyphicon-thumbs-up"></span>好评
+          </div>
+        </div>
+        <br>
+        <!-- 评论 -->
+        <div class="well">
+          <p>the "color puzzles" were actually really enjoyable and for once a few of the character designs caught my eye unlike a lot of erotic puzzle games I genuinely play for the puzzles. There is also like a after game timing minigame you can
+            play
+            for more really bad moans, cgi animation and lewds in the 18+patch but it didn't really meet my fancy and was a little laggy. In the end its not bad and its a enjoyable game to waste a little less than an hour on to be rewarded with cute
+            girls... Amanozako best girl.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <!-- 用户 和 状态 -->
+        <div class="row">
+          <!-- 用户 -->
+          <div class="col-sm-5 col-xs-5 pull-left" style="width:250px;">
+            <div class="col-sm-5 col-xs-5">
+              <a href="#" class="thumbnail">
+                <img class="img-responsive  center-block" src="img/user2.jpg" alt="">
+              </a>
+            </div>
+            <div class="col-sm-7 col-xs-7 pull-right" style="color: #5aa9d6;">
+              <h4>Noori</h4>
+              <p class="small">账户有93项产品<br> 4篇评论</p>
+            </div>
+          </div>
+          <!-- 状态 -->
+          <div class="alert alert-success col-xs-5 col-sm-7 col-md-8" style="font-size:15px;  font-weight: 700" role="alert">
+
+            <span class="glyphicon glyphicon-thumbs-up"></span>好评
+          </div>
+        </div>
+        <br>
+        <!-- 评论 -->
+        <div class="well">
+          <p>the "color puzzles" were actually really enjoyable and for once a few of the character designs caught my eye unlike a lot of erotic puzzle games I genuinely play for the puzzles. There is also like a after game timing minigame you can
+            play
+            for more really bad moans, cgi animation and lewds in the 18+patch but it didn't really meet my fancy and was a little laggy. In the end its not bad and its a enjoyable game to waste a little less than an hour on to be rewarded with cute
+            girls... Amanozako best girl.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <!-- 用户 和 状态 -->
+        <div class="row">
+          <!-- 用户 -->
+          <div class="col-sm-5 col-xs-5 pull-left" style="width:250px;">
+            <div class="col-sm-5 col-xs-5">
+              <a href="#" class="thumbnail">
+                <img class="img-responsive  center-block" src="img/user2.jpg" alt="">
+              </a>
+            </div>
+            <div class="col-sm-7 col-xs-7 pull-right" style="color: #5aa9d6;">
+              <h4>Noori</h4>
+              <p class="small">账户有93项产品<br> 4篇评论</p>
+            </div>
+          </div>
+          <!-- 状态 -->
+          <div class="alert alert-success col-xs-5 col-sm-7 col-md-8" style="font-size:15px;  font-weight: 700" role="alert">
+
+            <span class="glyphicon glyphicon-thumbs-up"></span>好评
+          </div>
+        </div>
+        <br>
+        <!-- 评论 -->
+        <div class="well">
+          <p>the "color puzzles" were actually really enjoyable and for once a few of the character designs caught my eye unlike a lot of erotic puzzle games I genuinely play for the puzzles. There is also like a after game timing minigame you can
+            play
+            for more really bad moans, cgi animation and lewds in the 18+patch but it didn't really meet my fancy and was a little laggy. In the end its not bad and its a enjoyable game to waste a little less than an hour on to be rewarded with cute
+            girls... Amanozako best girl.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <!-- 用户 和 状态 -->
+        <div class="row">
+          <!-- 用户 -->
+          <div class="col-sm-5 col-xs-5 pull-left" style="width:250px;">
+            <div class="col-sm-5 col-xs-5">
+              <a href="#" class="thumbnail">
+                <img class="img-responsive  center-block" src="img/user2.jpg" alt="">
+              </a>
+            </div>
+            <div class="col-sm-7 col-xs-7 pull-right" style="color: #5aa9d6;">
+              <h4>Noori</h4>
+              <p class="small">账户有93项产品<br> 4篇评论</p>
+            </div>
+          </div>
+          <!-- 状态 -->
+          <div class="alert alert-success col-xs-5 col-sm-7 col-md-8" style="font-size:15px;  font-weight: 700" role="alert">
+
+            <span class="glyphicon glyphicon-thumbs-up"></span>好评
+          </div>
+        </div>
+        <br>
+        <!-- 评论 -->
+        <div class="well">
+          <p>the "color puzzles" were actually really enjoyable and for once a few of the character designs caught my eye unlike a lot of erotic puzzle games I genuinely play for the puzzles. There is also like a after game timing minigame you can
+            play
+            for more really bad moans, cgi animation and lewds in the 18+patch but it didn't really meet my fancy and was a little laggy. In the end its not bad and its a enjoyable game to waste a little less than an hour on to be rewarded with cute
+            girls... Amanozako best girl.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 分页 -->
+  <div class="container">
+    <nav aria-label="...">
+      <ul class="pager">
+        <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> Older</a></li>
+        <li class="next"><a href="#">Newer <span aria-hidden="true">&rarr;</span></a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- 底部内容 -->
+  <!-- <div class="jumbotron text-center" style="margin-bottom:0">
+  <p>底部内容</p>
+</div> -->
+  <script src="js/jquery.min.js" charset="utf-8"></script>
+  <script src="js/bootstrap.min.js" charset="utf-8"></script>
+</body>
+
+</html>
