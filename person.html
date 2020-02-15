@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <title>Document</title>
+</head>
+
+<body style="background-image:url('img/bg1.jpg'); background-repeat: no-repeat;background-color: #000000">
+  <!-- 商城黑色导航栏 -->
+  <nav class="navbar navbar-inverse" role="navigation">
+    <!-- LOGO -->
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">商品购物平台</a>
+      </div>
+      <!-- 内容 -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+        <!-- 左对齐 -->
+        <ul class="nav navbar-nav navbar-left">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              商店
+              <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="#">公告</a></li>
+              <li class="divider"></li>
+              <li><a href="#">购物车</a></li>
+              <li class="divider"></li>
+              <li><a href="#">销量统计</a></li>
+              <li class="divider"></li>
+              <li><a href="#">关于商城</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              Len
+              <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="#">个人资料</a></li>
+              <li class="divider"></li>
+              <li><a href="#">好友</a></li>
+              <li class="divider"></li>
+              <li><a href="#">好友评论</a></li>
+              <li class="divider"></li>
+              <li><a href="#">库存</a></li>
+            </ul>
+          </li>
+        </ul>
+        <!-- 右对齐 -->
+        <ul class="nav navbar-nav navbar-right">
+          <form class="navbar-form navbar-left">
+            <div class="form-group">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="搜索商品">
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                  </button>
+                </span>
+              </div>
+            </div>
+          </form>
+          <li><a href="#">￥20.00</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <img src="img/headimg.jpg" class="img-rounded img-responsive">
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="#">注销</a></li>
+              <li class="divider"></li>
+              <li><a href="#">帐户明细</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 用户简介 -->
+  <div class="container">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="row">
+          <div class="media col-xs-9">
+            <div class="media-left">
+              <a href="#">
+                <img class="media-object" src="img/phead.jpg" alt="">
+              </a>
+            </div>
+            <div class="media-body">
+              <h4 class="media-heading"><strong>Len</strong></h4>
+              <hr>
+              <div style="max-height:120px; text-overflow:ellipsis;overflow:hidden;">
+                To be or not to be,it just a joke.=￣ω￣=.To be or not to be,it just a joke.=￣ω￣=To be or not to be,it just a joke.=￣ω￣=To be or not to be,it just a joke.=￣ω￣=To be or not to be,it just a joke.=￣ω￣=</div>
+            </div>
+          </div>
+          <div class="col-xs-3">
+            <div class="btn-group-vertical" role="group" aria-label="...">
+              <button class="btn btn-primary btn-lg" type="button">
+                库存<span class="badge">155</span>
+              </button>
+              <button class="btn btn-primary btn-lg" type="button">
+                评测 <span class="badge">2</span>
+              </button>
+              <button type="button" class="btn btn-primary dropdown-toggle btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                更多
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a href="#">添加关注</a></li>
+                <li><a href="#">发送消息</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <hr>
+  <!-- 最近动态 -->
+  <div class="container">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">最近购买</h3>
+      </div>
+      <div class="panel-body">
+        <a href="#" class="list-group-item">
+          <div class="media">
+            <div class="media-left media-middle">
+              <img src="img/g1.jpg" class="media-object ">
+            </div>
+            <div class="media-body">
+              <h4 class="media-heading">妖语</h4>
+              <p>独立，休闲，动作，角色扮演</p>
+              <p class="text-right">2020-02-15</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">最近评论</h3>
+      </div>
+      <div class="panel-body">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <!-- 用户 和 状态 -->
+            <!-- 用户 -->
+            <div class="media">
+              <div class="media-left">
+                <a href="#">
+                  <img class="media-object center-block" src="img/g1.jpg" alt="...">
+                </a>
+              </div>
+              <div class="media-body">
+                <div class="alert alert-success" style="font-size:15px;  font-weight: 700" role="alert">
+
+                  <span class="glyphicon glyphicon-thumbs-up"></span>好评
+                </div>
+              </div>
+            </div>
+            <!-- 评论 -->
+            <div class="well">
+              <p>the "color puzzles" were actually really enjoyable and for once a few of the character designs caught my eye unlike a lot of erotic puzzle games I genuinely play for the puzzles. There is also like a after game timing minigame you
+                can
+                play
+                for more really bad moans, cgi animation and lewds in the 18+patch but it didn't really meet my fancy and was a little laggy. In the end its not bad and its a enjoyable game to waste a little less than an hour on to be rewarded
+                with cute
+                girls... Amanozako best girl.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <!-- 留言 -->
+  <div class="container">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">留言</h3>
+      </div>
+      <div class="panel-body">
+        <!-- 未登录 则下列div不显示 -->
+        <div class="input-group">
+          <span class="input-group-addon">Len
+          </span>
+          <input type="text" class="form-control" placeholder="添加一条留言">
+          <span class="input-group-btn">
+            <button class="btn btn-success" type="button">提交留言</button>
+          </span>
+        </div><!-- /input-group -->
+
+        <!-- 所有留言 -->
+        <div class="media">
+          <div class="media-left media-top">
+            <a href="#">
+              <img class="media-object" src="img/shead.jpg" alt="...">
+            </a>
+          </div>
+          <div class="media-body">
+            <h4 class="media-heading">Len &nbsp&nbsp&nbsp
+              <small>2020-02-15</small>
+            </h4>
+            留言留言，我只是为了社区任务
+          </div>
+          <div class="text-right">
+            <a href="" title="删除">
+              <span class="glyphicon glyphicon-trash"></span>
+            </a>
+          </div>
+        </div>
+        <hr>
+        <div class="media">
+          <div class="media-left media-top">
+            <a href="#">
+              <img class="media-object" src="img/shead.jpg" alt="...">
+            </a>
+          </div>
+          <div class="media-body">
+            <h4 class="media-heading">Len &nbsp&nbsp&nbsp
+              <small>2020-02-15</small>
+            </h4>
+            留言留言，我只是为了社区任务
+          </div>
+          <div class="text-right">
+            <a href="" title="删除">
+              <span class="glyphicon glyphicon-trash"></span>
+            </a>
+          </div>
+        </div>
+        <hr>
+        <div class="media">
+          <div class="media-left media-top">
+            <a href="#">
+              <img class="media-object" src="img/shead.jpg" alt="...">
+            </a>
+          </div>
+          <div class="media-body">
+            <h4 class="media-heading">Len &nbsp&nbsp&nbsp
+              <small>2020-02-15</small>
+            </h4>
+            留言留言，我只是为了社区任务
+          </div>
+          <div class="text-right">
+            <a href="" title="删除">
+              <span class="glyphicon glyphicon-trash"></span>
+            </a>
+          </div>
+        </div>
+        <hr>
+        <div class="media">
+          <div class="media-left media-top">
+            <a href="#">
+              <img class="media-object" src="img/shead.jpg" alt="...">
+            </a>
+          </div>
+          <div class="media-body">
+            <h4 class="media-heading">Len &nbsp&nbsp&nbsp
+              <small>2020-02-15</small>
+            </h4>
+            留言留言，我只是为了社区任务
+          </div>
+          <div class="text-right">
+            <a href="" title="删除">
+              <span class="glyphicon glyphicon-trash"></span>
+            </a>
+          </div>
+        </div>
+        <hr>
+        <div class="media">
+          <div class="media-left media-top">
+            <a href="#">
+              <img class="media-object" src="img/shead.jpg" alt="...">
+            </a>
+          </div>
+          <div class="media-body">
+            <h4 class="media-heading">Len &nbsp&nbsp&nbsp
+              <small>2020-02-15</small>
+            </h4>
+            留言留言，我只是为了社区任务
+          </div>
+          <div class="text-right">
+            <a href="" title="删除">
+              <span class="glyphicon glyphicon-trash"></span>
+            </a>
+          </div>
+        </div>
+        <hr>
+      </div>
+    </div>
+  </div>
+
+
+
+  <script src="js/jquery.min.js" charset="utf-8"></script>
+  <script src="js/bootstrap.min.js" charset="utf-8"></script>
+</body>
+
+</html>
