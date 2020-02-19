@@ -117,121 +117,31 @@
     <h3>浏览商品</h3>
     <div class="row">
       <div class="btn-group btn-group-justified">
-        <a href="#" class="btn btn-primary">新品</a>
-        <a href="#" class="btn btn-primary">销量</a>
-        <a href="#" class="btn btn-primary">类别</a>
+        <a href="javascript:void(0);" class="btn btn-primary" id="type1">新品</a>
+        <a href="javascript:void(0);" class="btn btn-primary" id="type2">销量</a>
+        <a href="javascript:void(0);" class="btn btn-primary">类别</a>
       </div>
     </div>
   </div>
 
   <!-- 商品列表 -->
   <div class="container">
-    <div class="list-group">
-      <a href="#" class="list-group-item">
-        <div class="media">
-          <div class="media-left media-middle">
-            <img src="img/g1.jpg" class="media-object ">
-          </div>
-          <div class="media-body">
-            <h4 class="media-heading">妖语</h4>
-            <p>独立，休闲，动作，角色扮演</p>
-            <p class="text-right">6.00$</p>
-          </div>
-        </div>
-      </a>
-      <a href="#" class="list-group-item">
-        <div class="media">
-          <div class="media-left media-middle">
-            <img src="img/g1.jpg" class="media-object ">
-          </div>
-          <div class="media-body">
-            <h4 class="media-heading">妖语</h4>
-            <p>独立，休闲，动作，角色扮演</p>
-            <p class="text-right">6.00$</p>
-          </div>
-        </div>
-      </a><a href="#" class="list-group-item">
-        <div class="media">
-          <div class="media-left media-middle">
-            <img src="img/g1.jpg" class="media-object ">
-          </div>
-          <div class="media-body">
-            <h4 class="media-heading">妖语</h4>
-            <p>独立，休闲，动作，角色扮演</p>
-            <p class="text-right">6.00$</p>
-          </div>
-        </div>
-      </a><a href="#" class="list-group-item">
-        <div class="media">
-          <div class="media-left media-middle">
-            <img src="img/g1.jpg" class="media-object ">
-          </div>
-          <div class="media-body">
-            <h4 class="media-heading">妖语</h4>
-            <p>独立，休闲，动作，角色扮演</p>
-            <p class="text-right">6.00$</p>
-          </div>
-        </div>
-      </a><a href="#" class="list-group-item">
-        <div class="media">
-          <div class="media-left media-middle">
-            <img src="img/g1.jpg" class="media-object ">
-          </div>
-          <div class="media-body">
-            <h4 class="media-heading">妖语</h4>
-            <p>独立，休闲，动作，角色扮演</p>
-            <p class="text-right">6.00$</p>
-          </div>
-        </div>
-      </a><a href="#" class="list-group-item">
-        <div class="media">
-          <div class="media-left media-middle">
-            <img src="img/g1.jpg" class="media-object ">
-          </div>
-          <div class="media-body">
-            <h4 class="media-heading">妖语</h4>
-            <p>独立，休闲，动作，角色扮演</p>
-            <p class="text-right">6.00$</p>
-          </div>
-        </div>
-      </a>
-      <a href="#" class="list-group-item">
-        <div class="media">
-          <div class="media-left media-middle">
-            <img src="img/g1.jpg" class="media-object ">
-          </div>
-          <div class="media-body">
-            <h4 class="media-heading">妖语</h4>
-            <p>独立，休闲，动作，角色扮演</p>
-            <p class="text-right">6.00$</p>
-          </div>
-        </div>
-      </a><a href="#" class="list-group-item">
-        <div class="media">
-          <div class="media-left media-middle">
-            <img src="img/g1.jpg" class="media-object ">
-          </div>
-          <div class="media-body">
-            <h4 class="media-heading">妖语</h4>
-            <p>独立，休闲，动作，角色扮演</p>
-            <p class="text-right">6.00$</p>
-          </div>
-        </div>
-      </a>
+    <div class="list-group" id="goodListInfo">
       <!-- 分页 -->
-        <nav aria-label="...">
-          <ul class="pager">
-            <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> Older</a></li>
-            --第 1 页--
-            <li class="next"><a href="#">Newer <span aria-hidden="true">&rarr;</span></a></li>
-          </ul>
-        </nav>
+
     </div>
+    <nav aria-label="...">
+      <ul class="pager">
+        <li class="previous"><a href="javascript:void(0);"><span aria-hidden="true">&larr;</span> Older</a></li>
+         <font id="pageNum">--第 1 页--</font>
+        <li class="next"><a href="javascript:void(0);">Newer <span aria-hidden="true">&rarr;</span></a></li>
+      </ul>
+    </nav>
 
     <!-- 底部内容 -->
-    <div class="jumbotron text-center" style="margin-bottom:0">
+    <!-- <div class="jumbotron text-center" style="margin-bottom:0">
       <p>底部内容</p>
-    </div>
+    </div> -->
   </div>
 
   <script src="js/jquery.min.js" charset="utf-8"></script>

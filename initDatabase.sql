@@ -22,12 +22,12 @@ use OnlineShoppingPlatform;
 -- - **CustomPic**
 -- | 列名    | 数据类型    | 空/非空  | 约束条件 | 备注 |
 -- | ------- | ----------- | -------- | -------- | ---- |
--- | PicName | varchar(20) | not null | Unique   |      |
+-- | PicName | varchar(50) | not null | Unique   |      |
 -- | PicPath | varchar(50) | not null | Unique   |      |
 create table CustomPic
 (
-PicName varchar(20) not null Unique,
-PicPath varchar(20) not null Unique
+PicName varchar(50) not null Unique,
+PicPath varchar(50) not null Unique
 )ENGINE=InnoDB;
 
 -- - **UserInfo**
@@ -40,7 +40,7 @@ PicPath varchar(20) not null Unique
 -- | GrantP        | int         | not null |                                | 1管理员、0用户 |
 -- | Balance       | float       | not null |                                |                |
 -- | UserImg       | varchar(50) |          |                                | 头像           |
--- | Custom        | varchar(20) | not null | Foreign Key(CustomPic.PicName) | 背景           |
+-- | Custom        | varchar(50) | not null | Foreign Key(CustomPic.PicPath) | 背景           |
 create table UserInfo
 (
 UserID int not null primary key auto_increment,
@@ -50,8 +50,8 @@ UserPassword varchar(20) not null,
 GrantP int not null,
 Balance float not null,
 UserImg varchar(50),
-Custom varchar(20) not null,
-Foreign Key (Custom) References CustomPic(PicName)
+Custom varchar(50) not null,
+Foreign Key (Custom) References CustomPic(PicPath)
 )ENGINE=InnoDB;
 
 -- - **GoodInfo**
@@ -80,11 +80,13 @@ Detail varchar(1000) not null
 -- | ------ | ----------- | -------- | ---------------------------- | ---- |
 -- | GoodID | int         | not null | Foreign Key(GoodInfo.GoodID) |      |
 -- | Type   | varchar(20) | not null |                              |      |
+-- | Num    | int         | not null |                              |      |
 -- |        |             |          | Unique(GoodID,Type)          |      |
 create table GoodType
 (
 GoodID int not null,
 Type varchar(20) not null,
+Num int not null,
 Foreign Key (GoodID) References GoodInfo(GoodID)
 )ENGINE=InnoDB;
 
@@ -142,7 +144,6 @@ primary key(UserID,GoodID)
 -- | -------- | ------------ | -------- | ------------------------------ | ----------- |
 -- | GoodID   | int          | not null | Foreign Key(GoodInfo.GoodID)   |             |
 -- | UserID   | int          | not null | Foreign Key(UserInfo.UserID)   |             |
--- | UserName | varchar(20)  | not null | Foreign Key(UserInfo.UserName) |             |
 -- | Type     | int          | not null |                                | 0好评 1差评 |
 -- | Time     | date         | not null |                                |             |
 -- | Comment  | varchar(500) | not null |                                |             |
@@ -150,13 +151,11 @@ create table GoodComment
 (
 GoodID int not null,
 UserID int not null,
-UserName varchar(20) not null,
 Type int not null,
 Time date not null,
 Comment varchar(500) not null,
 Foreign Key (GoodID) References GoodInfo(GoodID),
-Foreign Key (UserID) References UserInfo(UserID),
-Foreign Key (UserName) References UserInfo(UserName)
+Foreign Key (UserID) References UserInfo(UserID)
 )ENGINE=InnoDB;
 
 --   - **ShoppingCart**
