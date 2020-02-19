@@ -1,4 +1,6 @@
 create database OnlineShoppingPlatform;
+drop database onlineshoppingplatform;
+
 use OnlineShoppingPlatform;
 -- #### 表汇总
 -- | 表名         | 功能说明           |
@@ -7,10 +9,10 @@ use OnlineShoppingPlatform;
 -- | UserState    | 用户屏蔽信息       |
 -- | UserFriend   | 用户好友信息       |
 -- | GoodInfo     | 单条商品信息       |
+-- | GoodType     | 商品类别汇总       |
 -- | Warehouse    | 用户仓库信息       |
 -- | GoodComment  | 商品评论信息       |
 -- | ShoppingCart | 购物车信息         |
--- | AdminInfo    | 单条管理员信息     |
 -- | Notice       | 管理员留言信息     |
 -- | Message      | 用户留言信息       |
 -- | CustomPic    | 自定义个人空间背景 |
@@ -29,61 +31,61 @@ PicPath varchar(20) not null Unique
 )ENGINE=InnoDB;
 
 -- - **UserInfo**
-
--- | 列名          | 数据类型    | 空/非空  | 约束条件                       | 备注 |
--- | ------------- | ----------- | -------- | ------------------------------ | ---- |
--- | UserID        | int         | not null | Primary Key,Auto_increment     |      |
--- | UserLoginName | varchar(20) | not null | Unique                         |      |
--- | UserName      | varchar(20) | not null | Unique                         |      |
--- | UserPassword  | varchar(20) | not null |                                |      |
--- | Balance       | float       | not null |                                |      |
--- | UserImg       | varchar(50) |          |                                | 头像 |
--- | Custom        | varchar(20) | not null | Foreign Key(CustomPic.PicName) | 背景 |
+-- | 列名          | 数据类型    | 空/非空  | 约束条件                       | 备注           |
+-- | ------------- | ----------- | -------- | ------------------------------ | -------------- |
+-- | UserID        | int         | not null | Primary Key,Auto_increment     |                |
+-- | UserLoginName | varchar(20) | not null | Unique                         |                |
+-- | UserName      | varchar(20) | not null | Unique                         |                |
+-- | UserPassword  | varchar(20) | not null |                                |                |
+-- | GrantP        | int         | not null |                                | 1管理员、0用户 |
+-- | Balance       | float       | not null |                                |                |
+-- | UserImg       | varchar(50) |          |                                | 头像           |
+-- | Custom        | varchar(20) | not null | Foreign Key(CustomPic.PicName) | 背景           |
 create table UserInfo
 (
 UserID int not null primary key auto_increment,
 UserLoginName varchar(20) not null Unique,
 UserName varchar(20) not null Unique,
 UserPassword varchar(20) not null,
+GrantP int not null,
 Balance float not null,
 UserImg varchar(50),
 Custom varchar(20) not null,
 Foreign Key (Custom) References CustomPic(PicName)
 )ENGINE=InnoDB;
 
--- - **AdminInfo**
-
--- | 列名           | 数据类型    | 空/非空  | 约束条件                   | 备注 |
--- | -------------- | ----------- | -------- | -------------------------- | ---- |
--- | AdminID        | int         | not null | Primary Key,Auto_increment |      |
--- | AdminLoginName | varchar(20) | not null | Unique                     |      |
--- | AdminPassword  | varchar(20) | not null |                            |      |
--- | AdminName      | varchar(20) | not null | Unique                     |      |
-create table AdminInfo
-(
-AdminID int not null Primary Key Auto_increment,
-AdminLoginName varchar(20) not null Unique,
-AdminPassword varchar(20) not null,
-AdminName varchar(20) not null Unique
-)ENGINE=InnoDB;
-
 -- - **GoodInfo**
 -- | 列名     | 数据类型      | 空/非空  | 约束条件                   | 备注     |
 -- | -------- | ------------- | -------- | -------------------------- | -------- |
 -- | GoodID   | int           | not null | Primary Key,Auto_increment |          |
--- | GoodName | varchar(20)   | not null | Unique                     |          |
+-- | GoodName | varchar(50)   | not null | Unique                     |          |
 -- | GoodImg  | varchar(50)   |          |                            |          |
 -- | Owner    | varchar(20)   | not null |                            | 默认官方 |
+-- | RDate    | date          | not null |                            |          |
 -- | Price    | float         | not null |                            |          |
 -- | Detail   | varchar(1000) | not null |                            |          |
 create table GoodInfo
 (
 GoodID int not null Primary Key Auto_increment,
-GoodName varchar(20) not null Unique,
+GoodName varchar(50) not null Unique,
 GoodImg varchar(50),
-Owner varchar(20) not null,
+Owner varchar(50) not null,
+RDate date not null,
 Price float not null,
 Detail varchar(1000) not null
+)ENGINE=InnoDB;
+
+-- - **GoodType**
+-- | 列名   | 数据类型    | 空/非空  | 约束条件                     | 备注 |
+-- | ------ | ----------- | -------- | ---------------------------- | ---- |
+-- | GoodID | int         | not null | Foreign Key(GoodInfo.GoodID) |      |
+-- | Type   | varchar(20) | not null |                              |      |
+-- |        |             |          | Unique(GoodID,Type)          |      |
+create table GoodType
+(
+GoodID int not null,
+Type varchar(20) not null,
+Foreign Key (GoodID) References GoodInfo(GoodID)
 )ENGINE=InnoDB;
 
 -- - **UserState**
