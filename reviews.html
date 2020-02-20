@@ -11,82 +11,7 @@
 
 <body style="background: radial-gradient(ellipse, white, lightblue);">
   <!-- 商城黑色导航栏 -->
-  <nav class="navbar navbar-inverse" role="navigation">
-    <!-- LOGO -->
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">商品购物平台</a>
-      </div>
-      <!-- 内容 -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-        <!-- 左对齐 -->
-        <ul class="nav navbar-nav navbar-left">
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              商店
-              <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a href="#">公告</a></li>
-              <li class="divider"></li>
-              <li><a href="#">购物车</a></li>
-              <li class="divider"></li>
-              <li><a href="#">销量统计</a></li>
-              <li class="divider"></li>
-              <li><a href="#">关于商城</a></li>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              Len
-              <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a href="#">个人资料</a></li>
-              <li class="divider"></li>
-              <li><a href="#">好友</a></li>
-              <li class="divider"></li>
-              <li><a href="#">好友评论</a></li>
-              <li class="divider"></li>
-              <li><a href="#">库存</a></li>
-            </ul>
-          </li>
-        </ul>
-        <!-- 右对齐 -->
-        <ul class="nav navbar-nav navbar-right">
-          <form class="navbar-form navbar-left">
-            <div class="form-group">
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="搜索商品">
-                <span class="input-group-btn">
-                  <button type="button" class="btn btn-default" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                  </button>
-                </span>
-              </div>
-            </div>
-          </form>
-          <li><a href="#">￥20.00</a></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="img/headimg.jpg" class="img-rounded img-responsive">
-            </a>
-            <ul class="dropdown-menu">
-              <li><a href="#">注销</a></li>
-              <li class="divider"></li>
-              <li><a href="#">帐户明细</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  <div class="headerpage"></div>
 
   <!-- 路径导航 -->
   <div class="container">
@@ -229,6 +154,12 @@
 </div> -->
   <script src="js/jquery.min.js" charset="utf-8"></script>
   <script src="js/bootstrap.min.js" charset="utf-8"></script>
+  <script>
+    $(function() {
+      // 公共部分 导航栏
+      $(".headerpage").load("header.html");
+    });
+  </script>
 </body>
 
 </html>
