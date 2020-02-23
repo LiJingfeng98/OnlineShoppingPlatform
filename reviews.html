@@ -16,136 +16,29 @@
   <!-- 路径导航 -->
   <div class="container">
     <ol class="breadcrumb">
-      <li><a href="#">
-          <h4>Len</h4>
-        </a></li>
-      <li><a href="usergoods.html">库存</a></li>
+      <li id="person"></li>
+      <li id="warehouse"></li>
       <li class="active">评测</li>
     </ol>
     <!-- 标签导航 -->
     <ul class="nav nav-tabs">
-      <li><a href="usergoods.html">库存</a></li>
+      <li id="warehouse1"></li>
       <li class="active"><a href="#">评测</a></li>
     </ul>
   </div>
   <!-- 内容 -->
   <div class="container">
     <div class="panel panel-default">
-      <div class="panel-body">
-        <!-- 一个评测 -->
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="media">
-              <div class="media-left">
-                <a href="#">
-                  <img class="media-object center-block" src="img/g1.jpg" alt="...">
-                </a>
-              </div>
-              <div class="media-body">
-                <div class="alert alert-success" style="font-size:15px;  font-weight: 700" role="alert">
-
-                  <span class="glyphicon glyphicon-thumbs-up"></span>好评
-                </div>
-              </div>
-            </div>
-            <!-- 评论 -->
-            <div class="well">
-              <p>the "color puzzles" were actually really enjoyable and for once a few of the character designs caught my eye unlike a lot of erotic puzzle games I genuinely play for the puzzles. There is also like a after game timing minigame you
-                can
-                play
-                for more really bad moans, cgi animation and lewds in the 18+patch but it didn't really meet my fancy and was a little laggy. In the end its not bad and its a enjoyable game to waste a little less than an hour on to be rewarded
-                with cute
-                girls... Amanozako best girl.</p>
-            </div>
-            <p class="text-right">发表于：2020-02-14</p>
-          </div>
-        </div>
-
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="media">
-              <div class="media-left">
-                <a href="#">
-                  <img class="media-object center-block" src="img/g1.jpg" alt="...">
-                </a>
-              </div>
-              <div class="media-body">
-                <div class="alert alert-success" style="font-size:15px;  font-weight: 700" role="alert">
-
-                  <span class="glyphicon glyphicon-thumbs-up"></span>好评
-                </div>
-              </div>
-            </div>
-            <!-- 评论 -->
-            <div class="well">
-              <p>the "color puzzles" were actually really enjoyable and for once a few of the character designs caught my eye unlike a lot of erotic puzzle games I genuinely play for the puzzles. There is also like a after game timing minigame you
-                can
-                play
-                for more really bad moans, cgi animation and lewds in the 18+patch but it didn't really meet my fancy and was a little laggy. In the end its not bad and its a enjoyable game to waste a little less than an hour on to be rewarded
-                with cute
-                girls... Amanozako best girl.</p>
-            </div>
-            <p class="text-right">发表于：2020-02-14</p>
-          </div>
-        </div>
-
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="media">
-              <div class="media-left">
-                <a href="#">
-                  <img class="media-object center-block" src="img/g1.jpg" alt="...">
-                </a>
-              </div>
-              <div class="media-body">
-                <div class="alert alert-success" style="font-size:15px;  font-weight: 700" role="alert">
-
-                  <span class="glyphicon glyphicon-thumbs-up"></span>好评
-                </div>
-              </div>
-            </div>
-            <!-- 评论 -->
-            <div class="well">
-              <p>the "color puzzles" were actually really enjoyable and for once a few of the character designs caught my eye unlike a lot of erotic puzzle games I genuinely play for the puzzles. There is also like a after game timing minigame you
-                can
-                play
-                for more really bad moans, cgi animation and lewds in the 18+patch but it didn't really meet my fancy and was a little laggy. In the end its not bad and its a enjoyable game to waste a little less than an hour on to be rewarded
-                with cute
-                girls... Amanozako best girl.</p>
-            </div>
-            <p class="text-right">发表于：2020-02-14</p>
-          </div>
-        </div>
-
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="media">
-              <div class="media-left">
-                <a href="#">
-                  <img class="media-object center-block" src="img/g1.jpg" alt="...">
-                </a>
-              </div>
-              <div class="media-body">
-                <div class="alert alert-success" style="font-size:15px;  font-weight: 700" role="alert">
-
-                  <span class="glyphicon glyphicon-thumbs-up"></span>好评
-                </div>
-              </div>
-            </div>
-            <!-- 评论 -->
-            <div class="well">
-              <p>the "color puzzles" were actually really enjoyable and for once a few of the character designs caught my eye unlike a lot of erotic puzzle games I genuinely play for the puzzles. There is also like a after game timing minigame you
-                can
-                play
-                for more really bad moans, cgi animation and lewds in the 18+patch but it didn't really meet my fancy and was a little laggy. In the end its not bad and its a enjoyable game to waste a little less than an hour on to be rewarded
-                with cute
-                girls... Amanozako best girl.</p>
-            </div>
-            <p class="text-right">发表于：2020-02-14</p>
-          </div>
-        </div>
+      <div class="panel-body" id="commentList">
       </div>
     </div>
+    <nav aria-label="...">
+      <ul class="pager">
+        <li class="previous"><a href="javascript:void(0);"><span aria-hidden="true">&larr;</span> Older</a></li>
+        <font id="pageNum">--第 1 页--</font>
+        <li class="next"><a href="javascript:void(0);">Newer <span aria-hidden="true">&rarr;</span></a></li>
+      </ul>
+    </nav>
   </div>
 
   <!-- 底部内容 -->
@@ -154,6 +47,7 @@
 </div> -->
   <script src="js/jquery.min.js" charset="utf-8"></script>
   <script src="js/bootstrap.min.js" charset="utf-8"></script>
+  <script src="js/reviews.js" charset="utf-8"></script>
   <script>
     $(function() {
       // 公共部分 导航栏
