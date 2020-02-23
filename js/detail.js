@@ -191,7 +191,7 @@ function loadCommendList() {
       commentlist.innerHTML = innerHTML;
 
       var pageNum = document.querySelector('#pageNum');
-      pageNum.innerHTML = "--第" + page + "/" + maxpage + "页--"
+      pageNum.innerHTML = "--第" + page + "/" + maxpage + "页--";
 
     },
     error: function(e) {
@@ -202,7 +202,6 @@ function loadCommendList() {
 };
 
 // 前后页切换
-
 $(function changePage() {
   $(".previous").click(function() {
     if (page > 1) {

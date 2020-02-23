@@ -44,7 +44,7 @@
       <div class="btn-group btn-group-justified">
         <a href="javascript:void(0);" class="btn btn-primary" id="type1">新品</a>
         <a href="javascript:void(0);" class="btn btn-primary" id="type2">销量</a>
-        <a href="javascript:void(0);" class="btn btn-primary">类别</a>
+        <a href="type.html" class="btn btn-primary">类别</a>
       </div>
     </div>
   </div>
@@ -76,6 +76,7 @@
     $(function() {
       // 公共部分 导航栏
       $(".headerpage").load("header.html");
+      $.getScript("js/header.js");
     });
   </script>
 </body>

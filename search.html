@@ -16,29 +16,24 @@
   <!-- 搜索标题 -->
   <div class="container">
     <h1>正在浏览 <br>
-      <small>所有产品</small>
+      <small id='searchText'>所有产品</small>
     </h1>
     <nav class="navbar navbar-default">
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <form class="navbar-form navbar-left">
+        <form class="navbar-form navbar-left" action="search.html" method="get">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search">
+            <input type="text" class="form-control" placeholder="Search" name="item">
           </div>
           <button type="submit" class="btn btn-default">搜索</button>
         </form>
         <ul class="nav navbar-nav navbar-right">
           <p class="navbar-text">排序依据</p>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">销量排序 <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">销量排序</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">最新排序</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">价格降序</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">价格升序</a></li>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >
+              <div id="typeTop"></div>
+            </a>
+            <ul class="dropdown-menu" id = "typeList">
             </ul>
           </li>
         </ul>
@@ -46,106 +41,15 @@
     </nav>
 
     <!-- 搜索内容 -->
-    <p>25,372 个匹配的搜索结果。</p>
-    <div class="list-group">
-      <a href="#" class="list-group-item">
-        <div class="media">
-          <div class="media-left media-middle">
-            <img src="img/g1.jpg" class="media-object ">
-          </div>
-          <div class="media-body">
-            <h4 class="media-heading">妖语</h4>
-            <p>独立，休闲，动作，角色扮演</p>
-            <p class="text-right">6.00$</p>
-          </div>
-        </div>
-      </a>
-      <a href="#" class="list-group-item">
-        <div class="media">
-          <div class="media-left media-middle">
-            <img src="img/g1.jpg" class="media-object ">
-          </div>
-          <div class="media-body">
-            <h4 class="media-heading">妖语</h4>
-            <p>独立，休闲，动作，角色扮演</p>
-            <p class="text-right">6.00$</p>
-          </div>
-        </div>
-      </a><a href="#" class="list-group-item">
-        <div class="media">
-          <div class="media-left media-middle">
-            <img src="img/g1.jpg" class="media-object ">
-          </div>
-          <div class="media-body">
-            <h4 class="media-heading">妖语</h4>
-            <p>独立，休闲，动作，角色扮演</p>
-            <p class="text-right">6.00$</p>
-          </div>
-        </div>
-      </a><a href="#" class="list-group-item">
-        <div class="media">
-          <div class="media-left media-middle">
-            <img src="img/g1.jpg" class="media-object ">
-          </div>
-          <div class="media-body">
-            <h4 class="media-heading">妖语</h4>
-            <p>独立，休闲，动作，角色扮演</p>
-            <p class="text-right">6.00$</p>
-          </div>
-        </div>
-      </a><a href="#" class="list-group-item">
-        <div class="media">
-          <div class="media-left media-middle">
-            <img src="img/g1.jpg" class="media-object ">
-          </div>
-          <div class="media-body">
-            <h4 class="media-heading">妖语</h4>
-            <p>独立，休闲，动作，角色扮演</p>
-            <p class="text-right">6.00$</p>
-          </div>
-        </div>
-      </a><a href="#" class="list-group-item">
-        <div class="media">
-          <div class="media-left media-middle">
-            <img src="img/g1.jpg" class="media-object ">
-          </div>
-          <div class="media-body">
-            <h4 class="media-heading">妖语</h4>
-            <p>独立，休闲，动作，角色扮演</p>
-            <p class="text-right">6.00$</p>
-          </div>
-        </div>
-      </a>
-      <a href="#" class="list-group-item">
-        <div class="media">
-          <div class="media-left media-middle">
-            <img src="img/g1.jpg" class="media-object ">
-          </div>
-          <div class="media-body">
-            <h4 class="media-heading">妖语</h4>
-            <p>独立，休闲，动作，角色扮演</p>
-            <p class="text-right">6.00$</p>
-          </div>
-        </div>
-      </a><a href="#" class="list-group-item">
-        <div class="media">
-          <div class="media-left media-middle">
-            <img src="img/g1.jpg" class="media-object ">
-          </div>
-          <div class="media-body">
-            <h4 class="media-heading">妖语</h4>
-            <p>独立，休闲，动作，角色扮演</p>
-            <p class="text-right">6.00$</p>
-          </div>
-        </div>
-      </a>
+    <p id = 'gnums'>0 个匹配的搜索结果。</p>
+    <div class="list-group" id="goodlist">
     </div>
     <!-- 分页 -->
       <nav aria-label="...">
         <ul class="pager">
-          <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> Older</a></li>
-          --第 1 页--
-          <li class="next"><a href="#">Newer <span aria-hidden="true">&rarr;</span></a></li>
+          <li class="previous"><a href="javascript:void(0);"><span aria-hidden="true">&larr;</span> Older</a></li>
+           <font id="pageNum">--第 1 页--</font>
+          <li class="next"><a href="javascript:void(0);">Newer <span aria-hidden="true">&rarr;</span></a></li>
         </ul>
       </nav>
 
@@ -159,10 +63,12 @@
 </div> -->
   <script src="js/jquery.min.js" charset="utf-8"></script>
   <script src="js/bootstrap.min.js" charset="utf-8"></script>
+  <script src="js/search.js" charset="utf-8"></script>
   <script>
     $(function() {
       // 公共部分 导航栏
       $(".headerpage").load("header.html");
+      $.getScript("js/header.js");
     });
   </script>
 </body>
