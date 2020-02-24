@@ -102,7 +102,7 @@ function getQueryVariable(variable) {
       var typeList = document.querySelector('#typeList');
       innerHTML = "";
       for (var i = 0; i < goodTypeArr.length; i++) {
-        innerHTML += "<a href=\"#\" class=\"btn btn-primary btn-sm\">" + goodTypeArr[i] + "</a>";
+        innerHTML += "<a href=\"type.html?item="+goodTypeArr[i]+"\" class=\"btn btn-primary btn-sm\">" + goodTypeArr[i] + "</a>";
       }
       innerHTML += '<a href="#" class="btn btn-primary btn-sm">+</a>';
       typeList.innerHTML = innerHTML;
