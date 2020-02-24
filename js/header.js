@@ -50,10 +50,6 @@ $(document).on("click", "#logout", function logOut() {
 
 
 (function init() {
-  // var expires = new Date(new Date().getTime() + 3600 * 24 * 1000).toGMTString();
-  // document.cookie = 'username = Len;expires=' + expires + ";path=/OnlineShoppingPlatform";
-  // document.cookie = 'userid = 2;expires=' + expires + ";path=/OnlineShoppingPlatform";
-  // document.cookie = 'balance = 190;expires=' + expires + ";path=/OnlineShoppingPlatform";
   var cookieObj = getCookieObj();
 
   if (typeof(cookieObj.username) != "undefined") {
@@ -68,6 +64,8 @@ $(document).on("click", "#logout", function logOut() {
       "<li><a href=\"person.html?uid=" + cookieObj.userid + "\">个人资料</a></li>" +
       "<li class=\"divider\"></li>" +
       "<li><a href=\"#\">好友</a></li>" +
+      "<li class=\"divider\"></li>" +
+      "<li><a href=\"#\">购物车</a></li>" +
       "<li class=\"divider\"></li>" +
       "<li><a href=\"usergoods.html?uid=" + cookieObj.userid + "\">库存</a></li>" +
       " </ul>";
