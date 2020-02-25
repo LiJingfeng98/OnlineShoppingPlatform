@@ -65,7 +65,7 @@ $(document).on("click", "#logout", function logOut() {
       "<li class=\"divider\"></li>" +
       "<li><a href=\"#\">好友</a></li>" +
       "<li class=\"divider\"></li>" +
-      "<li><a href=\"#\">购物车</a></li>" +
+      "<li><a href=\"cart.html\">购物车</a></li>" +
       "<li class=\"divider\"></li>" +
       "<li><a href=\"usergoods.html?uid=" + cookieObj.userid + "\">库存</a></li>" +
       " </ul>";

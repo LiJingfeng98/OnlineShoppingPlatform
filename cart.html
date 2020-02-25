@@ -15,89 +15,19 @@
 
   <!-- 搜索标题 -->
   <div class="container">
-    <h1>Len的购物车</h1>
+    <h1 id="uname">Len的购物车</h1>
     <!-- 搜索内容 -->
     <p>购买后将直接加入库存</p>
-    <div class="list-group">
-      <li class="list-group-item">
-        <div class="media">
-          <div class="media-left media-middle">
-            <a href="#">
-              <img src="img/g1.jpg" class="media-object ">
-            </a>
-          </div>
-          <div class="media-body">
-            <a href="#">
-              <h4 class="media-heading">妖语</h4>
-            </a>
-            <p class="text-right" style="font-size:18px;">6.00$</p>
-            <a href="">
-              <p class="text-right">移除</p>
-            </a>
-          </div>
-        </div>
-      </li>
-      <li class="list-group-item">
-        <div class="media">
-          <div class="media-left media-middle">
-            <a href="#">
-              <img src="img/g1.jpg" class="media-object ">
-            </a>
-          </div>
-          <div class="media-body">
-            <a href="#">
-              <h4 class="media-heading">妖语</h4>
-            </a>
-            <p class="text-right" style="font-size:18px;">6.00$</p>
-            <a href="">
-              <p class="text-right">移除</p>
-            </a>
-          </div>
-        </div>
-      </li>
-      <li class="list-group-item">
-        <div class="media">
-          <div class="media-left media-middle">
-            <a href="#">
-              <img src="img/g1.jpg" class="media-object ">
-            </a>
-          </div>
-          <div class="media-body">
-            <a href="#">
-              <h4 class="media-heading">妖语</h4>
-            </a>
-            <p class="text-right" style="font-size:18px;">6.00$</p>
-            <a href="">
-              <p class="text-right">移除</p>
-            </a>
-          </div>
-        </div>
-      </li>
-      <li class="list-group-item">
-        <div class="media">
-          <div class="media-left media-middle">
-            <a href="#">
-              <img src="img/g1.jpg" class="media-object ">
-            </a>
-          </div>
-          <div class="media-body">
-            <a href="#">
-              <h4 class="media-heading">妖语</h4>
-            </a>
-            <p class="text-right" style="font-size:18px;">6.00$</p>
-            <a href="">
-              <p class="text-right">移除</p>
-            </a>
-          </div>
-        </div>
-      </li>
+    <div class="list-group" id="cartList">
+      <li class="list-group-item"><h2 class="text-center">暂未添加商品</h2></li>
     </div>
     <div class="alert alert-info text-right" role="alert">
       <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
       <strong class="">总金额: &nbsp;&nbsp;&nbsp;&nbsp;</strong>
-      <font size="5">24.00$</font>
+      <font size="5" id="totalPrice">0.00￥</font>
       <hr>
-      <button type="button" class="btn btn-success">--购买--</button>
+      <div id="buybtn"><button type="button" class="btn btn-danger" disabled>--购买--</button></div>
+
     </div>
   </div>
 
@@ -109,6 +39,7 @@
 </div> -->
   <script src="js/jquery.min.js" charset="utf-8"></script>
   <script src="js/bootstrap.min.js" charset="utf-8"></script>
+  <script src="js/cart.js" charset="utf-8"></script>
   <script>
     $(function() {
       // 公共部分 导航栏

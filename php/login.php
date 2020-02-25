@@ -18,12 +18,12 @@
   // flag 0查询失败，1查询成功
   $flag = 0;
   if($halfPro->fetch(PDO::FETCH_COLUMN)){
-    setcookie('userid',$userid,time()+3600*24,'/OnlineShoppingPlatform');
-    setcookie('username',$username,time()+3600*24,'/OnlineShoppingPlatform');
-    setcookie('grantp',$grantp,time()+3600*24,'/OnlineShoppingPlatform');
-    setcookie('balance',$balance,time()+3600*24,'/OnlineShoppingPlatform');
-    setcookie('userimg',$userimg,time()+3600*24,'/OnlineShoppingPlatform');
-    setcookie('custom',$custom,time()+3600*24,'/OnlineShoppingPlatform');
+    setcookie('userid',$userid,time()+3600*24,'/onlineshoppingplatform');
+    setcookie('username',$username,time()+3600*24,'/onlineshoppingplatform');
+    setcookie('grantp',$grantp,time()+3600*24,'/onlineshoppingplatform');
+    setcookie('balance',$balance,time()+3600*24,'/onlineshoppingplatform');
+    setcookie('userimg',$userimg,time()+3600*24,'/onlineshoppingplatform');
+    setcookie('custom',$custom,time()+3600*24,'/onlineshoppingplatform');
     $flag = 1;
   }
   $success['infoCode'] = $flag;
