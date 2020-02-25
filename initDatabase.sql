@@ -163,12 +163,14 @@ Foreign Key (UserID) References UserInfo(UserID)
 -- | ------ | -------- | -------- | ---------------------------- | ---- |
 -- | UserID | int      | not null | Foreign Key(UserInfo.UserID) |      |
 -- | GoodID | int      | not null | Foreign Key(GoodInfo.GoodID) |      |
+-- |        |          |          | Unique(UserID,GoodID)        |      |
 create table ShoppingCart
 (
 UserID int not null,
 GoodID int not null,
 Foreign Key (GoodID) References GoodInfo(GoodID),
-Foreign Key (UserID) References UserInfo(UserID)
+Foreign Key (UserID) References UserInfo(UserID),
+UNIQUE (UserID,GoodID)
 )ENGINE=InnoDB;
 
 -- - **Notice**

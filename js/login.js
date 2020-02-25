@@ -27,6 +27,7 @@
         passWord: passWord
       },
       success: function(res) {
+        console.log(res);
         if(res.infoCode==0){
           $('#message').css('display', 'inline-block');
         }
@@ -34,27 +35,6 @@
           $('#message').css('display', 'none');
           window.location.href = 'index.html';
         }
-        // switch (res.infoCode) {
-        //   case 0:
-        //     //需要做的是变更页面结构
-        //     alert("登录成功");
-        //     $('.header-menu').find('.menu').css('display', 'none');
-        //     $('.header-menu').find('.ahidden').css('display', 'inline-block');
-        //     $('.header-menu').find('.ahidden').html('欢迎回来！' + res.showUserName);
-        //     $('.header-menu').find('.btn_hidden').css('display', 'inline-block');
-        //     break;
-        //   case 1:
-        //     alert('登录失败！用户名或密码错误！');
-        //     break;
-        //   case 2:
-        //     alert('登录失败！网络连接错误！');
-        //     break;
-        //   case 3:
-        //     alert('登录失败！该用户名不存在！');
-        //     break;
-        //   default:
-        //     alert('未知错误！');
-        // }
       },
       error: function(e) {
         alert(e.responseText);

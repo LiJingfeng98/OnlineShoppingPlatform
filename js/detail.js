@@ -1,6 +1,7 @@
 var gid = 1;
 var page = 1;
 var maxpage = 1;
+var uid;
 //获取get参数方法
 function getQueryVariable(variable) {
   var query = window.location.search.substring(1);
@@ -36,7 +37,7 @@ function getQueryVariable(variable) {
       //路径导航
       var innerHTML =
         "<li><a href=\"search.html\">所有游戏</a></li>" +
-        "<li><a href=\"type?type=" + goodTypeArr[0] + "\">" + goodTypeArr[0] + "</a></li>" +
+        "<li><a href=\"type?item=" + goodTypeArr[0] + "\">" + goodTypeArr[0] + "</a></li>" +
         "<li class=\"active\">" + goodInfoArr[0].gname + "</li>";
       var breadcrumb = document.querySelector('.breadcrumb');
       breadcrumb.innerHTML = innerHTML;
@@ -102,7 +103,7 @@ function getQueryVariable(variable) {
       var typeList = document.querySelector('#typeList');
       innerHTML = "";
       for (var i = 0; i < goodTypeArr.length; i++) {
-        innerHTML += "<a href=\"type.html?item="+goodTypeArr[i]+"\" class=\"btn btn-primary btn-sm\">" + goodTypeArr[i] + "</a>";
+        innerHTML += "<a href=\"type.html?item=" + goodTypeArr[i] + "\" class=\"btn btn-primary btn-sm\">" + goodTypeArr[i] + "</a>";
       }
       innerHTML += '<a href="#" class="btn btn-primary btn-sm">+</a>';
       typeList.innerHTML = innerHTML;
@@ -110,19 +111,55 @@ function getQueryVariable(variable) {
       var buywhat = document.querySelector('#buywhat');
       buywhat.innerHTML = "购买&nbsp" + goodInfoArr[0].gname;
 
+      // 判断是否登录
+      var cookieObj = getCookieObj();
+      var hasGoods;
+      var hasComment;
+      if (typeof(cookieObj.username) == "undefined") {
+        hasGoods = false;
+        hasComment = false;
+      }else{
+        uid = cookieObj.userid;
+        hasGoods = checkWarehouse(uid);
+        hasComment = checkWarehouse(uid);
+      }
+      if (typeof(cookieObj.userid) != "undefined") {
+        //判断是否拥有
+        if (hasGoods) {
+          innerHTML =
+            "<button type=\"button\" class=\"btn btn-primary btn-lg pull-right\" disabled=\"disabled\">已在库中</button>";
+        } else {
+          innerHTML =
+            "<button type=\"button\" class=\"btn btn-primary btn-lg pull-right\" id=\"incart\">加入购物车</button>"
+        }
+      } else {
+        innerHTML =
+          "<button type=\"button\" class=\"btn btn-primary btn-lg pull-right\" disabled=\"disabled\">请登录后购买</button>";
+      }
+
       var bugPrice = document.querySelector('#bugPrice');
       bugPrice.innerHTML =
         "￥" + goodInfoArr[0].gprice + "&nbsp;&nbsp;&nbsp;" +
-        "<a href=\"\">" +
-        "   <button type=\"button\" class=\"btn btn-primary btn-lg pull-right\">加入购物车</button>" +
+        "<a href=\"#\">" + innerHTML +
         "</a>";
 
-      var wcomment1 = document.querySelector('#wcomment1');
-      wcomment1.innerHTML = "您的库中已有《" + goodInfoArr[0].gname + "》";
+      // 判断是否评论
+      if(hasGoods){
+        if(hasComment){
+          var writecomment = document.querySelector('#writecomment');
+          writecomment.innerHTML =
+          "<div class=\"alert alert-success\" role=\"alert\" ><h3><strong id=\"wcomment1\">您的库中已有《" + goodInfoArr[0].gname + "》</strong></h3></div>";
 
-      var wcomment2 = document.querySelector('#wcomment2');
-      wcomment2.innerHTML = "为 " + goodInfoArr[0].gname + " 撰写一篇评测";
+        }else{
+          var wcomment1 = document.querySelector('#wcomment1');
+          wcomment1.innerHTML = "您的库中已有《" + goodInfoArr[0].gname + "》";
 
+          var wcomment2 = document.querySelector('#wcomment2');
+          wcomment2.innerHTML = "为 " + goodInfoArr[0].gname + " 撰写一篇评测";
+        }
+      }else{
+        $('#mycomment').css('display', 'none');
+      }
 
 
     },
@@ -215,4 +252,98 @@ $(function changePage() {
     }
     loadCommendList();
   });
+});
+
+// 读取cookie
+function getCookieObj() {
+  var cookieObj = {},
+    cookieSplit = [],
+    // 以分号（;）分组
+    cookieArr = document.cookie.split(";");
+  for (var i = 0, len = cookieArr.length; i < len; i++)
+    if (cookieArr[i]) {
+      // 以等号（=）分组
+      cookieSplit = cookieArr[i].split("=");
+      // Trim() 是自定义的函数，用来删除字符串两边的空格
+      cookieObj[cookieSplit[0].trim()] = cookieSplit[1].trim();
+    }
+  return cookieObj;
+}
+
+//查询是否拥有
+function checkWarehouse(userid) {
+  var flag = '';
+  $.ajax({
+    type: 'get',
+    url: 'php/hasGoods.php',
+    async: false,
+    dataType: 'json',
+    data: {
+      gid: gid,
+      uid: userid,
+      type:1
+    },
+    success: function(res) {
+      if (res.flag == 1) {
+        flag = true;
+      } else {
+        flag = false;
+      }
+    },
+    error: function(e) {
+      var res = e.responseText;
+      alert(res);
+    }
+  });
+  return flag;
+}
+
+//查询是否评论
+function checkComment(userid){
+  var flag = '';
+  $.ajax({
+    type: 'get',
+    url: 'php/hasGoods.php',
+    async: false,
+    dataType: 'json',
+    data: {
+      gid: gid,
+      uid: userid,
+      type:2
+    },
+    success: function(res) {
+      if (res.flag == 1) {
+        flag = true;
+      } else {
+        flag = false;
+      }
+    },
+    error: function(e) {
+      var res = e.responseText;
+      alert(res);
+    }
+  });
+  return flag;
+}
+
+//加入购物车
+$(document).on("click", "#incart", function inCart() {
+  $.ajax({
+    type: 'get',
+    url: 'php/hasGoods.php',
+    dataType: 'json',
+    data: {
+      gid: gid,
+      uid: uid,
+      type:3
+    },
+    success: function(res) {
+      window.location.href = "cart.html";
+      window.event.returnValue=false;
+    },
+    error: function(e) {
+      var res = e.responseText;
+      alert(res);
+    }
+  })
 });
