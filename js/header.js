@@ -5,14 +5,6 @@ $(function searchItem() {
     var url = "search.html?item=" + string;
     window.location.href = url;
   });
-  // 无效
-  // $("#searchItem").keydown(function(e) {
-  //       if (e.keyCode == 13) {
-  //         var string = $("#searchItem").val();
-  //         var url = "search.html?item="+string;
-  //         window.location.href=url;
-  //       }
-  //  });
 });
 
 // 读取cookie
@@ -72,12 +64,12 @@ $(document).on("click", "#logout", function logOut() {
 
     var balance = document.querySelector("#balance");
     balance.innerHTML =
-      "<a href=\"#\">￥" + cookieObj.balance + "</a>";
+      "<a href=\"recharge.html\">￥" + cookieObj.balance + "</a>";
 
     var stateBox = document.querySelector("#stateBox");
     stateBox.innerHTML =
       "<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">" +
-      "  <img src=\"img/headimg.jpg\" class=\"img-rounded img-responsive\">" +
+      "  <img src=\"img/headimg/"+cookieObj.userimg+"_s.jpg\" class=\"img-rounded img-responsive\">" +
       "</a>" +
       "<ul class=\"dropdown-menu\">" +
       "   <li id=\"logout\"><a href=\"#\" >注销</a></li>" +

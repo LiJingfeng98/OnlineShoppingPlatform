@@ -9,7 +9,7 @@
   <title>Document</title>
 </head>
 
-<body style="background-image:url('img/bg1.jpg'); background-repeat: no-repeat;background-color: #000000">
+<body style="background-repeat: no-repeat;background-color: #000000">
   <!-- 商城黑色导航栏 -->
   <div class="headerpage"></div>
 
@@ -21,32 +21,18 @@
           <div class="media col-xs-9">
             <div class="media-left">
               <a href="#">
-                <img class="media-object" src="img/phead.jpg" alt="">
+                <img class="media-object" src="" id="uheadimg" alt="">
               </a>
             </div>
             <div class="media-body">
-              <h4 class="media-heading"><strong>Len</strong></h4>
+              <h4 class="media-heading" id="uname"><strong >Len</strong></h4>
               <hr>
-              <div style="max-height:120px; text-overflow:ellipsis;overflow:hidden;">
-                To be or not to be,it just a joke.=￣ω￣=.To be or not to be,it just a joke.=￣ω￣=To be or not to be,it just a joke.=￣ω￣=To be or not to be,it just a joke.=￣ω￣=To be or not to be,it just a joke.=￣ω￣=</div>
+              <div style="max-height:120px; text-overflow:ellipsis;overflow:hidden;" id="introduce">
+              </div>
             </div>
           </div>
           <div class="col-xs-3 ">
-            <div class="btn-group-vertical pull-right" role="group" aria-label="...">
-              <button class="btn btn-primary btn-lg" type="button">
-                库存<span class="badge">155</span>
-              </button>
-              <button class="btn btn-primary btn-lg" type="button">
-                评测 <span class="badge">2</span>
-              </button>
-              <button type="button" class="btn btn-primary dropdown-toggle btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                更多
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu">
-                <li><a href="#">添加关注</a></li>
-                <li><a href="#">发送消息</a></li>
-              </ul>
+            <div class="btn-group-vertical pull-right" role="group" id="ubtnGroup">
             </div>
           </div>
         </div>
@@ -57,59 +43,22 @@
   <hr>
   <!-- 最近动态 -->
   <div class="container">
-    <div class="panel panel-default">
+    <div class="panel panel-default" id="recentBuyPanel" >
       <div class="panel-heading">
         <h3 class="panel-title">最近购买</h3>
       </div>
-      <div class="panel-body">
-        <a href="#" class="list-group-item">
-          <div class="media">
-            <div class="media-left media-middle">
-              <img src="img/g1.jpg" class="media-object ">
-            </div>
-            <div class="media-body">
-              <h4 class="media-heading">妖语</h4>
-              <p>独立，休闲，动作，角色扮演</p>
-              <p class="text-right">2020-02-15</p>
-            </div>
-          </div>
-        </a>
+      <div class="panel-body" id="recentBuyBody">
       </div>
     </div>
 
-    <div class="panel panel-default">
+    <div class="panel panel-default" id="recentCommentPanel">
       <div class="panel-heading">
         <h3 class="panel-title">最近评论</h3>
       </div>
-      <div class="panel-body">
+      <div class="panel-body" >
         <div class="panel panel-default">
-          <div class="panel-body">
-            <!-- 用户 和 状态 -->
-            <!-- 用户 -->
-            <div class="media">
-              <div class="media-left">
-                <a href="#">
-                  <img class="media-object center-block" src="img/g1.jpg" alt="...">
-                </a>
-              </div>
-              <div class="media-body">
-                <div class="alert alert-success" style="font-size:15px;  font-weight: 700" role="alert">
-
-                  <span class="glyphicon glyphicon-thumbs-up"></span>好评
-                </div>
-              </div>
-            </div>
-            <!-- 评论 -->
-            <div class="well">
-              <p>the "color puzzles" were actually really enjoyable and for once a few of the character designs caught my eye unlike a lot of erotic puzzle games I genuinely play for the puzzles. There is also like a after game timing minigame you
-                can
-                play
-                for more really bad moans, cgi animation and lewds in the 18+patch but it didn't really meet my fancy and was a little laggy. In the end its not bad and its a enjoyable game to waste a little less than an hour on to be rewarded
-                with cute
-                girls... Amanozako best girl.</p>
-            </div>
+          <div class="panel-body" id="recentCommentBody">
           </div>
-        </div>
       </div>
     </div>
   </div>
@@ -122,117 +71,31 @@
       </div>
       <div class="panel-body">
         <!-- 未登录 则下列div不显示 -->
-        <div class="input-group">
-          <span class="input-group-addon">Len
-          </span>
-          <input type="text" class="form-control" placeholder="添加一条留言">
+        <div class="input-group" id="writeMessage">
+          <span class="input-group-addon" id="visitName"></span>
+          <input type="text" class="form-control" placeholder="添加一条留言" id="messageText">
           <span class="input-group-btn">
-            <button class="btn btn-success" type="button">提交留言</button>
+            <button class="btn btn-success" type="button" id="submessage">提交留言</button>
           </span>
         </div><!-- /input-group -->
 
         <!-- 所有留言 -->
-        <div class="media">
-          <div class="media-left media-top">
-            <a href="#">
-              <img class="media-object" src="img/shead.jpg" alt="...">
-            </a>
-          </div>
-          <div class="media-body">
-            <h4 class="media-heading">Len &nbsp&nbsp&nbsp
-              <small>2020-02-15</small>
-            </h4>
-            留言留言，我只是为了社区任务
-          </div>
-          <div class="text-right">
-            <a href="" title="删除">
-              <span class="glyphicon glyphicon-trash"></span>
-            </a>
-          </div>
+        <div id="messageList">
         </div>
-        <hr>
-        <div class="media">
-          <div class="media-left media-top">
-            <a href="#">
-              <img class="media-object" src="img/shead.jpg" alt="...">
-            </a>
-          </div>
-          <div class="media-body">
-            <h4 class="media-heading">Len &nbsp&nbsp&nbsp
-              <small>2020-02-15</small>
-            </h4>
-            留言留言，我只是为了社区任务
-          </div>
-          <div class="text-right">
-            <a href="" title="删除">
-              <span class="glyphicon glyphicon-trash"></span>
-            </a>
-          </div>
-        </div>
-        <hr>
-        <div class="media">
-          <div class="media-left media-top">
-            <a href="#">
-              <img class="media-object" src="img/shead.jpg" alt="...">
-            </a>
-          </div>
-          <div class="media-body">
-            <h4 class="media-heading">Len &nbsp&nbsp&nbsp
-              <small>2020-02-15</small>
-            </h4>
-            留言留言，我只是为了社区任务
-          </div>
-          <div class="text-right">
-            <a href="" title="删除">
-              <span class="glyphicon glyphicon-trash"></span>
-            </a>
-          </div>
-        </div>
-        <hr>
-        <div class="media">
-          <div class="media-left media-top">
-            <a href="#">
-              <img class="media-object" src="img/shead.jpg" alt="...">
-            </a>
-          </div>
-          <div class="media-body">
-            <h4 class="media-heading">Len &nbsp&nbsp&nbsp
-              <small>2020-02-15</small>
-            </h4>
-            留言留言，我只是为了社区任务
-          </div>
-          <div class="text-right">
-            <a href="" title="删除">
-              <span class="glyphicon glyphicon-trash"></span>
-            </a>
-          </div>
-        </div>
-        <hr>
-        <div class="media">
-          <div class="media-left media-top">
-            <a href="#">
-              <img class="media-object" src="img/shead.jpg" alt="...">
-            </a>
-          </div>
-          <div class="media-body">
-            <h4 class="media-heading">Len &nbsp&nbsp&nbsp
-              <small>2020-02-15</small>
-            </h4>
-            留言留言，我只是为了社区任务
-          </div>
-          <div class="text-right">
-            <a href="" title="删除">
-              <span class="glyphicon glyphicon-trash"></span>
-            </a>
-          </div>
-        </div>
-        <hr>
+        <nav aria-label="...">
+          <ul class="pager">
+            <li class="previous"><a href="javascript:void(0);"><span aria-hidden="true">&larr;</span> Older</a></li>
+             <font id="pageNum">--第 1 页--</font>
+            <li class="next"><a href="javascript:void(0);">Newer <span aria-hidden="true">&rarr;</span></a></li>
+          </ul>
+        </nav>
       </div>
     </div>
   </div>
 
   <script src="js/jquery.min.js" charset="utf-8"></script>
   <script src="js/bootstrap.min.js" charset="utf-8"></script>
+  <script src="js/person.js" charset="utf-8"></script>
   <script>
     $(function() {
       // 公共部分 导航栏

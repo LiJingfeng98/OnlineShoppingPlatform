@@ -34,7 +34,6 @@ function loadCommentList() {
       page: page
     },
     success: function(res) {
-      console.log(res);
       var commentListArr = res.commentListInfo;
       var username = res.username;
       var commentList = document.querySelector('#commentList');

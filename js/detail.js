@@ -22,12 +22,14 @@ function getQueryVariable(variable) {
   }
 
   //直接进入页面后，自动发送ajax请求，等待数据回传之后直接加载到页面之上
+  //type 1.初始化  2.评价列表  3.提交评论
   $.ajax({
     type: 'get',
     url: 'php/detail.php',
     dataType: 'json',
     data: {
-      gid: gid
+      gid: gid,
+      type: 1
     },
     success: function(res) {
       var goodInfoArr = res.goodInfo;
@@ -97,7 +99,7 @@ function getQueryVariable(variable) {
         "              <img src=\"img/" + goodInfoArr[0].gname + "/3.jpg\" class=\"img-responsive center-block\" alt=\"Third slide\">" +
         "            </div>" +
         "            <div class=\"item\">" +
-        "              <img src=\"img/" + goodInfoArr[0].gname + "/1.jpg\" class=\"img-responsive center-block\" alt=\"Third slide\">" +
+        "              <img src=\"img/" + goodInfoArr[0].gname + "/4.jpg\" class=\"img-responsive center-block\" alt=\"Third slide\">" +
         "            </div>";
 
       var typeList = document.querySelector('#typeList');
@@ -118,10 +120,10 @@ function getQueryVariable(variable) {
       if (typeof(cookieObj.username) == "undefined") {
         hasGoods = false;
         hasComment = false;
-      }else{
+      } else {
         uid = cookieObj.userid;
         hasGoods = checkWarehouse(uid);
-        hasComment = checkWarehouse(uid);
+        hasComment = checkComment(uid);
       }
       if (typeof(cookieObj.userid) != "undefined") {
         //判断是否拥有
@@ -144,24 +146,25 @@ function getQueryVariable(variable) {
         "</a>";
 
       // 判断是否评论
-      if(hasGoods){
-        if(hasComment){
+      if (hasGoods) {
+        if (hasComment) {
           var writecomment = document.querySelector('#writecomment');
           writecomment.innerHTML =
-          "<div class=\"alert alert-success\" role=\"alert\" ><h3><strong id=\"wcomment1\">您的库中已有《" + goodInfoArr[0].gname + "》</strong></h3></div>";
-
-        }else{
+            "<div class=\"alert alert-success\" role=\"alert\" ><h3><strong id=\"wcomment1\">您的库中已有《" + goodInfoArr[0].gname + "》</strong></h3></div>";
+        } else {
           var wcomment1 = document.querySelector('#wcomment1');
           wcomment1.innerHTML = "您的库中已有《" + goodInfoArr[0].gname + "》";
 
           var wcomment2 = document.querySelector('#wcomment2');
           wcomment2.innerHTML = "为 " + goodInfoArr[0].gname + " 撰写一篇评测";
+
+          var myimg = document.querySelector("#myimg");
+          myimg.innerHTML = "<img src=\"img/headimg/" + cookieObj.userimg + ".jpg\" class=\"img-responsive center-block\">";
+
         }
-      }else{
+      } else {
         $('#mycomment').css('display', 'none');
       }
-
-
     },
     error: function(e) {
       var res = e.responseText;
@@ -179,7 +182,8 @@ function loadCommendList() {
     dataType: 'json',
     data: {
       gid: gid,
-      page: page
+      page: page,
+      type: 2
     },
     success: function(res) {
       var commentListArr = res.commentInfoList;
@@ -205,7 +209,7 @@ function loadCommendList() {
           "      <div class=\"col-sm-5 col-xs-5 pull-left\" style=\"width:250px;\">" +
           "        <div class=\"col-sm-5 col-xs-5\">" +
           "          <a href=\"person.html?uid=" + commentListArr[i].uid + "\" class=\"thumbnail\">" +
-          "            <img class=\"img-responsive  center-block\" src=\"img/headimg/m" + commentListArr[i].uimg + "\" alt=\"\">" +
+          "            <img class=\"img-responsive  center-block\" src=\"img/headimg/" + commentListArr[i].uimg + ".jpg\" alt=\"\">" +
           "          </a>" +
           "        </div>" +
           "        <div class=\"col-sm-7 col-xs-7 pull-right\" style=\"color: #5aa9d6;\">" +
@@ -237,6 +241,33 @@ function loadCommendList() {
     }
   });
 };
+
+// 写入评论
+$(document).on("click", "#subcomment", function writecomment() {
+  var type = $("input[name='options']:checked").val();
+  var comment = $("textarea").val();
+  alert(gid+uid+type+comment);
+  $.ajax({
+    type: 'get',
+    url: 'php/detail.php',
+    dataType: 'json',
+    data: {
+      gid: gid,
+      uid: uid,
+      ctype:type,
+      comment:comment,
+      type: 3
+    },
+    success: function(res) {
+      location.reload();
+    },
+    error: function(e) {
+      var res = e.responseText;
+      alert(res);
+    }
+  });
+});
+
 
 // 前后页切换
 $(function changePage() {
@@ -270,6 +301,7 @@ function getCookieObj() {
   return cookieObj;
 }
 
+// ------以下使用hasGoods.php-----
 //查询是否拥有
 function checkWarehouse(userid) {
   var flag = '';
@@ -281,7 +313,7 @@ function checkWarehouse(userid) {
     data: {
       gid: gid,
       uid: userid,
-      type:1
+      type: 1
     },
     success: function(res) {
       if (res.flag == 1) {
@@ -299,7 +331,7 @@ function checkWarehouse(userid) {
 }
 
 //查询是否评论
-function checkComment(userid){
+function checkComment(userid) {
   var flag = '';
   $.ajax({
     type: 'get',
@@ -309,7 +341,7 @@ function checkComment(userid){
     data: {
       gid: gid,
       uid: userid,
-      type:2
+      type: 2
     },
     success: function(res) {
       if (res.flag == 1) {
@@ -335,11 +367,11 @@ $(document).on("click", "#incart", function inCart() {
     data: {
       gid: gid,
       uid: uid,
-      type:3
+      type: 3
     },
     success: function(res) {
       window.location.href = "cart.html";
-      window.event.returnValue=false;
+      window.event.returnValue = false;
     },
     error: function(e) {
       var res = e.responseText;

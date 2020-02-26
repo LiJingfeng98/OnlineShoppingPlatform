@@ -6,6 +6,7 @@ use OnlineShoppingPlatform;
 -- | 表名         | 功能说明           |
 -- | ------------ | ------------------ |
 -- | UserInfo     | 单条用户信息       |
+-- | Introduce    | 用户自我介绍       |
 -- | UserState    | 用户屏蔽信息       |
 -- | UserFriend   | 用户好友信息       |
 -- | GoodInfo     | 单条商品信息       |
@@ -194,15 +195,31 @@ Foreign Key (AdminName) References AdminInfo(AdminName)
 -- - **Message**
 -- | 列名     | 数据类型     | 空/非空  | 约束条件                     | 备注 |
 -- | -------- | ------------ | -------- | ---------------------------- | ---- |
+-- | ID       | int          | not null | Primary Key,Auto_increment   |      |
 -- | Sender   | int          | not null | Foreign Key(UserInfo.UserID) |      |
 -- | Receiver | int          | not null | Foreign Key(UserInfo.UserID) |      |
+-- | Time     | Date         | not null |                              |      |
 -- | Message  | varchar(500) | not null |                              |      |
 create table Message
 (
+id int not null primary key Auto_increment,
 Sender int not null,
 Receiver int not null,
+Time date not null,
 Message varchar(500) not null,
 Foreign Key (Sender) References UserInfo(UserID),
 Foreign Key (Receiver) References UserInfo(UserID)
 )ENGINE=InnoDB;
 
+-- - **Introduce**
+
+-- | 列名      | 数据类型     | 空/非空  | 约束条件                     | 备注 |
+-- | --------- | ------------ | -------- | ---------------------------- | ---- |
+-- | UserID    | int          | not null | Foreign Key(UserInfo.UserID) |      |
+-- | Introduce | varchar(500) |          |                              |      |
+create table Introduce
+(
+UserId int not null,
+Introduce varchar(500),
+ Foreign Key (UserId) References UserInfo(UserID)
+)ENGINE=InnoDB;
