@@ -1,13 +1,5 @@
-;
-(function() {
-  //注销事件
-  $('.header-menu').find('.btn_hidden').click(function() {
-    $('.header-menu').find('.menu').css('display', 'inline-block');
-    $('.header-menu').find('.ahidden').css('display', 'none');
-    $('.header-menu').find('.ahidden').html('你好！');
-    $('.header-menu').find('.btn_hidden').css('display', 'none');
-  });
 
+(function() {
   //登录事件
   $('#login').click(function() {
     var loginName = $('#inputLoginName').val();

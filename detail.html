@@ -40,8 +40,14 @@
           <div class="carousel-inner">
           </div>
           <!-- 轮播（Carousel）导航 -->
-          <a class="carousel-control left" href="#myCarousel" data-slide="prev"> <span _ngcontent-c3="" aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a>
-          <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+          <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
         </div>
         <br>
         <p>该产品的热门用户自定义标签</p>
@@ -72,24 +78,23 @@
         <h2 style="color: #66c0f4;" id="wcomment2">为 ?? 撰写一篇评测</h2>
         <p>您认为这款游戏有什么优点或缺点？您是否会将这款游戏推荐给他人？请写下您的看法。</p>
         <div class="row">
-          <div class="col-sm-3 col-xs-2">
-            <img src="img/head.jpg" class="img-responsive center-block">
+          <div class="col-sm-3 col-xs-2" id="myimg">
+            <img src="" class="img-responsive center-block">
           </div>
           <div class="col-sm-9 col-xs-10">
-            <form>
+            <form action="" onsubmit="return false">
               <div class="form-group">
                 <textarea name="name" rows="8" class="form-control" placeholder="请输入评论" required></textarea>
               </div>
               <div class="btn-group" data-toggle="buttons">
-
                 <label class="btn btn-primary glyphicon glyphicon-thumbs-up">
-                  <input type="radio" name="options" id="option1" required> 好评
+                  <input type="radio" name="options" id="option1" value="1" required> 好评
                 </label>
                 <label class="btn btn-primary glyphicon glyphicon-thumbs-down">
-                  <input type="radio" name="options" id="option2" required> 差评
+                  <input type="radio" name="options" id="option2" value="0" required> 差评
                 </label>
               </div>
-              <button type="submit" class="btn btn-success pull-right">--提交--</button>
+              <button type="submit" class="btn btn-success pull-right" id="subcomment">--提交--</button>
             </form>
           </div>
         </div>

@@ -14,18 +14,13 @@
   <div class="headerpage"></div>
   <div class="container">
 
-      <form class="form-signin" >
-        <h2 class="form-signin-heading">登录到现有的帐户</h2>
+      <form class="form-signin" action="" onsubmit="return false">
+        <h2 class="form-signin-heading">为现有帐户充值</h2>
         <div class="form-group">
-        <label for="inputLoginName" >LoginName</label>
-        <input type="text" id="inputLoginName" class="form-control" placeholder="Login Name" required autofocus>
+        <label for="chargeNum" >充值金额</label>
+        <input type="number" id="chargeNum" class="form-control" placeholder="input number" required autofocus>
         </div>
-        <div class="form-group">
-        <label for="inputPassword" >Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        </div>
-        <p style="color:red; display:none" id='message'>登录失败，请重新输入</p>
-        <button class="btn btn-lg btn-primary btn-block" type="submit"  id="login">登录</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit"  id="charge">充值</button>
 
       </form>
 
@@ -39,7 +34,7 @@
 </div> -->
   <script src="js/jquery.min.js" charset="utf-8"></script>
   <script src="js/bootstrap.min.js" charset="utf-8"></script>
-  <script src="js/login.js" charset="utf-8"></script>
+  <script src="js/recharge.js" charset="utf-8"></script>
   <script>
     $(function() {
       // 公共部分 导航栏
