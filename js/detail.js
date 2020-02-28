@@ -2,6 +2,7 @@ var gid = 1;
 var page = 1;
 var maxpage = 1;
 var uid;
+var cookieObj;
 //获取get参数方法
 function getQueryVariable(variable) {
   var query = window.location.search.substring(1);
@@ -114,7 +115,7 @@ function getQueryVariable(variable) {
       buywhat.innerHTML = "购买&nbsp" + goodInfoArr[0].gname;
 
       // 判断是否登录
-      var cookieObj = getCookieObj();
+      cookieObj = getCookieObj();
       var hasGoods;
       var hasComment;
       if (typeof(cookieObj.username) == "undefined") {
@@ -202,6 +203,18 @@ function loadCommendList() {
           alertString = "alert-danger";
           imgString = "glyphicon-thumbs-down";
         }
+        if (typeof(cookieObj.username) == "undefined") {
+          innerDelete = '';
+        } else {
+          if(cookieObj.userid==commentListArr[i].uid||cookieObj.grantp==1){
+            innerDelete =   " <a href=\"javascript:void(0);\" onclick=\"del(" + commentListArr[i].uid + ")\" title=\"删除\">" +
+              "<span class=\"glyphicon glyphicon-trash\"></span>" +
+              "   </a>";
+          }
+          else{
+            innerDelete = '';
+          }
+        }
         innerHTML +=
           "<div class=\"panel panel-default\">" +
           "  <div class=\"panel-body\">" +
@@ -219,7 +232,7 @@ function loadCommendList() {
           "      </div>" +
           "      <!-- 状态 -->" +
           "      <div class=\"alert " + alertString + " col-xs-5 col-sm-7 col-md-8 col-lg-9\" style=\"font-size:15px;  font-weight: 700\" role=\"alert\">" +
-          "        <span class=\"glyphicon " + imgString + "\"></span>" + typestring + "<font class=\"pull-right\">" + commentListArr[i].ctime + "</font>" +
+          "        <span class=\"glyphicon " + imgString + "\"></span>" + typestring + "<font class=\"pull-right\">" + commentListArr[i].ctime + innerDelete+"</font>" +
           "      </div>" +
           "    </div>" +
           "    <br>" +
@@ -268,6 +281,27 @@ $(document).on("click", "#subcomment", function writecomment() {
   });
 });
 
+//删除评论
+function del(uid){
+  $.ajax({
+    type: 'get',
+    url: 'php/detail.php',
+    dataType: 'json',
+    data: {
+      gid:gid,
+      uid: uid,
+      type: 4
+    },
+    success: function(res) {
+      alert("删除成功")
+      loadCommendList();
+    },
+    error: function(e) {
+      var res = e.responseText;
+      alert(res);
+    }
+  });
+};
 
 // 前后页切换
 $(function changePage() {

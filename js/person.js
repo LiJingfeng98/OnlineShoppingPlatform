@@ -162,7 +162,20 @@ function loadMessage() {
       var messageArr = res.messageList;
       var messageList = document.querySelector("#messageList");
       var innerHTML = "";
+      var innerDelete = "";
       for (var i = 0; i < messageArr.length; i++) {
+        if(visitUid == messageArr[i].uid ||
+          visitUid == uid || cookieObj.grantp==1){
+          innerDelete =
+          "<div class=\"text-right\">" +
+          " <a href=\"javascript:void(0);\" onclick=\"del(" + messageArr[i].mid + ")\" title=\"删除\">" +
+          "<span class=\"glyphicon glyphicon-trash\"></span>" +
+          "   </a>" +
+          "</div>" ;
+        }
+        else{
+          innerDelete = '';
+        }
         innerHTML +=
           "         <hr>" +
           "        <div class=\"media\">" +
@@ -175,12 +188,7 @@ function loadMessage() {
           "            <h4 class=\"media-heading\">" + messageArr[i].uname + " &nbsp&nbsp&nbsp" +
           "              <small>" + messageArr[i].time + "</small>" +
           "            </h4>" + messageArr[i].message +
-          "          </div>" +
-          "          <div class=\"text-right\">" +
-          "            <a href=\"javascript:void(0);\" onclick=\"del(" + messageArr[i].mid + ")\" title=\"删除\">" +
-          "              <span class=\"glyphicon glyphicon-trash\"></span>" +
-          "            </a>" +
-          "          </div>" +
+          "          </div>" +innerDelete+
           "        </div>";
 
       }
