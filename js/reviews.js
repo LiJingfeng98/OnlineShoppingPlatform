@@ -30,6 +30,7 @@ function loadCommentList() {
     url: 'php/reviews.php',
     dataType: 'json',
     data: {
+      type:1,
       uid: uid,
       page: page
     },
@@ -52,6 +53,20 @@ function loadCommentList() {
           alertString = "alert-danger";
           imgString = "glyphicon-thumbs-down";
         }
+        var innerDelete;
+        var cookieObj = getCookieObj();
+        if (typeof(cookieObj.username) == "undefined") {
+          innerDelete = '';
+        } else {
+          if(cookieObj.userid==uid||cookieObj.grantp==1){
+            innerDelete =   " <a href=\"javascript:void(0);\" onclick=\"del(" + commentListArr[i].gid + ")\" title=\"删除\">" +
+              "<span class=\"glyphicon glyphicon-trash\"></span>" +
+              "   </a>";
+          }
+          else{
+            innerDelete = '';
+          }
+        }
         innerHTML +=
           "        <div class=\"panel panel-default\">" +
           "          <div class=\"panel-body\">" +
@@ -71,7 +86,8 @@ function loadCommentList() {
           "            <div class=\"well\">" +
           "              <p>" + commentListArr[i].comment + "</p>" +
           "            </div>" +
-          "            <p class=\"text-right\">发表于：" + commentListArr[i].time + "</p>" +
+          "            <p class=\"text-right\">发表于：" + commentListArr[i].time +innerDelete +
+          "</p>" +
           "          </div>" +
           "        </div>";
       }
@@ -103,6 +119,28 @@ function loadCommentList() {
   });
 };
 
+//删除评论
+function del(gid){
+  $.ajax({
+    type: 'get',
+    url: 'php/reviews.php',
+    dataType: 'json',
+    data: {
+      gid:gid,
+      uid: uid,
+      type: 2
+    },
+    success: function(res) {
+      alert("删除成功");
+      loadCommentList();
+    },
+    error: function(e) {
+      var res = e.responseText;
+      alert(res);
+    }
+  });
+};
+
 // 前后页切换
 $(function changePage() {
   $(".previous").click(function() {
@@ -118,3 +156,19 @@ $(function changePage() {
     loadCommentList();
   });
 });
+
+// 读取cookie
+function getCookieObj() {
+  var cookieObj = {},
+    cookieSplit = [],
+    // 以分号（;）分组
+    cookieArr = document.cookie.split(";");
+  for (var i = 0, len = cookieArr.length; i < len; i++)
+    if (cookieArr[i]) {
+      // 以等号（=）分组
+      cookieSplit = cookieArr[i].split("=");
+      // Trim() 是自定义的函数，用来删除字符串两边的空格
+      cookieObj[cookieSplit[0].trim()] = cookieSplit[1].trim();
+    }
+  return cookieObj;
+};

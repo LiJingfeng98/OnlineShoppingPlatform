@@ -70,7 +70,8 @@
     }
     $info[0] = array('typeCode'=>$typeCode,'gsum'=>$gsum);
     $success['commentType'] = $info;
-  }else if($type==2){
+  }
+  else if($type==2){
     if(!empty($_GET['page'])){
       $page = $_GET['page'];
     }
@@ -112,7 +113,8 @@
       $info[$i]['ucnum'] = $ucnum;
       $success['commentInfoList'] = $info;
     }
-  }else if($type==3){
+  }
+  else if($type==3){
     $gid = $_GET['gid'];
     $uid = $_GET['uid'];
     $ctype = $_GET['ctype'];
@@ -126,6 +128,12 @@
     $halfPro ->bindValue(3,$ctype);
     $halfPro ->bindValue(4,$date);
     $halfPro ->bindValue(5,$comment);
+    $result = $halfPro -> execute();
+  }
+  else if($type==4){
+    $uid = $_GET['uid'];
+    $sql = "delete from goodcomment where goodid=".$gid." and userid =".$uid;
+    $halfPro = $pdo -> prepare($sql);
     $result = $halfPro -> execute();
   }
 
