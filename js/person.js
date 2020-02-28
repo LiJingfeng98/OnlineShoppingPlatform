@@ -44,6 +44,24 @@ var hasLogin = false;
 
       document.querySelector('#introduce').innerHTML = userInfo.introduce;
 
+      var innerHTML;
+      // 是否登录
+      if(hasLogin){
+        // 自我访问
+        if(visitUid == uid){
+          innerHTML = "<li><a href=\"editUser.html\">编辑资料</a></li>";
+        }
+        // 他人访问
+        else{
+          innerHTML = "<li><a href=\"#\">添加关注</a></li>" +
+          " <li><a href=\"#\">发送消息</a></li>"
+        }
+
+      }
+      // 未登录
+      else{
+        innerHTML ='';
+      }
       document.querySelector('#ubtnGroup').innerHTML =
         "<a class=\"btn btn-primary btn-lg\" type=\"button\" href=\"usergoods.html?uid=" + uid + "\">库存 <span class=\"badge\">" + userInfo.wsum + "</span>" +
         "              </a>" +
@@ -53,9 +71,7 @@ var hasLogin = false;
         "                更多" +
         "                <span class=\"caret\"></span>" +
         "              </button>" +
-        "              <ul class=\"dropdown-menu\">" +
-        "                <li><a href=\"#\">添加关注</a></li>" +
-        "                <li><a href=\"#\">发送消息</a></li>" +
+        "              <ul class=\"dropdown-menu\">" +innerHTML +
         "              </ul>";
       // 最近购买
       if (recentBuy.infoCode == 1) {
