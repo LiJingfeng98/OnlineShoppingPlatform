@@ -76,13 +76,13 @@ function bgChange(path) {
   $('#bgPic').attr('src', "img/bg/sm" + bg);
   var name;
   switch (bg) {
-    case 1:
+    case 'bg1.jpg':
       name = "WILL：A Wonderful World";
       break;
-    case 2:
+    case 'bg2.jpg':
       name = "BG03 Little Painter Tricolour Lovestory";
       break;
-    case 3:
+    case 'bg3.jpg':
       name = "Hentai Girl";
       break;
     default:

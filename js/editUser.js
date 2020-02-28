@@ -1,8 +1,49 @@
 var bg = "bg1.jpg";
 var img = "head";
+var uid;
+var uname;
 (function init() {
+  // 获取cookie 登录状态
+  cookieObj = getCookieObj();
+  if (typeof(cookieObj.username) == "undefined") {
+    alert("请先登录后再访问该页面！");
+    window.location.href = 'index.html';
+    return;
+  } else {
+    uid = cookieObj.userid;
+    uname = decodeURI(cookieObj.username);
+  }
 
-  //登录事件
+  // 初始表格内容
+  $.ajax({
+    type: 'get',
+    url: 'php/editUser.php',
+    dataType: 'json',
+    data: {
+      uid: uid,
+      type: 1
+    },
+    success: function(res) {
+      if (res.infoCode == 1) {
+        var userInfo = res.userInfo;
+        $('#inputNickName').val(userInfo.uname);
+        $('#inputIntroduce').val(userInfo.introduce);
+        bgChange(userInfo.custom);
+        imgChange(userInfo.uimg);
+      }
+      else {
+        alert("该用户不存在");
+        window.location.href = 'index.html';
+        return;
+      }
+    },
+    error: function(e) {
+      alert(e.responseText);
+    }
+  }); //ajax end
+
+
+  //提交事件
   $('#login').click(function() {
     // 密码一致校验
     var passWord = $('#inputPassword').val();
@@ -11,60 +52,42 @@ var img = "head";
       alert("两次输入密码不同，请重新输入！");
       return;
     }
-    var loginName = $('#inputLoginName').val();
     var nickName = $('#inputNickName').val();
     //判空操作
-    if (loginName.trim().length == 0 || passWord.trim().length == 0 || nickName.trim().length == 0) {
-      alert('用户名、昵称、密码不能为空！请检查后重新输入！');
+    if (passWord.trim().length == 0 || nickName.trim().length == 0) {
+      alert('昵称、密码不能为空！请检查后重新输入！');
       return;
     }
     var introduce = $('#inputIntroduce').val();
 
     // 发送ajax请求去后台
     $.ajax({
-      type: 'post',
+      type: 'get',
       url: 'php/editUser.php',
       dataType: 'json',
       data: {
-        loginName: loginName,
+        uid:uid,
         nickName: nickName,
         passWord: passWord,
         introduce: introduce,
         bg: bg,
-        img: img
+        img: img,
+        type:2
       },
       success: function(res) {
         console.log(res);
         if (res.infoCode == 1) {
-          alert("注册成功，转入主页。");
-          if(res.login ==1){
-            alert("自动登入成功！");
-          }
-          else{
-            alert("未能自动登入。");
-          }
+          alert("更新成功，转入主页。");
           window.location.href = 'index.html';
-        }
-        else if (res.infoCode == 2) {
-          alert("昵称重复，请重新输入");
-        }
-        else if (res.infoCode == 3) {
-          alert("用户名重复，请重新输入");
-        }
-        else if (res.infoCode == 0) {
+        } else {
           alert("未知错误");
+          console.log(res);
         }
       },
       error: function(e) {
         alert(e.responseText);
       }
     }); //ajax end
-    // 发送请求完毕后，初始化输入框，等待下一次操作。
-    $('#inputLoginName').val('');
-    $('#inputPassword').val('');
-    $('#inputPassword1').val('');
-    $('#inputNickName').val('');
-    $('#inputIntroduce').val('');
   }); //login.click end
 
 
@@ -76,13 +99,13 @@ function bgChange(path) {
   $('#bgPic').attr('src', "img/bg/sm" + bg);
   var name;
   switch (bg) {
-    case 1:
+    case 'bg1.jpg':
       name = "WILL：A Wonderful World";
       break;
-    case 2:
+    case 'bg2.jpg':
       name = "BG03 Little Painter Tricolour Lovestory";
       break;
-    case 3:
+    case 'bg3.jpg':
       name = "Hentai Girl";
       break;
     default:
@@ -97,3 +120,19 @@ function imgChange(name) {
   $('#headPic').attr('src', "img/headimg/" + img + ".jpg");
   $('#headName').html(img);
 }
+
+// 读取cookie
+function getCookieObj() {
+  var cookieObj = {},
+    cookieSplit = [],
+    // 以分号（;）分组
+    cookieArr = document.cookie.split(";");
+  for (var i = 0, len = cookieArr.length; i < len; i++)
+    if (cookieArr[i]) {
+      // 以等号（=）分组
+      cookieSplit = cookieArr[i].split("=");
+      // Trim() 是自定义的函数，用来删除字符串两边的空格
+      cookieObj[cookieSplit[0].trim()] = cookieSplit[1].trim();
+    }
+  return cookieObj;
+};

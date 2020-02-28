@@ -3,50 +3,59 @@
   //匹配数据部分
   require_once("PDOsingleton.php");
   $pdo = PDOsingleton::getPdo();
-  $loginName =$_POST['loginName'];
-  $passWord =$_POST['passWord'];
-  $nickName =$_POST['nickName'];
-  $introduce =$_POST['introduce'];
-  $bg =$_POST['bg'];
-  $img =$_POST['img'];
-  // infoCode 1插入成功。2昵称重复，3用户名重复
-  $sql = "select count(*) from userinfo where username = ?";
-  $halfPro = $pdo -> prepare($sql);
-  $result = $halfPro -> execute([$nickName]);
-  $halfPro -> bindColumn(1,$count);
-  $halfPro->fetch(PDO::FETCH_COLUMN);
-  if($count!=0){
-    $success['infoCode'] = 2;
-  }
-  else{
-    $sql = "select count(*) from userinfo where userloginname = ?";
+  $type = $_GET['type'];
+  $uid = $_GET['uid'];
+  if($type == 1){
+    // 个人信息获取
+    $sql = "select username,userimg,custom from userinfo where userid = ?";
     $halfPro = $pdo -> prepare($sql);
-    $result = $halfPro -> execute([$loginName]);
-    $halfPro -> bindColumn(1,$count);
-    $halfPro->fetch(PDO::FETCH_COLUMN);
-    if($count!=0){
-      $success['infoCode'] = 3;
+    $result = $halfPro -> execute([$uid]);
+    $halfPro -> bindColumn(1,$uname);
+    $halfPro -> bindColumn(2,$uimg);
+    $halfPro -> bindColumn(3,$custom);
+    if($halfPro->fetch(PDO::FETCH_COLUMN)){
+      $sql = "select introduce from introduce where userid = ?";
+      $halfPro2 = $pdo -> prepare($sql);
+      $result2 = $halfPro2 -> execute([$uid]);
+      $halfPro2 -> bindColumn(1,$introduce);
+      $halfPro2->fetch(PDO::FETCH_COLUMN);
+      $info = array('uname'=>$uname,'uimg'=>$uimg,'custom'=>$custom,'introduce'=>$introduce);
+      $success['userInfo'] = $info;
+      $success['infoCode'] = 1;
+    }
+    // 未查询到结果
+    else {
+      $success['infoCode'] = 0;
+    }
+  }
+  else if($type == 2){
+    // 更新用户数据
+    $passWord =$_GET['passWord'];
+    $nickName =$_GET['nickName'];
+    $introduce =$_GET['introduce'];
+    $bg =$_GET['bg'];
+    $img =$_GET['img'];
+    // infoCode 1更新成功，0失败
+    $sql = "update userinfo set username = ?,userpassword = ?,userimg = ?,custom = ? where userid = ?";
+    $halfPro = $pdo -> prepare($sql);
+    $halfPro -> bindValue(1,$nickName);
+    $halfPro -> bindValue(2,$passWord);
+    $halfPro -> bindValue(3,$img);
+    $halfPro -> bindValue(4,$bg);
+    $halfPro -> bindValue(5,$uid);
+    if($result = $halfPro -> execute()){
+      $sql = "update introduce set introduce = ? where userid = ?";
+      $halfPro = $pdo -> prepare($sql);
+      $result = $halfPro -> execute([$introduce,$uid]);
+      $success['infoCode'] = 1;
     }
     else{
-      $sql = "insert into userinfo(userloginname,username,userpassword,grantp,balance,userimg,custom) values (?,?,?,0,0,?,?)";
-      $halfPro = $pdo -> prepare($sql);
-      $halfPro ->bindValue(1,$loginName);
-      $halfPro ->bindValue(2,$nickName);
-      $halfPro ->bindValue(3,$passWord);
-      $halfPro ->bindValue(4,$img);
-      $halfPro ->bindValue(5,$bg);
-      if($result = $halfPro -> execute()){
-        $success['infoCode'] = 1;
-      }
-      else{
-        $success['infoCode'] = 0;
-      }
+      $success['infoCode'] = 0;
     }
-  }
   if($success['infoCode'] == 1){
-    $sql = "select * from userinfo where userloginname = ? and userpassword = ?";
+    $sql = "select * from userinfo where userid = ?";
     $halfPro = $pdo -> prepare($sql);
-    $result = $halfPro -> execute([$loginName,$passWord]);
+    $result = $halfPro -> execute([$uid]);
     $halfPro -> bindColumn(1,$userid);
     $halfPro -> bindColumn(3,$username);
     $halfPro -> bindColumn(5,$grantp);
@@ -69,6 +78,7 @@
     }
     $success['login'] = $flag;
   }
+}
 
 
   echo json_encode($success);
