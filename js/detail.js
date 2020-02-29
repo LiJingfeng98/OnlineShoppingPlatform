@@ -108,7 +108,7 @@ function getQueryVariable(variable) {
       for (var i = 0; i < goodTypeArr.length; i++) {
         innerHTML += "<a href=\"type.html?item=" + goodTypeArr[i] + "\" class=\"btn btn-primary btn-sm\">" + goodTypeArr[i] + "</a>";
       }
-      innerHTML += '<a href="#" class="btn btn-primary btn-sm">+</a>';
+      innerHTML += '<a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-sm">+</a>';
       typeList.innerHTML = innerHTML;
 
       var buywhat = document.querySelector('#buywhat');
@@ -302,6 +302,38 @@ function del(uid){
     }
   });
 };
+
+// 新增类别
+$(function addType(){
+  $("#addType").click(function(){
+    var type = $("#inputTypeName").val().trim();
+    $.ajax({
+      type: 'get',
+      url: 'php/detail.php',
+      dataType: 'json',
+      data: {
+        inputType: type,
+        gid: gid,
+        type: 5
+      },
+      success: function(res) {
+        if(res.infoCode){
+          alert("提交成功！");
+
+        }
+        else{
+          alert("提交失败！");
+        }
+        $('#myModal').modal('hide');
+        location.reload();
+      },
+      error: function(e) {
+        var res = e.responseText;
+        alert(res);
+      }
+    });
+  });
+});
 
 // 前后页切换
 $(function changePage() {

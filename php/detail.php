@@ -136,6 +136,39 @@
     $halfPro = $pdo -> prepare($sql);
     $result = $halfPro -> execute();
   }
+  else if($type==5){
+    $inputType = $_GET['inputType'];
+    $gid = $_GET['gid'];
+    // 判断是否存在
+    $sql = "select num from goodtype where goodid = ? and type = ?";
+    $halfPro = $pdo -> prepare($sql);
+    $halfPro ->bindValue(1,$gid);
+    $halfPro ->bindValue(2,$inputType);
+    $halfPro -> execute();
+    $numcount = $halfPro->rowCount();
+    if($numcount != 0){
+      // 存在 num++
+      $halfPro -> bindColumn(1,$num);
+      $halfPro->fetch(PDO::FETCH_COLUMN);
+      $num++;
+      $sql = "update goodtype set num = ? where goodid = ? and type = ?";
+      $halfPro = $pdo -> prepare($sql);
+      $halfPro ->bindValue(1,$num);
+      $halfPro ->bindValue(2,$gid);
+      $halfPro ->bindValue(3,$inputType);
+      $result = $halfPro -> execute();
+      $success['infoCode'] = $result;
+    }
+    else{
+      // 不存在 新建
+      $sql = "insert into goodtype values (?,?,1)";
+      $halfPro = $pdo -> prepare($sql);
+      $halfPro ->bindValue(1,$gid);
+      $halfPro ->bindValue(2,$inputType);
+      $result = $halfPro -> execute();
+      $success['infoCode'] = $result;
+    }
+  }
 
   echo json_encode($success);
 
