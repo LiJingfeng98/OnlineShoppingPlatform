@@ -6,35 +6,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="css/bootstrap.min.css">
-  <title>余额充值</title>
+  <title>好友</title>
 </head>
 
 <body style="background: radial-gradient(ellipse, white, lightblue);">
   <!-- 商城黑色导航栏 -->
   <div class="headerpage"></div>
   <div class="container">
+  <h1>正在浏览 <br>
+    <small id='aboutText'>好友关注</small>
+  </h1>
+  </div>
+  <div class="container">
+  <div id="friendList"></div>
+  </div>
+  <div class="container">
+    <nav aria-label="...">
+      <ul class="pager">
+        <li class="previous"><a href="javascript:void(0);"><span aria-hidden="true">&larr;</span> Older</a></li>
+        <font id="pageNum">--第 1 页--</font>
+        <li class="next"><a href="javascript:void(0);">Newer <span aria-hidden="true">&rarr;</span></a></li>
+      </ul>
+    </nav>
+  </div>
 
-      <form class="form-signin" action="" onsubmit="return false">
-        <h2 class="form-signin-heading">为现有帐户充值</h2>
-        <div class="form-group">
-        <label for="chargeNum" >充值金额</label>
-        <input type="number" id="chargeNum" class="form-control" placeholder="input number" required autofocus>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit"  id="charge">充值</button>
-
-      </form>
-
-    </div> <!-- /container -->
 
 
-
-<!-- 底部内容 -->
-<!-- <div class="jumbotron text-center" style="margin-bottom:0">
-  <p>底部内容</p>
-</div> -->
   <script src="js/jquery.min.js" charset="utf-8"></script>
   <script src="js/bootstrap.min.js" charset="utf-8"></script>
-  <script src="js/recharge.js" charset="utf-8"></script>
+  <script src="js/friend.js" charset="utf-8"></script>
   <script>
     $(function() {
       // 公共部分 导航栏
