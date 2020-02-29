@@ -88,7 +88,8 @@ create table GoodType
 GoodID int not null,
 Type varchar(20) not null,
 Num int not null,
-Foreign Key (GoodID) References GoodInfo(GoodID)
+Foreign Key (GoodID) References GoodInfo(GoodID),
+UNIQUE (GoodID,Type)
 )ENGINE=InnoDB;
 
 -- - **UserState**
@@ -115,12 +116,14 @@ Foreign Key (AdminID) References AdminInfo(AdminID)
 -- | -------- | -------- | -------- | ---------------------------- | ---- |
 -- | UsderID  | int      | not null | Foreign Key(UserInfo.UserID) |      |
 -- | FriendID | int      | not null | Foreign Key(UserInfo.UserID) |      |
+-- |          |          |          | Unique(UserID,FriendID)      |      |
 create table UserFriend
 (
 UserID int not null,
 FriendID int not null,
 Foreign Key (UserID) References UserInfo(UserID),
-Foreign Key (FriendID) References UserInfo(UserID)
+Foreign Key (FriendID) References UserInfo(UserID),
+UNIQUE (UserID,FriendID)
 )ENGINE=InnoDB;
 
 -- - **Warehouse**

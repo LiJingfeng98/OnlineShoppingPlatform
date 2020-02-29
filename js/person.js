@@ -53,8 +53,7 @@ var hasLogin = false;
         }
         // 他人访问
         else{
-          innerHTML = "<li><a href=\"#\">添加关注</a></li>" +
-          " <li><a href=\"#\">发送消息</a></li>"
+          innerHTML = "<li><a href=\"javascript:void(0);\" onclick=\"add()\">添加关注</a></li>";
         }
 
       }
@@ -242,6 +241,32 @@ function del(mid){
     success: function(res) {
       alert("删除成功")
       loadMessage();
+    },
+    error: function(e) {
+      var res = e.responseText;
+      alert(res);
+    }
+  });
+};
+
+//添加关注
+function add(){
+  $.ajax({
+    type: 'get',
+    url: 'php/person.php',
+    dataType: 'json',
+    data: {
+      uid:visitUid,
+      fid:uid,
+      type: 5
+    },
+    success: function(res) {
+      if(res.infoCode){
+        alert("关注成功");
+      }
+      else{
+        alert("您已关注");
+      }
     },
     error: function(e) {
       var res = e.responseText;

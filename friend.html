@@ -12,12 +12,29 @@
 <body style="background: radial-gradient(ellipse, white, lightblue);">
   <!-- 商城黑色导航栏 -->
   <div class="headerpage"></div>
-
+  <div class="container">
+  <h1>正在浏览 <br>
+    <small id='aboutText'>好友关注</small>
+  </h1>
+  </div>
+  <div class="container">
+  <div id="friendList"></div>
+  </div>
+  <div class="container">
+    <nav aria-label="...">
+      <ul class="pager">
+        <li class="previous"><a href="javascript:void(0);"><span aria-hidden="true">&larr;</span> Older</a></li>
+        <font id="pageNum">--第 1 页--</font>
+        <li class="next"><a href="javascript:void(0);">Newer <span aria-hidden="true">&rarr;</span></a></li>
+      </ul>
+    </nav>
+  </div>
 
 
 
   <script src="js/jquery.min.js" charset="utf-8"></script>
   <script src="js/bootstrap.min.js" charset="utf-8"></script>
+  <script src="js/friend.js" charset="utf-8"></script>
   <script>
     $(function() {
       // 公共部分 导航栏

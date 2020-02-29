@@ -39,8 +39,6 @@ $(document).on("click", "#logout", function logOut() {
   })
 });
 
-
-
 (function init() {
   var cookieObj = getCookieObj();
 
@@ -73,8 +71,6 @@ $(document).on("click", "#logout", function logOut() {
       "</a>" +
       "<ul class=\"dropdown-menu\">" +
       "   <li id=\"logout\"><a href=\"#\" >注销</a></li>" +
-      "    <li class=\"divider\"></li>" +
-      "    <li><a href=\"#\">帐户明细</a></li>" +
       " </ul>";
   }
 })();

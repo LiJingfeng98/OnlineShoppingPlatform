@@ -123,6 +123,14 @@
     $halfPro = $pdo -> prepare($sql);
     $result = $halfPro -> execute();
   }
+  else if($type==5){
+    $fid = $_GET['fid'];
+    $uid = $_GET['uid'];
+    $sql = "insert into userfriend values (".$uid.",".$fid.")";
+    $result = $pdo -> prepare($sql);
+    $flag=$result -> execute();
+    $success['infoCode'] = $flag;
+  }
 
   echo json_encode($success);
 
