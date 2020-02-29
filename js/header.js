@@ -55,7 +55,7 @@ $(document).on("click", "#logout", function logOut() {
       "<ul class=\"dropdown-menu\">" +
       "<li><a href=\"person.html?uid=" + cookieObj.userid + "\">个人资料</a></li>" +
       "<li class=\"divider\"></li>" +
-      "<li><a href=\"#\">好友</a></li>" +
+      "<li><a href=\"friend.html\">好友</a></li>" +
       "<li class=\"divider\"></li>" +
       "<li><a href=\"cart.html\">购物车</a></li>" +
       "<li class=\"divider\"></li>" +
