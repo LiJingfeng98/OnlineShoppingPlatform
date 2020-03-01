@@ -10,26 +10,22 @@ var uname;
   }
   //提交事件
   $('#save').click(function() {
-    var gname = $('#inputGoodName').val();
-    var owner = $('#inputOwner').val();
-    var rdate = $('#inputRDate').val();
-    var price = $('#inputPrice').val();
+    var title = $('#inputTitle').val();
+    var time = $('#inputTime').val();
     var detail = $('#inputDetail').val();
-    if (owner.trim().length == 0 || rdate.trim().length == 0 || price.trim().length == 0 || detail.trim().length == 0) {
+    if (title.trim().length == 0 || time.trim().length == 0 || detail.trim().length == 0) {
       alert('内容不能为空！请检查后重新输入！');
       return;
     }
     // 发送ajax请求去后台
     $.ajax({
       type: 'get',
-      url: 'php/addGood.php',
+      url: 'php/addNews.php',
       dataType: 'json',
       data: {
-        gname: gname,
-        owner: owner,
-        rdate: rdate,
-        price: price,
-        detail: detail,
+        title: title,
+        time: time,
+        detail: detail
       },
       success: function(res) {
         if (res.infoCode == 1) {

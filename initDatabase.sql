@@ -14,7 +14,7 @@ use OnlineShoppingPlatform;
 -- | Warehouse    | 用户仓库信息       |
 -- | GoodComment  | 商品评论信息       |
 -- | ShoppingCart | 购物车信息         |
--- | Notice       | 管理员留言信息     |
+-- | News         | 管理员留言信息     |
 -- | Message      | 用户留言信息       |
 -- | CustomPic    | 自定义个人空间背景 |
 
@@ -93,22 +93,15 @@ UNIQUE (GoodID,Type)
 )ENGINE=InnoDB;
 
 -- - **UserState**
--- | 列名    | 数据类型 | 空/非空  | 约束条件                       | 备注         |
--- | ------- | -------- | -------- | ------------------------------ | ------------ |
--- | UsderID | int      | not null | Foreign Key(UserInfo.UserID)   |              |
--- | State   | int      | not null |                                | 0正常，1禁言 |
--- | AdminID | int      |          | Foreign Key(AdminInfo.AdminID) | 封禁操作人   |
--- | Start   | date     |          |                                | 封禁时间     |
--- | Finish  | date     |          |                                | 解封时间     |
+-- | 列名    | 数据类型 | 空/非空  | 约束条件                    | 备注         |
+-- | ------- | -------- | -------- | --------------------------- | ------------ |
+-- | UsderID | int      | not null | Foreign Key(UserInfo.UserID)|              |
+-- | Finish  | date     |          |                             | 解封时间     |
 create table UserState
 (
 UserID int not null,
-State int not null,
-AdminID int,
-Start date,
 Finish date,
-Foreign Key (UserID) References UserInfo(UserID),
-Foreign Key (AdminID) References AdminInfo(AdminID)
+Foreign Key (UserID) References UserInfo(UserID)
 )ENGINE=InnoDB;
 
 -- - **UserFriend**
@@ -177,22 +170,19 @@ Foreign Key (UserID) References UserInfo(UserID),
 UNIQUE (UserID,GoodID)
 )ENGINE=InnoDB;
 
--- - **Notice**
--- | 列名      | 数据类型     | 空/非空  | 约束条件                         | 备注 |
--- | --------- | ------------ | -------- | -------------------------------- | ---- |
--- | AdminID   | int          | not null | Foreign Key(AdminInfo.AdminID)   |      |
--- | UserID    | int          | not null | Foreign Key(UserInfo.UserID)     |      |
--- | AdminName | varchar(20)  |          | Foreign Key(AdminInfo.AdminName) |      |
--- | Notice    | varchar(500) | not null |                                  |      |
-create table Notice
+-- - **News**
+-- | 列名   | 数据类型      | 空/非空  | 约束条件                   | 备注 |
+-- | ------ | ------------- | -------- | -------------------------- | ---- |
+-- | ID     | int           | not null | Primary Key,Auto_increment |      |
+-- | Title  | varchar(50)   | not null |                            |      |
+-- | Time   | Date          | not null |                            |      |
+-- | Detail | varchar(1000) | not null |                            |      |
+create table News
 (
-AdminId int not null,
-UserId int not null,
-AdminName varchar(20),
-Notice varchar(500) not null,
-Foreign Key (AdminID) References AdminInfo(AdminID),
-Foreign Key (UserID) References UserInfo(UserID),
-Foreign Key (AdminName) References AdminInfo(AdminName)
+ID int not null primary key auto_increment,
+Title varchar(50) not null,
+Time date not null,
+Detail varchar(1000) not null
 )ENGINE=InnoDB;
 
 -- - **Message**

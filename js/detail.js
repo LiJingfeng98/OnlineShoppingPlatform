@@ -63,6 +63,8 @@ function getQueryVariable(variable) {
         case 4:
           evaluate = '多半差评';
           break;
+        case 5:
+          evaluate = '暂未明确';
         default:
       }
 
@@ -111,9 +113,6 @@ function getQueryVariable(variable) {
       innerHTML += '<a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-sm">+</a>';
       typeList.innerHTML = innerHTML;
 
-      var buywhat = document.querySelector('#buywhat');
-      buywhat.innerHTML = "购买&nbsp" + goodInfoArr[0].gname;
-
       // 判断是否登录
       cookieObj = getCookieObj();
       var hasGoods;
@@ -126,16 +125,36 @@ function getQueryVariable(variable) {
         hasGoods = checkWarehouse(uid);
         hasComment = checkComment(uid);
       }
-      if (typeof(cookieObj.userid) != "undefined") {
-        //判断是否拥有
-        if (hasGoods) {
-          innerHTML =
-            "<button type=\"button\" class=\"btn btn-primary btn-lg pull-right\" disabled=\"disabled\">已在库中</button>";
-        } else {
-          innerHTML =
-            "<button type=\"button\" class=\"btn btn-primary btn-lg pull-right\" id=\"incart\">加入购物车</button>"
-        }
+
+      // 判断用户还是管理员
+      var buywhat = document.querySelector('#buywhat');
+      if (cookieObj.grantp == 1) {
+        buywhat.innerHTML = "编辑&nbsp" + goodInfoArr[0].gname;
       } else {
+        buywhat.innerHTML = "购买&nbsp" + goodInfoArr[0].gname;
+      }
+
+
+
+      // 判断是否登录
+      if (typeof(cookieObj.userid) != "undefined") {
+        // 判断是否为管理员
+        if (cookieObj.grantp == 1) {
+          innerHTML =
+            "<button type=\"button\" class=\"btn btn-primary btn-lg pull-right\" id=\"incart\">编辑商品</button>";
+        } else {
+          //判断是否拥有
+          if (hasGoods) {
+            innerHTML =
+              "<button type=\"button\" class=\"btn btn-primary btn-lg pull-right\" disabled=\"disabled\">已在库中</button>";
+          } else {
+            innerHTML =
+              "<button type=\"button\" class=\"btn btn-primary btn-lg pull-right\" id=\"incart\">加入购物车</button>";
+          }
+        }
+      }
+      // 未登录
+      else {
         innerHTML =
           "<button type=\"button\" class=\"btn btn-primary btn-lg pull-right\" disabled=\"disabled\">请登录后购买</button>";
       }
@@ -162,6 +181,12 @@ function getQueryVariable(variable) {
           var myimg = document.querySelector("#myimg");
           myimg.innerHTML = "<img src=\"img/headimg/" + cookieObj.userimg + ".jpg\" class=\"img-responsive center-block\">";
 
+          if(checkState()){
+            $('textarea').attr('disabled','disabled');
+            $('textarea').val('您已被封禁，请与管理员联系');
+            $('#subcomment').attr('class','btn btn-danger pull-right');
+            $('#subcomment').attr('disabled','disabled');
+          }
         }
       } else {
         $('#mycomment').css('display', 'none');
@@ -206,12 +231,11 @@ function loadCommendList() {
         if (typeof(cookieObj.username) == "undefined") {
           innerDelete = '';
         } else {
-          if(cookieObj.userid==commentListArr[i].uid||cookieObj.grantp==1){
-            innerDelete =   " <a href=\"javascript:void(0);\" onclick=\"del(" + commentListArr[i].uid + ")\" title=\"删除\">" +
+          if (cookieObj.userid == commentListArr[i].uid || cookieObj.grantp == 1) {
+            innerDelete = " <a href=\"javascript:void(0);\" onclick=\"del(" + commentListArr[i].uid + ")\" title=\"删除\">" +
               "<span class=\"glyphicon glyphicon-trash\"></span>" +
               "   </a>";
-          }
-          else{
+          } else {
             innerDelete = '';
           }
         }
@@ -232,7 +256,7 @@ function loadCommendList() {
           "      </div>" +
           "      <!-- 状态 -->" +
           "      <div class=\"alert " + alertString + " col-xs-5 col-sm-7 col-md-8 col-lg-9\" style=\"font-size:15px;  font-weight: 700\" role=\"alert\">" +
-          "        <span class=\"glyphicon " + imgString + "\"></span>" + typestring + "<font class=\"pull-right\">" + commentListArr[i].ctime + innerDelete+"</font>" +
+          "        <span class=\"glyphicon " + imgString + "\"></span>" + typestring + "<font class=\"pull-right\">" + commentListArr[i].ctime + innerDelete + "</font>" +
           "      </div>" +
           "    </div>" +
           "    <br>" +
@@ -259,7 +283,7 @@ function loadCommendList() {
 $(document).on("click", "#subcomment", function writecomment() {
   var type = $("input[name='options']:checked").val();
   var comment = $("textarea").val();
-  alert(gid+uid+type+comment);
+  alert(gid + uid + type + comment);
   $.ajax({
     type: 'get',
     url: 'php/detail.php',
@@ -267,8 +291,8 @@ $(document).on("click", "#subcomment", function writecomment() {
     data: {
       gid: gid,
       uid: uid,
-      ctype:type,
-      comment:comment,
+      ctype: type,
+      comment: comment,
       type: 3
     },
     success: function(res) {
@@ -282,13 +306,13 @@ $(document).on("click", "#subcomment", function writecomment() {
 });
 
 //删除评论
-function del(uid){
+function del(uid) {
   $.ajax({
     type: 'get',
     url: 'php/detail.php',
     dataType: 'json',
     data: {
-      gid:gid,
+      gid: gid,
       uid: uid,
       type: 4
     },
@@ -304,8 +328,8 @@ function del(uid){
 };
 
 // 新增类别
-$(function addType(){
-  $("#addType").click(function(){
+$(function addType() {
+  $("#addType").click(function() {
     var type = $("#inputTypeName").val().trim();
     $.ajax({
       type: 'get',
@@ -317,11 +341,10 @@ $(function addType(){
         type: 5
       },
       success: function(res) {
-        if(res.infoCode){
+        if (res.infoCode) {
           alert("提交成功！");
 
-        }
-        else{
+        } else {
           alert("提交失败！");
         }
         $('#myModal').modal('hide');
@@ -396,6 +419,34 @@ function checkWarehouse(userid) {
   return flag;
 }
 
+// 是否被封禁
+function checkState(){
+  var flag;
+  $.ajax({
+    type: 'get',
+    url: 'php/person.php',
+    dataType: 'json',
+    async:false,
+    data: {
+      uid: uid,
+      type: 7
+    },
+    success: function(res) {
+      if(res.infoCode){
+        flag=true;
+      }
+      else{
+        flag=false;
+      }
+    },
+    error: function(e) {
+      var res = e.responseText;
+      alert(res);
+    }
+  });
+  return flag;
+};
+
 //查询是否评论
 function checkComment(userid) {
   var flag = '';
@@ -426,22 +477,28 @@ function checkComment(userid) {
 
 //加入购物车
 $(document).on("click", "#incart", function inCart() {
-  $.ajax({
-    type: 'get',
-    url: 'php/hasGoods.php',
-    dataType: 'json',
-    data: {
-      gid: gid,
-      uid: uid,
-      type: 3
-    },
-    success: function(res) {
-      window.location.href = "cart.html";
-      window.event.returnValue = false;
-    },
-    error: function(e) {
-      var res = e.responseText;
-      alert(res);
-    }
-  })
+  if(cookieObj.grantp == 1){
+    window.location.href = "editGood.html?gid="+gid;
+  }
+  else{
+    $.ajax({
+      type: 'get',
+      url: 'php/hasGoods.php',
+      dataType: 'json',
+      data: {
+        gid: gid,
+        uid: uid,
+        type: 3
+      },
+      success: function(res) {
+        window.location.href = "cart.html";
+        window.event.returnValue = false;
+      },
+      error: function(e) {
+        var res = e.responseText;
+        alert(res);
+      }
+    })
+  }
+
 });

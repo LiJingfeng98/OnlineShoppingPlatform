@@ -45,20 +45,35 @@ $(document).on("click", "#logout", function logOut() {
   if (typeof(cookieObj.username) != "undefined") {
     cookieObj.username = decodeURI(cookieObj.username);
     var loginName = document.querySelector("#LoginName");
-    loginName.innerHTML =
-      "<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">" +
-      cookieObj.username +
-      "<b class=\"caret\"></b>" +
-      " </a>" +
-      "<ul class=\"dropdown-menu\">" +
-      "<li><a href=\"person.html?uid=" + cookieObj.userid + "\">个人资料</a></li>" +
-      "<li class=\"divider\"></li>" +
-      "<li><a href=\"friend.html\">好友</a></li>" +
-      "<li class=\"divider\"></li>" +
-      "<li><a href=\"cart.html\">购物车</a></li>" +
-      "<li class=\"divider\"></li>" +
-      "<li><a href=\"usergoods.html?uid=" + cookieObj.userid + "\">库存</a></li>" +
-      " </ul>";
+    if(cookieObj.grantp==1){
+      loginName.innerHTML =
+        "<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">" +
+        cookieObj.username +
+        "<b class=\"caret\"></b>" +
+        " </a>" +
+        "<ul class=\"dropdown-menu\">" +
+        "<li><a href=\"addGood.html\">新增商品</a></li>" +
+        "<li class=\"divider\"></li>" +
+        "<li><a href=\"addNews.html\">新增公告</a></li>" +
+        " </ul>";
+    }
+    else{
+      loginName.innerHTML =
+        "<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">" +
+        cookieObj.username +
+        "<b class=\"caret\"></b>" +
+        " </a>" +
+        "<ul class=\"dropdown-menu\">" +
+        "<li><a href=\"person.html?uid=" + cookieObj.userid + "\">个人资料</a></li>" +
+        "<li class=\"divider\"></li>" +
+        "<li><a href=\"friend.html\">好友</a></li>" +
+        "<li class=\"divider\"></li>" +
+        "<li><a href=\"cart.html\">购物车</a></li>" +
+        "<li class=\"divider\"></li>" +
+        "<li><a href=\"usergoods.html?uid=" + cookieObj.userid + "\">库存</a></li>" +
+        " </ul>";
+    }
+
 
     var balance = document.querySelector("#balance");
     balance.innerHTML =

@@ -56,18 +56,24 @@
     $result -> bindColumn(1,$gsum);
     $result -> bindColumn(2,$tsum);
     $result->fetch(PDO::FETCH_COLUMN);
-    $flag = $tsum/$gsum;
-    $typeCode = 0;//1为特别好评 ，2为多半好评，3为褒贬不一，4为多半差评
-    $info = [];
-    if($flag>0.75){
-      $typeCode = 1;
-    }else if($flag>0.5){
-      $typeCode = 2;
-    }else if($flag>0.25){
-      $typeCode = 3;
-    }else{
-      $typeCode = 4;
+    if($gsum==0||$gsum==0){
+      $typeCode =5;
     }
+    else{
+      $flag = $tsum/$gsum;
+      $typeCode = 0;//1为特别好评 ，2为多半好评，3为褒贬不一，4为多半差评,5为暂未明确
+      $info = [];
+      if($flag>0.75){
+        $typeCode = 1;
+      }else if($flag>0.5){
+        $typeCode = 2;
+      }else if($flag>0.25){
+        $typeCode = 3;
+      }else{
+        $typeCode = 4;
+      }
+    }
+
     $info[0] = array('typeCode'=>$typeCode,'gsum'=>$gsum);
     $success['commentType'] = $info;
   }
@@ -111,8 +117,8 @@
       $result3 -> bindColumn(1,$ucnum);
       $result3 ->fetch(PDO::FETCH_COLUMN);
       $info[$i]['ucnum'] = $ucnum;
-      $success['commentInfoList'] = $info;
     }
+    $success['commentInfoList'] = $info;
   }
   else if($type==3){
     $gid = $_GET['gid'];

@@ -2,7 +2,7 @@ var uid;
 var username;
 var totalPrice;
 var flag = false;
-var balance = 0;
+var balance;
 // 读取cookie
 function getCookieObj() {
   var cookieObj = {},
@@ -119,8 +119,11 @@ function del(goodid) {
 
 // 购买商品
 function buy(){
-  if(totalPrice>balance){
-    alert("余额不足，请重置！");
+  // 转化为数字
+  totalPrice = parseFloat(totalPrice);
+  balance = parseFloat(balance);
+  if(totalPrice > balance){
+    alert("余额不足，请充值！");
   }else{
     $.ajax({
       type: 'get',

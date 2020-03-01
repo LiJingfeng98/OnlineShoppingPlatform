@@ -51,6 +51,10 @@ var hasLogin = false;
         if(visitUid == uid){
           innerHTML = "<li><a href=\"editUser.html\">编辑资料</a></li>";
         }
+        // 管理员访问
+        else if(cookieObj.grantp==1){
+          innerHTML = "<li><a href=\"#\" data-toggle=\"modal\" data-target=\"#myModal\">封禁发言</a></li>"
+        }
         // 他人访问
         else{
           innerHTML = "<li><a href=\"javascript:void(0);\" onclick=\"add()\">添加关注</a></li>";
@@ -61,6 +65,7 @@ var hasLogin = false;
       else{
         innerHTML ='';
       }
+
       document.querySelector('#ubtnGroup').innerHTML =
         "<a class=\"btn btn-primary btn-lg\" type=\"button\" href=\"usergoods.html?uid=" + uid + "\">库存 <span class=\"badge\">" + userInfo.wsum + "</span>" +
         "              </a>" +
@@ -131,9 +136,19 @@ var hasLogin = false;
       // 留言输入
       if (!visitUid) {
         $('#writeMessage').css('display', 'none');
-      } else {
+      }
+      else{
         document.querySelector("#visitName").innerHTML = visitName;
-        $(document).on("click", "#submessage", writeMessage);
+        var state = checkState();
+        if(state){
+          $('#messageText').attr('disabled','disabled');
+          $('#messageText').val('您已被封禁，请与管理员联系');
+          $('#submessage').attr('class','btn btn-danger');
+          $('#submessage').attr('disabled','disabled');
+        }
+        else{
+          $(document).on("click", "#submessage", writeMessage);
+        }
       }
 
     },
@@ -273,6 +288,65 @@ function add(){
       alert(res);
     }
   });
+};
+
+// 新增封禁
+$(function addState() {
+  $("#addState").click(function() {
+    var date = $("#inputDate").val();
+    $.ajax({
+      type: 'get',
+      url: 'php/person.php',
+      dataType: 'json',
+      data: {
+        date: date,
+        uid: uid,
+        type: 6
+      },
+      success: function(res) {
+        if (res.infoCode) {
+          alert("封禁成功！");
+
+        } else {
+          alert("封禁失败！");
+        }
+        $('#myModal').modal('hide');
+        location.reload();
+      },
+      error: function(e) {
+        var res = e.responseText;
+        alert(res);
+      }
+    });
+  });
+});
+
+// 是否被封禁
+function checkState(){
+  var flag;
+  $.ajax({
+    type: 'get',
+    url: 'php/person.php',
+    dataType: 'json',
+    async:false,
+    data: {
+      uid: visitUid,
+      type: 7
+    },
+    success: function(res) {
+      if(res.infoCode){
+        flag=true;
+      }
+      else{
+        flag=false;
+      }
+    },
+    error: function(e) {
+      var res = e.responseText;
+      alert(res);
+    }
+  });
+  return flag;
 };
 
 // 前后页切换
