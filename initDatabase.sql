@@ -14,7 +14,7 @@ use OnlineShoppingPlatform;
 -- | Warehouse    | 用户仓库信息       |
 -- | GoodComment  | 商品评论信息       |
 -- | ShoppingCart | 购物车信息         |
--- | Notice       | 管理员留言信息     |
+-- | News         | 管理员留言信息     |
 -- | Message      | 用户留言信息       |
 -- | CustomPic    | 自定义个人空间背景 |
 
