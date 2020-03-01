@@ -170,22 +170,19 @@ Foreign Key (UserID) References UserInfo(UserID),
 UNIQUE (UserID,GoodID)
 )ENGINE=InnoDB;
 
--- - **Notice**
--- | 列名      | 数据类型     | 空/非空  | 约束条件                         | 备注 |
--- | --------- | ------------ | -------- | -------------------------------- | ---- |
--- | AdminID   | int          | not null | Foreign Key(AdminInfo.AdminID)   |      |
--- | UserID    | int          | not null | Foreign Key(UserInfo.UserID)     |      |
--- | AdminName | varchar(20)  |          | Foreign Key(AdminInfo.AdminName) |      |
--- | Notice    | varchar(500) | not null |                                  |      |
-create table Notice
+-- - **News**
+-- | 列名   | 数据类型      | 空/非空  | 约束条件                   | 备注 |
+-- | ------ | ------------- | -------- | -------------------------- | ---- |
+-- | ID     | int           | not null | Primary Key,Auto_increment |      |
+-- | Title  | varchar(50)   | not null |                            |      |
+-- | Time   | Date          | not null |                            |      |
+-- | Detail | varchar(1000) | not null |                            |      |
+create table News
 (
-AdminId int not null,
-UserId int not null,
-AdminName varchar(20),
-Notice varchar(500) not null,
-Foreign Key (AdminID) References AdminInfo(AdminID),
-Foreign Key (UserID) References UserInfo(UserID),
-Foreign Key (AdminName) References AdminInfo(AdminName)
+ID int not null primary key auto_increment,
+Title varchar(50) not null,
+Time date not null,
+Detail varchar(1000) not null
 )ENGINE=InnoDB;
 
 -- - **Message**

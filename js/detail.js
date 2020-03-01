@@ -63,6 +63,8 @@ function getQueryVariable(variable) {
         case 4:
           evaluate = '多半差评';
           break;
+        case 5:
+          evaluate = '暂未明确';
         default:
       }
 
