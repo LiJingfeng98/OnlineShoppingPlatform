@@ -3,13 +3,16 @@
   //匹配数据部分
   require_once("PDOsingleton.php");
   $pdo = PDOsingleton::getPdo();
-  //type 1.初始化  2.留言列表  3.提交留言
+  //type
+  // 1.初始化   2.留言列表 3.提交留言 4.删除留言
+  // 5.添加关注 6.新增封禁 7.检查封禁
+
   $type = $_GET['type'];
 
   if($type==1){
     $uid = $_GET['uid'];
     // 获取用户信息
-    $sql = "select * from (select userid,userName,userimg,custom from userinfo where userid = ".$uid.") a inner join introduce b where a.userid = b.userid";
+    $sql = "select * from (select userid,userName,userimg,custom from userinfo where userid = ".$uid.") a left join introduce b on a.userid = b.userid";
     $result = $pdo -> prepare($sql);
     $result -> execute();
     $result -> bindColumn(2,$uname);
@@ -131,7 +134,55 @@
     $flag=$result -> execute();
     $success['infoCode'] = $flag;
   }
-
+  else if($type==6){
+    $date = $_GET['date'];
+    $uid = $_GET['uid'];
+    // 判断是否存在
+    $sql = "select * from userstate where userid = ?";
+    $halfPro = $pdo -> prepare($sql);
+    $halfPro ->bindValue(1,$uid);
+    $halfPro -> execute();
+    $numcount = $halfPro->rowCount();
+    if($numcount != 0){
+      // 存在 num++
+      $sql = "update userstate set finish = ? where userid = ?";
+      $halfPro = $pdo -> prepare($sql);
+      $halfPro ->bindValue(1,$date);
+      $halfPro ->bindValue(2,$uid);
+      $result = $halfPro -> execute();
+      $success['infoCode'] = $result;
+    }
+    else{
+      // 不存在 新建
+      $sql = "insert into userstate values (?,?);";
+      $halfPro = $pdo -> prepare($sql);
+      $halfPro ->bindValue(1,$uid);
+      $halfPro ->bindValue(2,$date);
+      $result = $halfPro -> execute();
+      $success['infoCode'] = $result;
+    }
+  }
+  else if($type==7){
+    $uid = $_GET['uid'];
+    // 判断是否存在
+    $sql = "select finish from userstate where userid = ?";
+    $halfPro = $pdo -> prepare($sql);
+    $halfPro ->bindValue(1,$uid);
+    $halfPro -> execute();
+    $numcount = $halfPro->rowCount();
+    if($numcount != 0){
+      // 存在 判断比较
+      $halfPro -> bindColumn(1,$odate);
+      $halfPro->fetch(PDO::FETCH_COLUMN);
+      $ndate = date('Y-m-d');
+      $result = strtotime($ndate)<strtotime($odate);
+      $success['infoCode'] = $result;
+    }
+    else{
+      // 不存在 未封禁
+      $success['infoCode'] = false;
+    }
+  }
   echo json_encode($success);
 
  ?>

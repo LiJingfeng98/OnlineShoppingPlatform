@@ -93,22 +93,15 @@ UNIQUE (GoodID,Type)
 )ENGINE=InnoDB;
 
 -- - **UserState**
--- | 列名    | 数据类型 | 空/非空  | 约束条件                       | 备注         |
--- | ------- | -------- | -------- | ------------------------------ | ------------ |
--- | UsderID | int      | not null | Foreign Key(UserInfo.UserID)   |              |
--- | State   | int      | not null |                                | 0正常，1禁言 |
--- | AdminID | int      |          | Foreign Key(AdminInfo.AdminID) | 封禁操作人   |
--- | Start   | date     |          |                                | 封禁时间     |
--- | Finish  | date     |          |                                | 解封时间     |
+-- | 列名    | 数据类型 | 空/非空  | 约束条件                    | 备注         |
+-- | ------- | -------- | -------- | --------------------------- | ------------ |
+-- | UsderID | int      | not null | Foreign Key(UserInfo.UserID)|              |
+-- | Finish  | date     |          |                             | 解封时间     |
 create table UserState
 (
 UserID int not null,
-State int not null,
-AdminID int,
-Start date,
 Finish date,
-Foreign Key (UserID) References UserInfo(UserID),
-Foreign Key (AdminID) References AdminInfo(AdminID)
+Foreign Key (UserID) References UserInfo(UserID)
 )ENGINE=InnoDB;
 
 -- - **UserFriend**
