@@ -5,6 +5,7 @@ QDU2020软外毕设
 - 开启wampServer。
 - 将initDatabase.sql文件全部执行，创建初始数据库。
 - 将csv文件夹内文件全部拷贝至wamp根目录tmp下，导入到数据库同名表内。
+- php\PDOsingleton.php文件配置数据库名称和密码。
 
 ## 接口说明
 - 所有.HTML除固定jquery.min.js、bootstrap.min.js、bootstrap.min.css外皆引用同名js。
