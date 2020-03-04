@@ -195,7 +195,6 @@ function loadGoodList() {
       item: item
     },
     success: function(res) {
-      console.log(res);
       //商品列表重新加载
       var goodInfoArr = res.goodListInfo;
       var innerHTML = '';

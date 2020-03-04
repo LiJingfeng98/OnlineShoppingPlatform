@@ -12,18 +12,18 @@
   if($type==1){
     $uid = $_GET['uid'];
     // 获取用户信息
-    $sql = "select * from (select userid,userName,userimg,custom from userinfo where userid = ".$uid.") a left join introduce b on a.userid = b.userid";
+    $sql = "select username,userimg,custom,introduce from (select userid,userName,userimg,custom from userinfo where userid = ".$uid.") a left join introduce b on a.userid = b.userid";
     $result = $pdo -> prepare($sql);
     $result -> execute();
-    $result -> bindColumn(2,$uname);
-    $result -> bindColumn(3,$uimg);
-    $result -> bindColumn(4,$bgimg);
-    $result -> bindColumn(6,$introduce);
+    $result -> bindColumn(1,$uname);
+    $result -> bindColumn(2,$uimg);
+    $result -> bindColumn(3,$bgimg);
+    $result -> bindColumn(4,$introduce);
     $result->fetch(PDO::FETCH_COLUMN);
     $info = [];
     $info = array('uname'=>$uname,'uimg'=>$uimg,'bgimg'=>$bgimg,'introduce'=>$introduce);
     //获取用户库存和评价数量
-    $sql ="select * from (select count(*) as num from warehouse where userid =".$uid.") a inner join (select count(*) as num2 from goodcomment where userid = ".$uid.") b";
+    $sql ="select num,num2 from (select count(*) as num from possessions where userid =".$uid.") a inner join (select count(*) as num2 from goodcomment where userid = ".$uid.") b";
     $result = $pdo -> prepare($sql);
     $result -> execute();
     $result -> bindColumn(1,$wsum);
@@ -34,7 +34,7 @@
     $success['userInfo'] = $info;
 
     //获取最近购买
-    $sql ="select a.goodid,goodname,time from (select goodid,time from warehouse where userid = ".$uid." order by time desc limit 1) a inner join goodinfo b where a.goodid = b.goodid ";
+    $sql ="select a.goodid,goodname,time from (select goodid,time from possessions where userid = ".$uid." order by time desc limit 1) a inner join goodinfo b where a.goodid = b.goodid ";
     $result = $pdo -> prepare($sql);
     $result -> execute();
     $result -> bindColumn(1,$gid);
@@ -43,11 +43,11 @@
     $info = [];
     if($result->fetch(PDO::FETCH_COLUMN)){
       //查询商品类别
-      $sql = "select * from goodType where goodID = ".$gid." order by Num desc limit 4;";
+      $sql = "select type from goodType where goodID = ".$gid." order by Num desc limit 4;";
       $info2 = [];
       $result2 = $pdo -> prepare($sql);
       $result2 -> execute();
-      $result2 -> bindColumn(2,$gtype);
+      $result2 -> bindColumn(1,$gtype);
       for($j=0;$result2->fetch(PDO::FETCH_COLUMN);$j++){
         $info2[$j]=$gtype;
       }
@@ -58,7 +58,7 @@
     $success['recentBuy'] = $info;
 
     //查询最近评论
-    $sql = "select a.goodid,goodname,type,time,comment from (select goodid,type,time,comment from goodcomment where userid = ".$uid." order by time desc limit 1) a inner join goodinfo b where a.goodid = b.goodid";
+    $sql = "select a.goodid,goodname,a.type,time,comment from (select goodid,type,time,comment from goodcomment where userid = ".$uid." order by time desc limit 1) a inner join goodinfo b where a.goodid = b.goodid";
     $result = $pdo -> prepare($sql);
     $result -> execute();
     $result -> bindColumn(1,$gid);

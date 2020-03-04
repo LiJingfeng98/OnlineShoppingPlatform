@@ -45,7 +45,7 @@
     $result->fetch(PDO::FETCH_COLUMN);
     // infoCode,1成功，0余额不足
     if($balance>=0){
-      $sql = "insert into warehouse(userid,goodid,time) select *,'".$date."'as date from shoppingcart where userid = ".$uid;
+      $sql = "insert into possessions(userid,goodid,time) select *,'".$date."'as date from shoppingcart where userid = ".$uid;
       $result = $pdo -> prepare($sql);
       $result -> execute();
       // 更新账户余额

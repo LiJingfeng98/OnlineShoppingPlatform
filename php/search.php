@@ -17,7 +17,7 @@
   }
   $num = ($page-1)*8;
   // 获取总页数 计算评论页数
-  $sql = "select count(*) from (select * from (select a.goodID,goodname,type from goodinfo a inner join goodtype b where a.goodid = b.goodid) a where goodname like \"%".$item."%\" or type like \"%".$item."%\" group by goodid) a";
+  $sql = "select count(*) from (select * from (select a.goodID,goodname,b.type from goodinfo a inner join goodtype b where a.goodid = b.goodid) a where goodname like \"%".$item."%\" or type like \"%".$item."%\" group by goodid) a";
   $result = $pdo -> prepare($sql);
   $result -> execute();
   $result -> bindColumn(1,$gnums);
@@ -46,7 +46,7 @@
       break;
   }
 
-  $sql = "select a.goodID,goodname,price,sum,Rdate from (select * from (select a.goodID,goodname,price,type,Rdate from goodinfo a inner join goodtype b where a.goodid = b.goodid) a where goodname like \"%".$item."%\" or type like \"%".$item."%\" group by goodid) a inner join (select count(*) as sum,goodID from warehouse group by goodID order by sum desc) b where a.goodID = b.goodID ".$sqlType." limit ".$num.",8";
+  $sql = "select a.goodID,goodname,price,sum,Rdate from (select * from (select a.goodID,goodname,price,b.type,Rdate from goodinfo a inner join goodtype b where a.goodid = b.goodid) a where goodname like \"%".$item."%\" or type like \"%".$item."%\" group by goodid) a inner join (select count(*) as sum,goodID from possessions group by goodID order by sum desc) b where a.goodID = b.goodID ".$sqlType." limit ".$num.",8";
   //因为需要从数据库中读取数据，所以采用pdo的预处理语句
   $result = $pdo -> prepare($sql);
   $result -> execute();
@@ -58,11 +58,11 @@
   $info = [];
   for($i=0;$row=$result->fetch(PDO::FETCH_COLUMN);$i++){
     // 获取类别
-    $sql = "select * from goodType where goodID = ".$gid." order by Num desc limit 3;";
+    $sql = "select type from goodType where goodID = ".$gid." order by Num desc limit 3;";
     $info2 = [];
     $result2 = $pdo -> prepare($sql);
     $result2 -> execute();
-    $result2 -> bindColumn(2,$gtype);
+    $result2 -> bindColumn(1,$gtype);
     for($j=0;$result2->fetch(PDO::FETCH_COLUMN);$j++){
       $info2[$j]=$gtype;
     }

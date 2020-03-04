@@ -44,15 +44,15 @@
     }
   }
   if($success['infoCode'] == 1){
-    $sql = "select * from userinfo where userloginname = ? and userpassword = ?";
+    $sql = "select userid,username,grantp,balance,userimg,custom from userinfo where userloginname = ? and userpassword = ?";
     $halfPro = $pdo -> prepare($sql);
     $result = $halfPro -> execute([$loginName,$passWord]);
     $halfPro -> bindColumn(1,$userid);
-    $halfPro -> bindColumn(3,$username);
-    $halfPro -> bindColumn(5,$grantp);
-    $halfPro -> bindColumn(6,$balance);
-    $halfPro -> bindColumn(7,$userimg);
-    $halfPro -> bindColumn(8,$custom);
+    $halfPro -> bindColumn(2,$username);
+    $halfPro -> bindColumn(3,$grantp);
+    $halfPro -> bindColumn(4,$balance);
+    $halfPro -> bindColumn(5,$userimg);
+    $halfPro -> bindColumn(6,$custom);
     // flag 0查询失败，1查询成功
     $flag = 0;
     if($halfPro->fetch(PDO::FETCH_COLUMN)){

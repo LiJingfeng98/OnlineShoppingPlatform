@@ -10,7 +10,7 @@
     $page = $_GET['page'];
     $num = ($page-1)*8;
     // sql
-    $sql = "select a.goodid,goodname,type,time,comment from goodcomment a inner join goodinfo b where a.goodid = b.goodid and userid = ".$uid." order by time desc limit ".$num.",8";
+    $sql = "select a.goodid,goodname,a.type,time,comment from goodcomment a inner join goodinfo b where a.goodid = b.goodid and userid = ".$uid." order by time desc limit ".$num.",8";
     $result = $pdo -> prepare($sql);
     $result -> execute();
     $result -> bindColumn(1,$gid);

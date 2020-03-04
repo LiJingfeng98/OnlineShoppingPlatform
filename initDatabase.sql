@@ -1,5 +1,4 @@
 create database OnlineShoppingPlatform;
-drop database onlineshoppingplatform;
 
 use OnlineShoppingPlatform;
 -- #### 表汇总
@@ -11,7 +10,9 @@ use OnlineShoppingPlatform;
 -- | UserFriend   | 用户好友信息       |
 -- | GoodInfo     | 单条商品信息       |
 -- | GoodType     | 商品类别汇总       |
--- | Warehouse    | 用户仓库信息       |
+-- | Possessions  | 用户已拥有         |
+-- | OrderList    | 订单列表           | 
+-- | OrderDetails | 订单详情           |
 -- | GoodComment  | 商品评论信息       |
 -- | ShoppingCart | 购物车信息         |
 -- | News         | 管理员留言信息     |
@@ -56,24 +57,28 @@ Foreign Key (Custom) References CustomPic(PicPath)
 )ENGINE=InnoDB;
 
 -- - **GoodInfo**
--- | 列名     | 数据类型      | 空/非空  | 约束条件                   | 备注     |
--- | -------- | ------------- | -------- | -------------------------- | -------- |
--- | GoodID   | int           | not null | Primary Key,Auto_increment |          |
--- | GoodName | varchar(50)   | not null | Unique                     |          |
--- | GoodImg  | varchar(50)   |          |                            |          |
--- | Owner    | varchar(20)   | not null |                            | 默认官方 |
--- | RDate    | date          | not null |                            |          |
--- | Price    | float         | not null |                            |          |
--- | Detail   | varchar(1000) | not null |                            |          |
+-- | 列名     | 数据类型      | 空/非空  | 约束条件                   | 备注           |
+-- | -------- | ------------- | -------- | -------------------------- | -------------- |
+-- | GoodID   | int           | not null | Primary Key,Auto_increment |                |
+-- | GoodName | varchar(50)   | not null | Unique                     |                |
+-- | GoodImg  | varchar(50)   | not null | Unique                     |                |
+-- | Owner    | varchar(20)   | not null |                            | 默认官方       |
+-- | RDate    | date          | not null |                            |                |
+-- | Price    | float         | not null |                            |                |
+-- | Detail   | varchar(1000) | not null |                            |                |
+-- | Discount | float         | not null |                            | 默认为1        |
+-- | Type     | int           | not null |                            | 1可退款，0不可 | 
 create table GoodInfo
 (
 GoodID int not null Primary Key Auto_increment,
 GoodName varchar(50) not null Unique,
-GoodImg varchar(50),
+GoodImg varchar(50) not null unique,
 Owner varchar(50) not null,
 RDate date not null,
 Price float not null,
-Detail varchar(1000) not null
+Detail varchar(1000) not null,
+Discount float not null,
+Type int not null
 )ENGINE=InnoDB;
 
 -- - **GoodType**
@@ -119,14 +124,14 @@ Foreign Key (FriendID) References UserInfo(UserID),
 UNIQUE (UserID,FriendID)
 )ENGINE=InnoDB;
 
--- - **Warehouse**
+-- - **Possessions**
 -- | 列名   | 数据类型 | 空/非空  | 约束条件                                     | 备注     |
 -- | ------ | -------- | -------- | -------------------------------------------- | -------- |
 -- | UserID | int      | not null | Foreign Key(UserInfo.UserID)                 |          |
 -- | GoodID | int      | not null | Foreign Key(GoodInfo.GoodID)                 |          |
 -- | Time   | date     | not null |                                              |          |
 -- |        |          |          | Primary Key(UserInfo.UserID,GoodInfo.GoodID) | 联合主键 |
-create table Warehouse
+create table Possessions
 (
 UserID int not null,
 GoodID int not null,
@@ -134,6 +139,39 @@ Time date not null,
 Foreign Key (UserID) References UserInfo(UserID),
 Foreign Key (GoodID) References GoodInfo(GoodID),
 primary key(UserID,GoodID)
+)ENGINE=InnoDB;
+
+-- - **OrderList**
+-- | 列名    | 数据类型 | 空/非空  | 约束条件                     | 备注                     |
+-- | ------- | -------- | -------- | ---------------------------- | ------------------------ |
+-- | OrderID | int      | not null | Primary Key,Auto_increment   |                          |
+-- | UserID  | int      | not null | Foreign Key(UserInfo.UserID) |                          |
+-- | Time    | date     | not null |                              |                          |
+-- | Amount  | float    | not null |                              |                          |
+create table OrderList
+(
+OrderID int not null Primary Key Auto_increment,
+UserID int not null,
+Time date not null,
+Amount float not null,
+Foreign Key (UserID) References UserInfo(UserID)
+)ENGINE=InnoDB;
+
+-- - **OrderDetails**
+-- | 列名    | 数据类型 | 空/非空  | 约束条件                       | 备注                     |
+-- | ------- | -------- | -------- | ------------------------------ | ------------------------ |
+-- | OrderID | int      | not null | Foreign Key(OrderList.OrderID) |                          |
+-- | GoodID  | int      | not null | Foreign Key(GoodInfo.GoodID)   |                          |
+-- | Price   | float    | not null |                                |                          |
+-- | Type    | int      | not null |                                | 1可退款，0不可,2为已退款 |
+create table OrderDetails
+(
+OrderID int not null,
+GoodID int not null,
+Price float not null,
+Type int not null,
+Foreign Key (OrderID) References OrderList(OrderID),
+Foreign Key (GoodID) References GoodInfo(GoodID)
 )ENGINE=InnoDB;
 
 -- - **GoodComment**

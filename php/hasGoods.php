@@ -8,7 +8,7 @@
   $type = $_GET['type'];
   // type:1查询库存，2.查询评论，3.加入购物车
   if($type==1){
-      $sql = "select count(*) from warehouse where userid = ".$uid." and goodid = ".$gid."";
+      $sql = "select count(*) from possessions where userid = ".$uid." and goodid = ".$gid."";
   }else if($type==2){
       $sql = "select count(*) from goodcomment where userid = ".$uid." and goodid = ".$gid."";
   }else{

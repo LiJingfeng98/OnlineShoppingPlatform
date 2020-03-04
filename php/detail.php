@@ -21,17 +21,17 @@
     $success['maxPage'] = ceil($sum);
 
     //获取单项商品数据
-    $sql = "select * from goodinfo where goodid = '$gid'";
+    $sql = "select goodid,goodname,owner,rdate,price,detail from goodinfo where goodid = '$gid'";
     //因为需要从数据库中读取数据，所以采用pdo的预处理语句
     $result = $pdo -> prepare($sql);
     $result -> execute();
     //数据绑定，便于在循环遍历中读取查询结果
     $result -> bindColumn(1,$gid);
     $result -> bindColumn(2,$gname);
-    $result -> bindColumn(4,$gowner);
-    $result -> bindColumn(5,$gdate);
-    $result -> bindColumn(6,$gprice);
-    $result -> bindColumn(7,$gdetail);
+    $result -> bindColumn(3,$gowner);
+    $result -> bindColumn(4,$gdate);
+    $result -> bindColumn(5,$gprice);
+    $result -> bindColumn(6,$gdetail);
     //通过预处理语句得到的$result就包含了所有的结果
     $info = [];
     $result->fetch(PDO::FETCH_COLUMN);
@@ -83,13 +83,13 @@
     }
     $num = ($page-1)*4;
     // 获取评论
-    $sql = "select * from goodcomment where goodid = '$gid' order by time desc limit $num,4";
+    $sql = "select userid,type,time,comment from goodcomment where goodid = '$gid' order by time desc limit $num,4";
     $result = $pdo -> prepare($sql);
     $result -> execute();
-    $result -> bindColumn(2,$uid);
-    $result -> bindColumn(3,$ctype);
-    $result -> bindColumn(4,$ctime);
-    $result -> bindColumn(5,$comment);
+    $result -> bindColumn(1,$uid);
+    $result -> bindColumn(2,$ctype);
+    $result -> bindColumn(3,$ctime);
+    $result -> bindColumn(4,$comment);
     $info = [];
     for($i=0;$row=$result->fetch(PDO::FETCH_COLUMN);$i++){
       $info[$i] = array('uid'=>$uid,'ctyp'=>$ctype,'ctime'=>$ctime,'comment'=>$comment);
@@ -104,7 +104,7 @@
       $info[$i]['uimg'] = $uimg;
 
       //user有几个产品
-      $sql = "select count(userID) from warehouse where userid = $uid";
+      $sql = "select count(userID) from possessions where userid = $uid";
       $result2 = $pdo -> prepare($sql);
       $result2 -> execute();
       $result2 -> bindColumn(1,$ugnum);
