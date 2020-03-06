@@ -45,19 +45,27 @@
     $result->fetch(PDO::FETCH_COLUMN);
     // infoCode,1成功，0余额不足
     if($balance>=0){
-      $sql = "insert into possessions(userid,goodid,time) select *,'".$date."'as date from shoppingcart where userid = ".$uid;
+      $sql = "insert into possessions(userid,goodid,time) select userid,goodid,'".$date."'as date from shoppingcart where userid = ".$uid;
       $result = $pdo -> prepare($sql);
       $result -> execute();
       // 更新账户余额
       $sql = "update userinfo set balance = ".$balance." where userid = ".$uid;
       $result = $pdo -> prepare($sql);
       $result -> execute();
+      // 更新cookie
+      setcookie('balance',$balance,time()+3600*24,'/onlineshoppingplatform');
+      // 加入到订单列表
+      $sql= "insert into orderlist(userid,time,amount) values (".$uid.",'".$date."',(select sum(price*discount) from shoppingcart a inner join goodinfo b on a.goodid = b.goodid))";
+      $result = $pdo -> prepare($sql);
+      $result -> execute();
+      // 加入订单详情
+      $sql = "insert into orderDetails(orderid,goodid,price,type) select LAST_INSERT_ID(),a.goodid,sum(price*discount)as price,type from shoppingcart a inner join goodinfo b on a.goodid = b.goodid and userid = ".$uid." group by b.goodid";
+      $result = $pdo -> prepare($sql);
+      $result -> execute();
       // 清空购物车
       $sql = "delete from shoppingcart where userid = ".$uid;
       $result = $pdo -> prepare($sql);
       $result -> execute();
-      // 更新cookie
-      setcookie('balance',$balance,time()+3600*24,'/onlineshoppingplatform');
       $success['infoCode'] = 1;
     }else{
       $success['infoCode'] = 0;
