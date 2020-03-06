@@ -8,14 +8,14 @@
 
 
   //获取轮播数据
-  $sql = 'select * from goodinfo order by Rdate desc limit 3';
+  $sql = 'select goodid,goodname,price from goodinfo order by Rdate desc limit 3';
   //因为需要从数据库中读取数据，所以采用pdo的预处理语句
   $result = $pdo -> prepare($sql);
   $result -> execute();
   //数据绑定，便于在循环遍历中读取查询结果
   $result -> bindColumn(1,$gid);
   $result -> bindColumn(2,$gname);
-  $result -> bindColumn(6,$gprice);
+  $result -> bindColumn(3,$gprice);
   //通过预处理语句得到的$result就包含了所有的结果
   $info = [];
   for($i=0;$result->fetch(PDO::FETCH_COLUMN);$i++){
@@ -31,24 +31,24 @@
   $num = ($page-1)*8;
   // sql
   if($type == 1){
-    $sql = "select * from goodinfo order by RDate desc limit $num,8";
+    $sql = "select goodid,goodname,price from goodinfo order by RDate desc limit $num,8";
   }else if($type == 2){
-    $sql = "select * from goodinfo a INNER JOIN (select COUNT(GoodID),goodID from warehouse group by goodid order by COUNT(GoodID) desc) b ON a.goodid = b.goodid limit $num,8";
+    $sql = "select a.goodid,goodname,price from goodinfo a INNER JOIN (select COUNT(GoodID),goodID from possessions group by goodid order by COUNT(GoodID) desc) b ON a.goodid = b.goodid limit $num,8";
   }
 
   $result = $pdo -> prepare($sql);
   $result -> execute();
   $result -> bindColumn(1,$gid);
   $result -> bindColumn(2,$gname);
-  $result -> bindColumn(6,$gprice);
+  $result -> bindColumn(3,$gprice);
   $info = [];
   for($i=0;$result->fetch(PDO::FETCH_COLUMN);$i++){
     // 获取类别
-    $sql = "select * from goodType where goodID = ".$gid." order by Num desc limit 3;";
+    $sql = "select type from goodType where goodID = ".$gid." order by Num desc limit 3;";
     $info2 = [];
     $result2 = $pdo -> prepare($sql);
     $result2 -> execute();
-    $result2 -> bindColumn(2,$gtype);
+    $result2 -> bindColumn(1,$gtype);
     for($j=0;$result2->fetch(PDO::FETCH_COLUMN);$j++){
       $info2[$j]=$gtype;
     }

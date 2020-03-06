@@ -16,7 +16,7 @@
   $success['maxPage'] = ceil($gnums);
 
   //获取商品列表数据
-  $sql = "select a.goodID,goodname,sum from (select * from (select a.goodID,goodname,type from goodinfo a inner join goodtype b where a.goodid = b.goodid) a group by goodid) a inner join (select count(*) as sum,goodID from warehouse group by goodID order by sum desc) b where a.goodID = b.goodID order by sum desc limit ".$num.",8";
+  $sql = "select a.goodID,goodname,sum from (select * from (select a.goodID,goodname from goodinfo a inner join goodtype b where a.goodid = b.goodid) a group by goodid) a inner join (select count(*) as sum,goodID from possessions group by goodID order by sum desc) b where a.goodID = b.goodID order by sum desc limit ".$num.",8";
   //因为需要从数据库中读取数据，所以采用pdo的预处理语句
   $result = $pdo -> prepare($sql);
   $result -> execute();
@@ -28,11 +28,11 @@
   $info = [];
   for($i=0;$row=$result->fetch(PDO::FETCH_COLUMN);$i++){
     // 获取类别
-    $sql = "select * from goodType where goodID = ".$gid." order by Num desc limit 3;";
+    $sql = "select type from goodType where goodID = ".$gid." order by Num desc limit 3;";
     $info2 = [];
     $result2 = $pdo -> prepare($sql);
     $result2 -> execute();
-    $result2 -> bindColumn(2,$gtype);
+    $result2 -> bindColumn(1,$gtype);
     for($j=0;$result2->fetch(PDO::FETCH_COLUMN);$j++){
       $info2[$j]=$gtype;
     }
