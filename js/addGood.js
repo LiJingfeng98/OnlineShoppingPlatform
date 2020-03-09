@@ -14,7 +14,10 @@ var uname;
     var owner = $('#inputOwner').val();
     var rdate = $('#inputRDate').val();
     var price = $('#inputPrice').val();
+    var discount = $('#inputDiscount').val();
+    var gtype = $('input[name="gtype"]:checked').val();
     var detail = $('#inputDetail').val();
+    var gimg = $('#inputGoodImg').val();
     if (owner.trim().length == 0 || rdate.trim().length == 0 || price.trim().length == 0 || detail.trim().length == 0) {
       alert('内容不能为空！请检查后重新输入！');
       return;
@@ -29,7 +32,10 @@ var uname;
         owner: owner,
         rdate: rdate,
         price: price,
+        discount: discount,
+        gtype: gtype,
         detail: detail,
+        gimg: gimg
       },
       success: function(res) {
         if (res.infoCode == 1) {
@@ -46,7 +52,10 @@ var uname;
     }); //ajax end
   }); //login.click end
 })(); //init end
-
+//滑块滑动事件
+$('#inputDiscount').change(function showDis() {
+  $('#num').html($('#inputDiscount').val() + "折 -- " + Math.ceil($('#inputPrice').val() * $('#inputDiscount').val()) + "￥");
+});
 // 读取cookie
 function getCookieObj() {
   var cookieObj = {},

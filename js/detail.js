@@ -68,9 +68,17 @@ function getQueryVariable(variable) {
         default:
       }
 
+      var refund;
+      if(goodInfoArr[0].gtype==0){
+        refund = "不可退款";
+      }
+      else{
+        refund = "7天退款";
+      }
+
       var introduce = document.querySelector('#introduce');
       introduce.innerHTML =
-        "<img src=\"img/" + goodInfoArr[0].gname + "/header.jpg\" alt=\"\" class=\"img-responsive center-block\">" +
+        "<img src=\"img/" + goodInfoArr[0].gimg + "/header.jpg\" alt=\"\" class=\"img-responsive center-block\">" +
         "        <br>" +
         "        <p class=\"text-justify\">" + goodInfoArr[0].gdetail + "</p>" +
         "        <table class=\"table table-striped\">" +
@@ -87,22 +95,26 @@ function getQueryVariable(variable) {
         "              <td>发行商</td>" +
         "              <td><a href=\"\">" + goodInfoArr[0].gowner + "</a></td>" +
         "            </tr>" +
+        "            <tr>" +
+        "              <td>售后类别</td>" +
+        "              <td>" + refund + "</td>" +
+        "            </tr>" +
         "          </tbody>" +
         "        </table>";
 
       var carousel_inner = document.querySelector('.carousel-inner');
       carousel_inner.innerHTML =
         "<div class=\"item active\">" +
-        "              <img src=\"img/" + goodInfoArr[0].gname + "/1.jpg\" class=\"img-responsive center-block\" alt=\"First slide\">" +
+        "              <img src=\"img/" + goodInfoArr[0].gimg + "/1.jpg\" class=\"img-responsive center-block\" alt=\"First slide\">" +
         "            </div>" +
         "            <div class=\"item\">" +
-        "              <img src=\"img/" + goodInfoArr[0].gname + "/2.jpg\" class=\"img-responsive center-block\" alt=\"Second slide\">" +
+        "              <img src=\"img/" + goodInfoArr[0].gimg + "/2.jpg\" class=\"img-responsive center-block\" alt=\"Second slide\">" +
         "            </div>" +
         "            <div class=\"item\">" +
-        "              <img src=\"img/" + goodInfoArr[0].gname + "/3.jpg\" class=\"img-responsive center-block\" alt=\"Third slide\">" +
+        "              <img src=\"img/" + goodInfoArr[0].gimg + "/3.jpg\" class=\"img-responsive center-block\" alt=\"Third slide\">" +
         "            </div>" +
         "            <div class=\"item\">" +
-        "              <img src=\"img/" + goodInfoArr[0].gname + "/4.jpg\" class=\"img-responsive center-block\" alt=\"Third slide\">" +
+        "              <img src=\"img/" + goodInfoArr[0].gimg + "/4.jpg\" class=\"img-responsive center-block\" alt=\"Third slide\">" +
         "            </div>";
 
       var typeList = document.querySelector('#typeList');
@@ -159,9 +171,17 @@ function getQueryVariable(variable) {
           "<button type=\"button\" class=\"btn btn-primary btn-lg pull-right\" disabled=\"disabled\">请登录后购买</button>";
       }
 
+      // 判断是否打折
+      var discount = '';
+      if (goodInfoArr[0].discount != 1) {
+        discount = "<del><small>￥" + goodInfoArr[0].gprice + "</small></del>" +
+          "&nbsp;&nbsp;&nbsp;";
+      }
       var bugPrice = document.querySelector('#bugPrice');
       bugPrice.innerHTML =
-        "￥" + goodInfoArr[0].gprice + "&nbsp;&nbsp;&nbsp;" +
+      discount +
+        "￥" +
+        Math.ceil(goodInfoArr[0].gprice * goodInfoArr[0].discount)  + "&nbsp;&nbsp;&nbsp;" +
         "<a href=\"#\">" + innerHTML +
         "</a>";
 
@@ -181,11 +201,11 @@ function getQueryVariable(variable) {
           var myimg = document.querySelector("#myimg");
           myimg.innerHTML = "<img src=\"img/headimg/" + cookieObj.userimg + ".jpg\" class=\"img-responsive center-block\">";
 
-          if(checkState()){
-            $('textarea').attr('disabled','disabled');
+          if (checkState()) {
+            $('textarea').attr('disabled', 'disabled');
             $('textarea').val('您已被封禁，请与管理员联系');
-            $('#subcomment').attr('class','btn btn-danger pull-right');
-            $('#subcomment').attr('disabled','disabled');
+            $('#subcomment').attr('class', 'btn btn-danger pull-right');
+            $('#subcomment').attr('disabled', 'disabled');
           }
         }
       } else {
@@ -420,23 +440,22 @@ function checkWarehouse(userid) {
 }
 
 // 是否被封禁
-function checkState(){
+function checkState() {
   var flag;
   $.ajax({
     type: 'get',
     url: 'php/person.php',
     dataType: 'json',
-    async:false,
+    async: false,
     data: {
       uid: uid,
       type: 7
     },
     success: function(res) {
-      if(res.infoCode){
-        flag=true;
-      }
-      else{
-        flag=false;
+      if (res.infoCode) {
+        flag = true;
+      } else {
+        flag = false;
       }
     },
     error: function(e) {
@@ -477,10 +496,9 @@ function checkComment(userid) {
 
 //加入购物车
 $(document).on("click", "#incart", function inCart() {
-  if(cookieObj.grantp == 1){
-    window.location.href = "editGood.html?gid="+gid;
-  }
-  else{
+  if (cookieObj.grantp == 1) {
+    window.location.href = "editGood.html?gid=" + gid;
+  } else {
     $.ajax({
       type: 'get',
       url: 'php/hasGoods.php',

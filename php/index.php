@@ -8,7 +8,7 @@
 
 
   //获取轮播数据
-  $sql = 'select goodid,goodname,price from goodinfo order by Rdate desc limit 3';
+  $sql = 'select goodid,goodname,price,discount,goodimg from goodinfo order by Rdate desc limit 3';
   //因为需要从数据库中读取数据，所以采用pdo的预处理语句
   $result = $pdo -> prepare($sql);
   $result -> execute();
@@ -16,10 +16,12 @@
   $result -> bindColumn(1,$gid);
   $result -> bindColumn(2,$gname);
   $result -> bindColumn(3,$gprice);
+  $result -> bindColumn(4,$discount);
+  $result -> bindColumn(5,$gimg);
   //通过预处理语句得到的$result就包含了所有的结果
   $info = [];
   for($i=0;$result->fetch(PDO::FETCH_COLUMN);$i++){
-    $info[$i] = array('gid'=>$gid,'gname'=>$gname,'gprice'=>$gprice);
+    $info[$i] = array('gid'=>$gid,'gname'=>$gname,'gprice'=>$gprice,'discount'=>$discount,'gimg'=>$gimg);
   }
   //将索引到的数据放入$success中并进行返回
   $success['carouselInfo'] = $info;
@@ -31,9 +33,9 @@
   $num = ($page-1)*8;
   // sql
   if($type == 1){
-    $sql = "select goodid,goodname,price from goodinfo order by RDate desc limit $num,8";
+    $sql = "select goodid,goodname,price,discount,goodimg from goodinfo order by RDate desc limit $num,8";
   }else if($type == 2){
-    $sql = "select a.goodid,goodname,price from goodinfo a INNER JOIN (select COUNT(GoodID),goodID from possessions group by goodid order by COUNT(GoodID) desc) b ON a.goodid = b.goodid limit $num,8";
+    $sql = "select a.goodid,goodname,price,discount,goodimg from goodinfo a INNER JOIN (select COUNT(GoodID),goodID from possessions group by goodid order by COUNT(GoodID) desc) b ON a.goodid = b.goodid limit $num,8";
   }
 
   $result = $pdo -> prepare($sql);
@@ -41,6 +43,8 @@
   $result -> bindColumn(1,$gid);
   $result -> bindColumn(2,$gname);
   $result -> bindColumn(3,$gprice);
+  $result -> bindColumn(4,$discount);
+  $result -> bindColumn(5,$gimg);
   $info = [];
   for($i=0;$result->fetch(PDO::FETCH_COLUMN);$i++){
     // 获取类别
@@ -53,7 +57,7 @@
       $info2[$j]=$gtype;
     }
 
-    $info[$i] = array('gid'=>$gid,'gname'=>$gname,'gprice'=>$gprice,'gtype'=>$info2);
+    $info[$i] = array('gid'=>$gid,'gname'=>$gname,'gprice'=>$gprice,'discount'=>$discount,'gimg'=>$gimg,'gtype'=>$info2);
   }
   //将索引到的数据放入$success中并进行返回
   $success['goodListInfo'] = $info;
