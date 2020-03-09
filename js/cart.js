@@ -56,6 +56,12 @@ function loadCartList() {
       for (var i = 0; i < cartListArr.length; i++) {
         //flag
         flag = true;
+        // 判断是否打折
+        var discount = '';
+        if (cartListArr[i].discount != 1) {
+          discount = "<del><small>￥" + cartListArr[i].price + "</small></del>" +
+            "&nbsp;&nbsp;&nbsp;";
+        }
         //List
         innerType = '';
         innerHTML +=
@@ -63,14 +69,16 @@ function loadCartList() {
           "        <div class=\"media\">" +
           "          <div class=\"media-left media-middle\">" +
           "            <a href=\"detail.html?gid=" + cartListArr[i].gid + "\">" +
-          "              <img src=\"img/" + cartListArr[i].gname + "/2x.jpg\" class=\"media-object \">" +
+          "              <img src=\"img/" + cartListArr[i].gimg + "/2x.jpg\" class=\"media-object \">" +
           "            </a>" +
           "          </div>" +
           "          <div class=\"media-body\">" +
           "            <a href=\"#\">" +
           "              <h4 class=\"media-heading\">" + cartListArr[i].gname + "</h4>" +
           "            </a>" +
-          "            <p class=\"text-right\" style=\"font-size:18px;\">￥" + cartListArr[i].price + "</p>" +
+          "            <p class=\"text-right\" style=\"font-size:18px;\">" + discount +
+            "￥" +
+            Math.ceil(cartListArr[i].price * cartListArr[i].discount) + "</p>" +
           "            <a href=\"javascript:void(0);\" onclick=\"del(" + cartListArr[i].gid + ")\">" +
           "              <p class=\"text-right\">移除</p>" +
           "            </a>" +

@@ -37,16 +37,16 @@
     break;
     case 2:$sqlType = 'order by rdate desc';
     break;
-    case 3:$sqlType = 'order by price desc';
+    case 3:$sqlType = 'order by CEILING(price*discount) desc';
     break;
-    case 4:$sqlType = 'order by price asc';
+    case 4:$sqlType = 'order by CEILING(price*discount) asc';
     break;
     default:
       // code...
       break;
   }
 
-  $sql = "select a.goodID,goodname,price,sum,Rdate from (select * from (select a.goodID,goodname,price,b.type,Rdate from goodinfo a inner join goodtype b where a.goodid = b.goodid) a where goodname like \"%".$item."%\" or type like \"%".$item."%\" group by goodid) a inner join (select count(*) as sum,goodID from possessions group by goodID order by sum desc) b where a.goodID = b.goodID ".$sqlType." limit ".$num.",8";
+  $sql = "select a.goodID,goodname,price,discount,goodimg from (select * from (select a.goodID,goodname,price,b.type,Rdate,discount,goodimg from goodinfo a inner join goodtype b where a.goodid = b.goodid) a where goodname like \"%".$item."%\" or type like \"%".$item."%\" group by goodid) a inner join (select count(*) as sum,goodID from possessions group by goodID order by sum desc) b where a.goodID = b.goodID ".$sqlType." limit ".$num.",8";
   //因为需要从数据库中读取数据，所以采用pdo的预处理语句
   $result = $pdo -> prepare($sql);
   $result -> execute();
@@ -54,6 +54,8 @@
   $result -> bindColumn(1,$gid);
   $result -> bindColumn(2,$gname);
   $result -> bindColumn(3,$gprice);
+  $result -> bindColumn(4,$discount);
+  $result -> bindColumn(5,$gimg);
   //通过预处理语句得到的$result就包含了所有的结果
   $info = [];
   for($i=0;$row=$result->fetch(PDO::FETCH_COLUMN);$i++){
@@ -66,7 +68,7 @@
     for($j=0;$result2->fetch(PDO::FETCH_COLUMN);$j++){
       $info2[$j]=$gtype;
     }
-    $info[$i] = array('gid'=>$gid,'gname'=>$gname,'gprice'=>$gprice,'gtype'=>$info2);
+    $info[$i] = array('gid'=>$gid,'gname'=>$gname,'gprice'=>$gprice,'discount'=>$discount,'gimg'=>$gimg,'gtype'=>$info2);
   }
 
   $success['goodListInfo'] = $info;

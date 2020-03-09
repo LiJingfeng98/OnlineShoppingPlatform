@@ -51,7 +51,7 @@ function getQueryVariable(variable) {
       if (gsum >= 1) {
         innerHTML =
           "<div class=\"item active\">" +
-          "            <img src=\"img/" + carouselInfoArr[0].gname + "/header.jpg\" class=\"img-responsive img-rounded center-block col-md-7\">" +
+          "            <img src=\"img/" + carouselInfoArr[0].gimg + "/header.jpg\" class=\"img-responsive img-rounded center-block col-md-7\">" +
           "            <div class=\"col-md-5 hidden-xs hidden-sm\">" +
           "              <div class=\"row\">" +
           "                <a href=\"detail?gid=" + carouselInfoArr[0].gid + "\">" +
@@ -59,16 +59,16 @@ function getQueryVariable(variable) {
           "                </a>" +
           "              </div>" +
           "              <div class=\"row\">" +
-          "                <div class=\"col-md-6\"><img src=\"img/" + carouselInfoArr[0].gname + "/1.jpg\" class=\"img-rounded img-responsive\"></div>" +
-          "                <div class=\"col-md-6\"><img src=\"img/" + carouselInfoArr[0].gname + "/2.jpg\" class=\"img-rounded img-responsive\"></div>" +
+          "                <div class=\"col-md-6\"><img src=\"img/" + carouselInfoArr[0].gimg + "/1.jpg\" class=\"img-rounded img-responsive\"></div>" +
+          "                <div class=\"col-md-6\"><img src=\"img/" + carouselInfoArr[0].gimg + "/2.jpg\" class=\"img-rounded img-responsive\"></div>" +
           "              </div>" +
           "              <br>" +
           "              <div class=\"row\">" +
-          "                <div class=\"col-md-6\"><img src=\"img/" + carouselInfoArr[0].gname + "/3.jpg\" class=\"img-rounded img-responsive\"></div>" +
-          "                <div class=\"col-md-6\"><img src=\"img/" + carouselInfoArr[0].gname + "/4.jpg\" class=\"img-rounded img-responsive\"></div>" +
+          "                <div class=\"col-md-6\"><img src=\"img/" + carouselInfoArr[0].gimg + "/3.jpg\" class=\"img-rounded img-responsive\"></div>" +
+          "                <div class=\"col-md-6\"><img src=\"img/" + carouselInfoArr[0].gimg + "/4.jpg\" class=\"img-rounded img-responsive\"></div>" +
           "              </div>" +
           "              <div class=\"row\">" +
-          "                <h3>￥" + carouselInfoArr[0].gprice + "</h3>" +
+          "                <h3>￥" + Math.ceil(carouselInfoArr[0].gprice * carouselInfoArr[0].discount) + "&nbsp;&nbsp;&nbsp;<del><small>￥" + carouselInfoArr[0].gprice + "</small></del>" + "</h3>" +
           "              </div>" +
           "            </div>" +
           "          </div>";
@@ -76,7 +76,7 @@ function getQueryVariable(variable) {
       if (gsum >= 2) {
         innerHTML +=
           "          <div class=\"item\">" +
-          "            <img src=\"img/" + carouselInfoArr[1].gname + "/header.jpg\" class=\"img-responsive center-block img-rounded col-md-7\">" +
+          "            <img src=\"img/" + carouselInfoArr[1].gimg + "/header.jpg\" class=\"img-responsive center-block img-rounded col-md-7\">" +
           "            <div class=\"col-md-5 hidden-xs hidden-sm\">" +
           "              <div class=\"row\">" +
           "                <a href=\"detail?gid=" + carouselInfoArr[1].gid + "\">" +
@@ -84,16 +84,16 @@ function getQueryVariable(variable) {
           "                </a>" +
           "              </div>" +
           "              <div class=\"row\">" +
-          "                <div class=\"col-md-6\"><img src=\"img/" + carouselInfoArr[1].gname + "/1.jpg\" class=\"img-rounded img-responsive\"></div>" +
-          "                <div class=\"col-md-6\"><img src=\"img/" + carouselInfoArr[1].gname + "/2.jpg\" class=\"img-rounded img-responsive\"></div>" +
+          "                <div class=\"col-md-6\"><img src=\"img/" + carouselInfoArr[1].gimg + "/1.jpg\" class=\"img-rounded img-responsive\"></div>" +
+          "                <div class=\"col-md-6\"><img src=\"img/" + carouselInfoArr[1].gimg + "/2.jpg\" class=\"img-rounded img-responsive\"></div>" +
           "              </div>" +
           "              <br>" +
           "              <div class=\"row\">" +
-          "                <div class=\"col-md-6\"><img src=\"img/" + carouselInfoArr[1].gname + "/3.jpg\" class=\"img-rounded img-responsive\"></div>" +
-          "                <div class=\"col-md-6\"><img src=\"img/" + carouselInfoArr[1].gname + "/4.jpg\" class=\"img-rounded img-responsive\"></div>" +
+          "                <div class=\"col-md-6\"><img src=\"img/" + carouselInfoArr[1].gimg + "/3.jpg\" class=\"img-rounded img-responsive\"></div>" +
+          "                <div class=\"col-md-6\"><img src=\"img/" + carouselInfoArr[1].gimg + "/4.jpg\" class=\"img-rounded img-responsive\"></div>" +
           "              </div>" +
           "              <div class=\"row\">" +
-          "                <h3>￥" + carouselInfoArr[1].gprice + "</h3>" +
+          "                <h3>￥" + Math.ceil(carouselInfoArr[1].gprice * carouselInfoArr[1].discount) + "&nbsp;&nbsp;&nbsp;<del><small>￥" + carouselInfoArr[1].gprice + "</small></del>" + "</h3>" +
           "              </div>" +
           "            </div>" +
           "          </div>";
@@ -101,7 +101,7 @@ function getQueryVariable(variable) {
       if (gsum >= 3) {
         innerHTML +=
           "          <div class=\"item\">" +
-          "            <img src=\"img/" + carouselInfoArr[2].gname + "/header.jpg\" class=\"img-responsive center-block img-rounded col-md-7\">" +
+          "            <img src=\"img/" + carouselInfoArr[2].gimg + "/header.jpg\" class=\"img-responsive center-block img-rounded col-md-7\">" +
           "            <div class=\"col-md-5 hidden-xs hidden-sm\">" +
           "              <div class=\"row\">" +
           "                <a href=\"detail?gid=" + carouselInfoArr[2].gid + "\">" +
@@ -109,16 +109,16 @@ function getQueryVariable(variable) {
           "                </a>" +
           "              </div>" +
           "              <div class=\"row\">" +
-          "                <div class=\"col-md-6\"><img src=\"img/" + carouselInfoArr[2].gname + "/1.jpg\" class=\"img-rounded img-responsive\"></div>" +
-          "                <div class=\"col-md-6\"><img src=\"img/" + carouselInfoArr[2].gname + "/2.jpg\" class=\"img-rounded img-responsive\"></div>" +
+          "                <div class=\"col-md-6\"><img src=\"img/" + carouselInfoArr[2].gimg + "/1.jpg\" class=\"img-rounded img-responsive\"></div>" +
+          "                <div class=\"col-md-6\"><img src=\"img/" + carouselInfoArr[2].gimg + "/2.jpg\" class=\"img-rounded img-responsive\"></div>" +
           "              </div>" +
           "              <br>" +
           "              <div class=\"row\">" +
-          "                <div class=\"col-md-6\"><img src=\"img/" + carouselInfoArr[2].gname + "/3.jpg\" class=\"img-rounded img-responsive\"></div>" +
-          "                <div class=\"col-md-6\"><img src=\"img/" + carouselInfoArr[2].gname + "/4.jpg\" class=\"img-rounded img-responsive\"></div>" +
+          "                <div class=\"col-md-6\"><img src=\"img/" + carouselInfoArr[2].gimg + "/3.jpg\" class=\"img-rounded img-responsive\"></div>" +
+          "                <div class=\"col-md-6\"><img src=\"img/" + carouselInfoArr[2].gimg + "/4.jpg\" class=\"img-rounded img-responsive\"></div>" +
           "              </div>" +
           "              <div class=\"row\">" +
-          "                <h3>￥" + carouselInfoArr[2].gprice + "</h3>" +
+          "                <h3>￥" + Math.ceil(carouselInfoArr[2].gprice * carouselInfoArr[2].discount) + "&nbsp;&nbsp;&nbsp;<del><small>￥" + carouselInfoArr[2].gprice + "</small></del>" + "</h3>" +
           "              </div>" +
           "            </div>" +
           "          </div>";
@@ -150,6 +150,13 @@ function getQueryVariable(variable) {
       var innerHTML = '';
       var innerType = '';
       for (var i = 0; i < goodInfoArr.length; i++) {
+        // 判断打折
+        var discount='';
+        if (goodInfoArr[i].discount != 1) {
+          discount = "<del><small>￥" + goodInfoArr[i].gprice + "</small></del>" +
+            "&nbsp;&nbsp;&nbsp;";
+        }
+        // type
         innerType = '';
         for (var j = 0; j < goodInfoArr[i].gtype.length; j++) {
           innerType += "  " + goodInfoArr[i].gtype[j];
@@ -158,12 +165,12 @@ function getQueryVariable(variable) {
           "<a href=\"detail?gid=" + goodInfoArr[i].gid + "\" class=\"list-group-item\">" +
           "        <div class=\"media\">" +
           "          <div class=\"media-left media-middle\">" +
-          "            <img src=\"img/" + goodInfoArr[i].gname + "/2x.jpg\" class=\"media-object \">" +
+          "            <img src=\"img/" + goodInfoArr[i].gimg + "/2x.jpg\" class=\"media-object \">" +
           "          </div>" +
           "          <div class=\"media-body\">" +
           "            <h4 class=\"media-heading\">" + goodInfoArr[i].gname + "</h4>" +
           "            <p>" + innerType + "</p>" +
-          "            <p class=\"text-right\">￥" + goodInfoArr[i].gprice + "</p>" +
+          "            <p class=\"text-right\">"+discount+"&nbsp;&nbsp;&nbsp;￥" + Math.ceil(goodInfoArr[i].gprice * goodInfoArr[i].discount) + "</p>" +
           "          </div>" +
           "        </div>" +
           "      </a>";
@@ -200,6 +207,13 @@ function loadGoodList() {
       var innerHTML = '';
       var innerType = '';
       for (var i = 0; i < goodInfoArr.length; i++) {
+        // 判断打折
+        var discount='';
+        if (goodInfoArr[i].discount != 1) {
+          discount = "<del><small>￥" + goodInfoArr[i].gprice + "</small></del>" +
+            "&nbsp;&nbsp;&nbsp;";
+        }
+        // type
         innerType = '';
         for (var j = 0; j < goodInfoArr[i].gtype.length; j++) {
           innerType += "  " + goodInfoArr[i].gtype[j];
@@ -208,12 +222,12 @@ function loadGoodList() {
           "<a href=\"detail?gid=" + goodInfoArr[i].gid + "\" class=\"list-group-item\">" +
           "        <div class=\"media\">" +
           "          <div class=\"media-left media-middle\">" +
-          "            <img src=\"img/" + goodInfoArr[i].gname + "/2x.jpg\" class=\"media-object \">" +
+          "            <img src=\"img/" + goodInfoArr[i].gimg + "/2x.jpg\" class=\"media-object \">" +
           "          </div>" +
           "          <div class=\"media-body\">" +
           "            <h4 class=\"media-heading\">" + goodInfoArr[i].gname + "</h4>" +
           "            <p>" + innerType + "</p>" +
-          "            <p class=\"text-right\">￥" + goodInfoArr[i].gprice + "</p>" +
+          "            <p class=\"text-right\">"+discount+"&nbsp;&nbsp;&nbsp;￥" + Math.ceil(goodInfoArr[i].gprice * goodInfoArr[i].discount) + "</p>" +
           "          </div>" +
           "        </div>" +
           "      </a>";

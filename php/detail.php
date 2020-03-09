@@ -21,7 +21,7 @@
     $success['maxPage'] = ceil($sum);
 
     //获取单项商品数据
-    $sql = "select goodid,goodname,owner,rdate,price,detail from goodinfo where goodid = '$gid'";
+    $sql = "select goodid,goodname,owner,rdate,price,detail,discount,goodimg,type from goodinfo where goodid = '$gid'";
     //因为需要从数据库中读取数据，所以采用pdo的预处理语句
     $result = $pdo -> prepare($sql);
     $result -> execute();
@@ -32,10 +32,13 @@
     $result -> bindColumn(4,$gdate);
     $result -> bindColumn(5,$gprice);
     $result -> bindColumn(6,$gdetail);
+    $result -> bindColumn(7,$discount);
+    $result -> bindColumn(8,$gimg);
+    $result -> bindColumn(9,$gtype);
     //通过预处理语句得到的$result就包含了所有的结果
     $info = [];
     $result->fetch(PDO::FETCH_COLUMN);
-    $info[0] = array('gid'=>$gid,'gname'=>$gname,'gprice'=>$gprice,'gowner'=>$gowner,'gdate'=>$gdate,'gdetail'=>$gdetail);
+    $info[0] = array('gid'=>$gid,'gname'=>$gname,'gprice'=>$gprice,'gowner'=>$gowner,'gdate'=>$gdate,'gdetail'=>$gdetail,'discount'=>$discount,'gimg'=>$gimg,'gtype'=>$gtype);
     $success['goodInfo'] = $info;
 
     //获取商品类别

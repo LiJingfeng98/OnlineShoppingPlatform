@@ -1,9 +1,9 @@
-var gid=0;
+var gid = 0;
 var uname;
 (function init() {
   // 获取cookie 登录状态
   cookieObj = getCookieObj();
-  if (cookieObj.grantp!= '1') {
+  if (cookieObj.grantp != '1') {
     alert("只有管理员可以访问该页面！");
     window.location.href = 'index.html';
     return;
@@ -31,8 +31,13 @@ var uname;
         $('#inputRDate').val(goodInfo.rdate);
         $('#inputPrice').val(goodInfo.price);
         $('#inputDetail').val(goodInfo.detail);
-      }
-      else {
+        $('#inputDiscount').val(goodInfo.discount);
+        $('#num').html(goodInfo.discount + "折 -- " + Math.ceil(goodInfo.price * goodInfo.discount) + "￥");
+        $('#inputGoodImg').val(goodInfo.gimg);
+        $("input:radio[value=" + goodInfo.gtype + "]").attr('checked', 'true');
+
+
+      } else {
         alert("该商品不存在");
         window.location.href = 'index.html';
         return;
@@ -43,15 +48,21 @@ var uname;
     }
   }); //ajax end
 
+  //滑块滑动事件
+  $('#inputDiscount').change(function showDis() {
+    $('#num').html($('#inputDiscount').val() + "折 -- " + Math.ceil($('#inputPrice').val() * $('#inputDiscount').val()) + "￥");
+  });
 
   //提交事件
   $('#save').click(function() {
-    // 密码一致校验
+    var gname = $('#inputGoodName').val();
     var owner = $('#inputOwner').val();
     var rdate = $('#inputRDate').val();
     var price = $('#inputPrice').val();
+    var discount = $('#inputDiscount').val();
+    var gtype = $('input[name="gtype"]:checked').val();
     var detail = $('#inputDetail').val();
-    if (owner.trim().length == 0 || rdate.trim().length == 0|| price.trim().length == 0|| detail.trim().length == 0) {
+    if (owner.trim().length == 0 || rdate.trim().length == 0 || price.trim().length == 0 || detail.trim().length == 0) {
       alert('内容不能为空！请检查后重新输入！');
       return;
     }
@@ -61,12 +72,15 @@ var uname;
       url: 'php/editGood.php',
       dataType: 'json',
       data: {
-        gid:gid,
+        gid: gid,
+        gname: gname,
         owner: owner,
         rdate: rdate,
         price: price,
+        discount: discount,
+        gtype: gtype,
         detail: detail,
-        type:2
+        type: 2
       },
       success: function(res) {
         if (res.infoCode == 1) {

@@ -56,9 +56,6 @@ function getQueryVariable(variable) {
     "<li><a href=\"search.html?item=" + item + "&type=4\">价格升序</a></li>";
 
     loadGoodList();
-
-
-
 })();
 
 //加载商品列表
@@ -91,6 +88,13 @@ function loadGoodList(){
       var goodList = document.querySelector('#goodlist');
       var innerHTML = '';
       for (var i = 0; i < goodInfoArr.length; i++) {
+        // 判断打折
+        var discount='';
+        if (goodInfoArr[i].discount != 1) {
+          discount = "<del><small>￥" + goodInfoArr[i].gprice + "</small></del>" +
+            "&nbsp;&nbsp;&nbsp;";
+        }
+        // 录入类别
         innerType = '';
         for (var j = 0; j < goodInfoArr[i].gtype.length; j++) {
           innerType += "  " + goodInfoArr[i].gtype[j];
@@ -99,12 +103,12 @@ function loadGoodList(){
           "<a href=\"detail?gid=" + goodInfoArr[i].gid + "\" class=\"list-group-item\">" +
           "        <div class=\"media\">" +
           "          <div class=\"media-left media-middle\">" +
-          "            <img src=\"img/" + goodInfoArr[i].gname + "/2x.jpg\" class=\"media-object \">" +
+          "            <img src=\"img/" + goodInfoArr[i].gimg + "/2x.jpg\" class=\"media-object \">" +
           "          </div>" +
           "          <div class=\"media-body\">" +
           "            <h4 class=\"media-heading\">" + goodInfoArr[i].gname + "</h4>" +
           "            <p>" + innerType + "</p>" +
-          "            <p class=\"text-right\">￥" + goodInfoArr[i].gprice + "</p>" +
+          "            <p class=\"text-right\">"+discount+"&nbsp;&nbsp;&nbsp;￥" + Math.ceil(goodInfoArr[i].gprice * goodInfoArr[i].discount) + "</p>" +
           "          </div>" +
           "        </div>" +
           "      </a>";
