@@ -27,6 +27,7 @@
         $result2 -> bindColumn(3,$type);
         $result2 -> bindColumn(4,$gname);
         $result2 -> bindColumn(5,$gimg);
+        $infoDe = [];
         for($j=0;$result2->fetch(PDO::FETCH_COLUMN);$j++){
           $infoDe[$j] = array('gid'=>$gid,'price'=>$price,'type'=>$type,'gname'=>$gname,'gimg'=>$gimg);
         }
