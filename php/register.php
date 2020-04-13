@@ -59,12 +59,12 @@
       $sql = "insert into introduce values(?,?)";
       $halfPro = $pdo -> prepare($sql);
       $result = $halfPro -> execute([$userid,$introduce]);
-      setcookie('userid',$userid,time()+3600*24,'/onlineshoppingplatform');
-      setcookie('username',$username,time()+3600*24,'/onlineshoppingplatform');
-      setcookie('grantp',$grantp,time()+3600*24,'/onlineshoppingplatform');
-      setcookie('balance',$balance,time()+3600*24,'/onlineshoppingplatform');
-      setcookie('userimg',$userimg,time()+3600*24,'/onlineshoppingplatform');
-      setcookie('custom',$custom,time()+3600*24,'/onlineshoppingplatform');
+      setcookie('userid',$userid,time()+3600*24,'/');
+      setcookie('username',$username,time()+3600*24,'/');
+      setcookie('grantp',$grantp,time()+3600*24,'/');
+      setcookie('balance',$balance,time()+3600*24,'/');
+      setcookie('userimg',$userimg,time()+3600*24,'/');
+      setcookie('custom',$custom,time()+3600*24,'/');
       $flag = 1;
     }
     $success['login'] = $flag;

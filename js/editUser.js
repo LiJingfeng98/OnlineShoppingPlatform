@@ -5,7 +5,7 @@ var uname;
 (function init() {
   // 获取cookie 登录状态
   cookieObj = getCookieObj();
-  if (typeof(cookieObj.username) == "undefined") {
+  if (cookieObj.username == undefined) {
     alert("请先登录后再访问该页面！");
     window.location.href = 'index.html';
     return;

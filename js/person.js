@@ -12,7 +12,7 @@ var hasLogin = false;
   }
   // 获取cookie 登录状态
   cookieObj = getCookieObj();
-  if (typeof(cookieObj.username) == "undefined") {
+  if (cookieObj.username == undefined) {
     hasLogin = false;
   } else {
     visitUid = cookieObj.userid;

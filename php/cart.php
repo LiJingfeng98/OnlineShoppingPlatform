@@ -58,7 +58,7 @@
       $result = $pdo -> prepare($sql);
       $result -> execute();
       // 更新cookie
-      setcookie('balance',$balance,time()+3600*24,'/onlineshoppingplatform');
+      setcookie('balance',$balance,time()+3600*24,'/');
       // 加入到订单列表
       $sql= "insert into orderlist(userid,time,amount) values (".$uid.",'".$date."',(select sum(CEILING(price*discount)) from shoppingcart a inner join goodinfo b on a.goodid = b.goodid))";
       $result = $pdo -> prepare($sql);

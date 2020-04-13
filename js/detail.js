@@ -129,7 +129,7 @@ function getQueryVariable(variable) {
       cookieObj = getCookieObj();
       var hasGoods;
       var hasComment;
-      if (typeof(cookieObj.username) == "undefined") {
+      if (cookieObj.username == undefined) {
         hasGoods = false;
         hasComment = false;
       } else {
@@ -149,7 +149,7 @@ function getQueryVariable(variable) {
 
 
       // 判断是否登录
-      if (typeof(cookieObj.userid) != "undefined") {
+      if (cookieObj.userid != undefined) {
         // 判断是否为管理员
         if (cookieObj.grantp == 1) {
           innerHTML =
@@ -248,7 +248,7 @@ function loadCommendList() {
           alertString = "alert-danger";
           imgString = "glyphicon-thumbs-down";
         }
-        if (typeof(cookieObj.username) == "undefined") {
+        if (cookieObj.username == undefined) {
           innerDelete = '';
         } else {
           if (cookieObj.userid == commentListArr[i].uid || cookieObj.grantp == 1) {
@@ -300,10 +300,9 @@ function loadCommendList() {
 };
 
 // 写入评论
-$(document).on("click", "#subcomment", function writecomment() {
+$('form').submit(function writecomment() {
   var type = $("input[name='options']:checked").val();
   var comment = $("textarea").val();
-  alert(gid + uid + type + comment);
   $.ajax({
     type: 'get',
     url: 'php/detail.php',

@@ -1,6 +1,6 @@
 var uid;
 var cookieObj = getCookieObj();
-if (typeof(cookieObj.userid) != "undefined") {
+if (cookieObj.userid != undefined) {
   uid=cookieObj.userid
 }else{
   alert("请登录后再充值！");
