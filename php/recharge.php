@@ -16,7 +16,7 @@
   $halfPro -> bindColumn(1,$balance);
   $halfPro->fetch(PDO::FETCH_COLUMN);
 
-    setcookie('balance',$balance,time()+3600*24,'/onlineshoppingplatform');
+    setcookie('balance',$balance,time()+3600*24,'/');
 
   echo json_encode($success);
 

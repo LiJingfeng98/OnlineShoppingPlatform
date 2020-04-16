@@ -22,7 +22,7 @@ function getCookieObj() {
 (function init() {
   //获取uid参数（cookie）
   var cookieObj = getCookieObj();
-  if (typeof(cookieObj.username) == "undefined") {
+  if (cookieObj.username == undefined) {
     alert("请登录后访问该页面");
     window.location.href = 'login.html';
   } else {

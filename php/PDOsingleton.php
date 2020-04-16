@@ -5,7 +5,7 @@
       if(self::$pdo == null){
         //创建一个PDO
         try{
-          self::$pdo = new PDO('mysql:host=localhost;dbname=onlineshoppingplatform','root','');
+          self::$pdo = new PDO('mysql:host=localhost;dbname=onlineshoppingplatform;charset=UTF8','root','');
         }catch(PDOException $e){
           echo '连接错误，信息为：'.$e->getMessage();
         }
@@ -15,6 +15,4 @@
   }
 
   $pdo1 = PDOsingleton::getPdo();
-
-
  ?>

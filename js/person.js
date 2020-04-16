@@ -12,7 +12,7 @@ var hasLogin = false;
   }
   // 获取cookie 登录状态
   cookieObj = getCookieObj();
-  if (typeof(cookieObj.username) == "undefined") {
+  if (cookieObj.username == undefined) {
     hasLogin = false;
   } else {
     visitUid = cookieObj.userid;
@@ -117,7 +117,7 @@ var hasLogin = false;
         recentCommentBody.innerHTML =
           "        <div class=\"media\">" +
           "          <div class=\"media-left\">" +
-          "            <a href=\"detail.html?git=" + recentComment.gid + "\">" +
+          "            <a href=\"detail.html?gid=" + recentComment.gid + "\">" +
           "              <img class=\"media-object center-block\" src=\"img/" + recentComment.gname + "/2x.jpg\" alt=\"...\">" +
           "            </a>" +
           "          </div>" +

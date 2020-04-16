@@ -55,7 +55,7 @@ function loadCommentList() {
         }
         var innerDelete;
         var cookieObj = getCookieObj();
-        if (typeof(cookieObj.username) == "undefined") {
+        if (cookieObj.username == undefined) {
           innerDelete = '';
         } else {
           if(cookieObj.userid==uid||cookieObj.grantp==1){

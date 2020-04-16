@@ -23,7 +23,7 @@ function getQueryVariable(variable) {
   loadGoodList();
 })();
 
-//加载评论列表
+//加载商品列表
 function loadGoodList() {
   $.ajax({
     type: 'get',

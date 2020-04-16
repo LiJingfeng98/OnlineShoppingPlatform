@@ -21,7 +21,7 @@ function getCookieObj() {
 (function init() {
   // 判断是否登录
   cookieObj = getCookieObj();
-  if (typeof(cookieObj.username) == "undefined") {
+  if (cookieObj.username == undefined) {
     alert("请先登录后再访问该页面！");
     window.location.href = 'index.html';
     return;
@@ -34,7 +34,7 @@ function getCookieObj() {
   loadFriendList();
 })();
 
-//加载评论列表
+//加载好友列表
 function loadFriendList() {
   $.ajax({
     type: 'get',

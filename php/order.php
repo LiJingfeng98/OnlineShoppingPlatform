@@ -78,7 +78,7 @@
       if(!$result->fetch(PDO::FETCH_COLUMN)){
         $flag=false;
       }
-      setcookie('balance',$balance,time()+3600*24,'/onlineshoppingplatform');
+      setcookie('balance',$balance,time()+3600*24,'/');
       // 更新已退款状态
       $sql = "update orderdetails a inner join orderlist b on a.orderid = b.orderid set type = 2 where userid = ".$uid." and goodid = ".$gid;
       $result = $pdo -> prepare($sql);

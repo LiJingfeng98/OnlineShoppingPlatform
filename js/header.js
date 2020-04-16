@@ -42,7 +42,7 @@ $(document).on("click", "#logout", function logOut() {
 (function init() {
   var cookieObj = getCookieObj();
 
-  if (typeof(cookieObj.username) != "undefined") {
+  if (cookieObj.username != undefined) {
     cookieObj.username = decodeURI(cookieObj.username);
     var loginName = document.querySelector("#LoginName");
     if(cookieObj.grantp==1){
