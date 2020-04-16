@@ -9,3 +9,4 @@ UserID,UserLoginName,UserName,UserPassword,GrantP,Balance,UserImg,Custom
 8,test08,壹叁小白,password08,0,990,car,bg3.jpg
 9,test09,夏小正,password09,0,345,book,bg2.jpg
 10,test10,Elphonse,password10,0,543,bird,bg1.jpg
+11,admin,Admin,admin123,1,0,book,bg1.jpg

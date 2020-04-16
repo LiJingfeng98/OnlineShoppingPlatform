@@ -3,6 +3,8 @@
   //匹配数据部分
   require_once("PDOsingleton.php");
   $pdo = PDOsingleton::getPdo();
+  $type = $_GET['type'];
+  if($type==1){
   $page = $_GET['page'];
   $num = ($page-1)*8;
   // 获取总页数
@@ -31,6 +33,12 @@
   }
 
   $success['newsListInfo'] = $info;
+}else if($type==2){
+  $nid=$_GET['nid'];
+  $sql = "delete from news where id = ".$nid;
+  $halfPro = $pdo -> prepare($sql);
+  $result = $halfPro -> execute();
+}
   echo json_encode($success);
 
  ?>

@@ -248,7 +248,7 @@ function loadCommendList() {
           alertString = "alert-danger";
           imgString = "glyphicon-thumbs-down";
         }
-        if (cookieObj.username == undefined) {
+        if (!cookieObj) {
           innerDelete = '';
         } else {
           if (cookieObj.userid == commentListArr[i].uid || cookieObj.grantp == 1) {

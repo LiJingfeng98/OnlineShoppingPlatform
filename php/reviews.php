@@ -49,8 +49,6 @@
     $result = $halfPro -> execute();
   }
 
-
-
   echo json_encode($success);
 
  ?>
