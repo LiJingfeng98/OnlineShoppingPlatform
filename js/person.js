@@ -19,7 +19,6 @@ var hasLogin = false;
     visitName = decodeURI(cookieObj.username);
     hasLogin = true;
   }
-
   //直接进入页面后，自动发送ajax请求，等待数据回传之后直接加载到页面之上
   //type 1.初始化  2.留言列表  3.提交留言
   $.ajax({
@@ -306,7 +305,6 @@ $(function addState() {
       success: function(res) {
         if (res.infoCode) {
           alert("封禁成功！");
-
         } else {
           alert("封禁失败！");
         }

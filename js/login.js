@@ -2,8 +2,8 @@
 (function() {
   //登录事件
   $('#login').click(function() {
-    var loginName = $('#inputLoginName').val();
-    var passWord = $('#inputPassword').val();
+    var loginName = $('#inputLoginName').val().trim();
+    var passWord = $('#inputPassword').val().trim();
     //判空操作
     if (loginName.trim().length == 0 || passWord.trim().length == 0) {
       alert('用户名或密码不能为空！请检查后重新输入！');

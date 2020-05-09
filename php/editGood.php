@@ -29,7 +29,7 @@
     }
   }
   else if($type == 2){
-    // 更新用户数据
+    // 更新商品数据
     $gname =$_GET['gname'];
     $owner =$_GET['owner'];
     $rdate =$_GET['rdate'];

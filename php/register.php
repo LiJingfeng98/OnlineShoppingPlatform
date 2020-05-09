@@ -69,8 +69,6 @@
     }
     $success['login'] = $flag;
   }
-
-
   echo json_encode($success);
 
 

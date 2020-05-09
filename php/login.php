@@ -5,7 +5,6 @@
   $pdo = PDOsingleton::getPdo();
   $loginName =$_POST['loginName'];
   $passWord =$_POST['passWord'];
-
   $sql = "select userid,username,grantp,balance,userimg,custom from userinfo where userloginname = ? and userpassword = ?";
   $halfPro = $pdo -> prepare($sql);
   $result = $halfPro -> execute([$loginName,$passWord]);
@@ -28,7 +27,4 @@
   }
   $success['infoCode'] = $flag;
   echo json_encode($success);
-
-
-
 ?>

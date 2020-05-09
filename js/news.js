@@ -74,7 +74,7 @@ $(function changePage() {
   });
 });
 
-//删除评论
+//删除公告
 function del(nid) {
   $.ajax({
     type: 'get',
