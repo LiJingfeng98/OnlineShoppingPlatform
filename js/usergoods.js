@@ -34,17 +34,26 @@ function loadGoodList() {
       page: page
     },
     success: function(res) {
+      var cookieObj = getCookieObj();
+
       var goodListArr = res.goodListInfo;
       var username = res.username;
       var goodList = document.querySelector('#goodList');
-      innerHTML = "";
-
+      var innerHTML = "";
+       innerDownload = "";
       for (var i = 0; i < goodListArr.length; i++) {
         //type
         innerType = '';
         for (var j = 0; j < goodListArr[i].gtype.length; j++) {
           innerType += "  " + goodListArr[i].gtype[j];
         }
+
+        if (cookieObj.username != undefined&&cookieObj.userid==uid) {
+            innerDownload =   " <a href=\"file/" + goodListArr[i].gname + ".rar\" title=\"下载\">" +
+              "<span class=\"glyphicon glyphicon-download-alt\"></span>" +
+              "   </a>";
+        }
+
         innerHTML +=
           "    <a href=\"detail.html?gid=" + goodListArr[i].gid + "\" class=\"list-group-item\">" +
           "        <div class=\"media\">" +
@@ -56,8 +65,8 @@ function loadGoodList() {
           "            <p>" + innerType + "</p>" +
           "            <p class=\"text-right\">" + goodListArr[i].btime + "</p>" +
           "          </div>" +
-          "        </div>" +
-          "      </a>";
+          "        </div>" +innerDownload+
+          "      </a>"
       }
       goodList.innerHTML = innerHTML;
 
@@ -98,3 +107,19 @@ $(function changePage() {
     loadGoodList();
   });
 });
+
+// 读取cookie
+function getCookieObj() {
+  var cookieObj = {},
+    cookieSplit = [],
+    // 以分号（;）分组
+    cookieArr = document.cookie.split(";");
+  for (var i = 0, len = cookieArr.length; i < len; i++)
+    if (cookieArr[i]) {
+      // 以等号（=）分组
+      cookieSplit = cookieArr[i].split("=");
+      // Trim() 是自定义的函数，用来删除字符串两边的空格
+      cookieObj[cookieSplit[0].trim()] = cookieSplit[1].trim();
+    }
+  return cookieObj;
+};
